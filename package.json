@@ -21,6 +21,10 @@
       }
     ]
   },
+  "engines": {
+    "node": "v22.21.1",
+    "npm": "10.9.4"
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "^20.2.14",
