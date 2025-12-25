@@ -1,0 +1,71 @@
+
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="leaveForm" class="leave-form">
+    <!-- Employee Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Employee Name</mat-label>
+      <input matInput formControlName="employeeName">
+      <mat-error>Employee name is required</mat-error>
+    </mat-form-field>
+
+    <!-- Leave Type -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nature of Leave</mat-label>
+      <mat-select formControlName="nature">
+        <mat-option value="CL">Casual Leave (CL)</mat-option>
+        <mat-option value="EL">Earned Leave (EL)</mat-option>
+      </mat-select>
+      <mat-error>Select leave type</mat-error>
+    </mat-form-field>
+
+    <!-- Date Ranges (Angular 20 @for) -->
+    <div formArrayName="dates">
+      @for (dateGroup of dates(); track dateGroup; let i = $index) {
+        <div [formGroupName]="i" class="date-range-row">
+          <div class="date-fields">
+            <mat-form-field appearance="outline" class="date-field">
+              <mat-label>From</mat-label>
+              <input matInput [matDatepicker]="pickerFrom" formControlName="dateFrom">
+              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFrom></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="date-field">
+              <mat-label>To</mat-label>
+              <input matInput [matDatepicker]="pickerTo" formControlName="dateTo">
+              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+              <mat-datepicker #pickerTo></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          @if (dates().length > 1) {
+            <button mat-icon-button color="warn" (click)="removeDateRange(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Add Button -->
+    <button mat-stroked-button color="primary" type="button" (click)="addDateRange()">
+      <mat-icon>add</mat-icon> Add Date Range
+    </button>
+
+    <!-- Total Days (Angular 20 @if/@else) -->
+    <div class="total-days">
+      <mat-icon>calendar_today</mat-icon>
+      <strong>Total Days: {{ totalDays() }}</strong>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" 
+          [mat-dialog-close]="submitData()"
+          [disabled]="leaveForm.invalid">
+    Submit ({{ totalDays() }} days)
+  </button>
+</div>
+

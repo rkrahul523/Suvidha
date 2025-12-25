@@ -1,0 +1,36 @@
+<div class="page">
+    <div class="login-box">
+    <h1>Suvidha</h1>
+    <p class="subtitle">Welcome back, please login</p>
+    
+    
+    <form (ngSubmit)="onLogin()">
+    <div class="input-group">
+    <input
+    type="text"
+    name="username"
+    [(ngModel)]="username"
+    required
+    />
+    <label>Username</label>
+    </div>
+    
+    
+    <div class="input-group">
+    <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    required
+    />
+    <label>Password</label>
+    </div>
+    
+    
+    <button type="submit">Login</button>
+    </form>
+    
+    
+    <div class="footer">© 2025 Suvidha</div>
+    </div>
+    </div>
