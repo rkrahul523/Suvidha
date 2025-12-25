@@ -4,7 +4,7 @@ import { appConfig } from './app.config';
 import { serverRoutes } from './app.routes.server';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
@@ -12,7 +12,9 @@ const serverConfig: ApplicationConfig = {
     importProvidersFrom(
       MatDialogModule,
       MatNativeDateModule
-    )
+    ),
+  //  provideAnimations(),
+    // provideNgb()
   ]
 };
 

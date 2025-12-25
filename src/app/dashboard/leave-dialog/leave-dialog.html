@@ -1,71 +1,95 @@
+<form [formGroup]="leaveForm" (ngSubmit)="submit()" class="p-4">
 
-<div mat-dialog-content class="dialog-content">
-  <form [formGroup]="leaveForm" class="leave-form">
-    <!-- Employee Name -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Employee Name</mat-label>
-      <input matInput formControlName="employeeName">
-      <mat-error>Employee name is required</mat-error>
-    </mat-form-field>
+  <!-- Employee Name -->
+  <div class="mb-3">
+    <label>Employee Name</label>
+    <input class="form-control" formControlName="employeeName">
+  </div>
 
-    <!-- Leave Type -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nature of Leave</mat-label>
-      <mat-select formControlName="nature">
-        <mat-option value="CL">Casual Leave (CL)</mat-option>
-        <mat-option value="EL">Earned Leave (EL)</mat-option>
-      </mat-select>
-      <mat-error>Select leave type</mat-error>
-    </mat-form-field>
+  <!-- Leave Type -->
+  <div class="mb-3">
+    <label>Nature of Leave</label>
+    <select class="form-select" formControlName="leaveType">
+      <option value="">Select</option>
+      <option value="CL">Casual Leave</option>
+      <option value="EL">Earned Leave</option>
+    </select>
+  </div>
 
-    <!-- Date Ranges (Angular 20 @for) -->
-    <div formArrayName="dates">
-      @for (dateGroup of dates(); track dateGroup; let i = $index) {
-        <div [formGroupName]="i" class="date-range-row">
-          <div class="date-fields">
-            <mat-form-field appearance="outline" class="date-field">
-              <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="pickerFrom" formControlName="dateFrom">
-              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-              <mat-datepicker #pickerFrom></mat-datepicker>
-            </mat-form-field>
+  <!-- Date FormArray -->
+  <div formArrayName="dates">
+    <div class="row g-2 mb-2" *ngFor="let group of dates.controls; let i = index" [formGroupName]="i">
 
-            <mat-form-field appearance="outline" class="date-field">
-              <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="pickerTo" formControlName="dateTo">
-              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-              <mat-datepicker #pickerTo></mat-datepicker>
-            </mat-form-field>
-          </div>
+      <!-- From Date -->
+      <div class="col-md-5">
+        <label>From</label>
+        <!-- <ngb-datepicker
+          formControlName="fromDate"
+          #d1="ngbDatepicker"
+        (click)="d1?.toggle()"
+          (select)="calculateDays()">
+        </ngb-datepicker> -->
+     
 
-          @if (dates().length > 1) {
-            <button mat-icon-button color="warn" (click)="removeDateRange(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          }
-        </div>
-      }
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="dd-mm-yyyy"
+          name="dp"
+          formControlName="fromDate"
+          ngbDatepicker
+          (select)="calculateDays()"
+          #d1="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d1.toggle()" type="button"></button>
+      </div>
     </div>
+      <!-- To Date -->
+      <div class="col-md-5">
+        <label>To</label>
+       
 
-    <!-- Add Button -->
-    <button mat-stroked-button color="primary" type="button" (click)="addDateRange()">
-      <mat-icon>add</mat-icon> Add Date Range
-    </button>
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="dd-mm-yyyy"
+          name="dp"
+          formControlName="toDate"
+          ngbDatepicker
+          [minDate]="dates.at(i).get('fromDate')?.value! || undefined"
+        (select)="calculateDays()"
+          #d2="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
+      </div>
+      
 
-    <!-- Total Days (Angular 20 @if/@else) -->
-    <div class="total-days">
-      <mat-icon>calendar_today</mat-icon>
-      <strong>Total Days: {{ totalDays() }}</strong>
+      </div>
+
+      <div class="col-md-2 d-flex align-items-end">
+        <button *ngIf="i > 0" type="button" class="btn btn-danger" (click)="removeRow(i)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+
     </div>
-  </form>
-</div>
+  </div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" 
-          [mat-dialog-close]="submitData()"
-          [disabled]="leaveForm.invalid">
-    Submit ({{ totalDays() }} days)
+  <button type="button" class="btn btn-outline-primary mt-2" (click)="addRow()">
+    <i class="bi bi-plus-circle"></i> Add More Dates
   </button>
-</div>
 
+  <!-- Total Days -->
+  <div class="alert alert-info mt-3">
+    <strong>Total Days:</strong> {{ totalDays() }}
+  </div>
+
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="activeModal.dismiss()">Cancel</button>
+    <button class="btn btn-success" type="submit" [disabled]="leaveForm.invalid">
+      <i class="bi bi-check-circle"></i> Submit
+    </button>
+  </div>
+
+</form>
