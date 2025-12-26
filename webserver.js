@@ -9,7 +9,7 @@ const app = express();
 app.use(express.static('./dist/SuvidhaApp'));
 app.get('/', (req, res) => {
     console.log('Registering route1:', '/your/path/here');
-    res.sendFile(path.join(__dirname, 'dist/SuvidhaApp/browser/index.csr.html'));
+    res.sendFile(path.join(__dirname, 'dist/SuvidhaApp/server/index.server.html'));
 });
  
 // Start the app by listening on the default Heroku port

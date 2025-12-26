@@ -3,13 +3,15 @@
   <!-- Employee Name -->
   <div class="mb-3">
     <label>Employee Name</label>
-    <input class="form-control" formControlName="employeeName">
-  </div>
+    <ng-select class="w-100 mr-2 "   [items]="names" [selectOnTab]="true" 
+    placeholder="Select Name" formControlName="employeeName" bindValue="name" bindLabel="name">
+   </ng-select>
+    </div>
 
   <!-- Leave Type -->
   <div class="mb-3">
     <label>Nature of Leave</label>
-    <select class="form-select" formControlName="leaveType">
+    <select class="form-control" formControlName="leaveType">
       <option value="">Select</option>
       <option value="CL">Casual Leave</option>
       <option value="EL">Earned Leave</option>

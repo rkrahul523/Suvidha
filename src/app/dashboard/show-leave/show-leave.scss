@@ -1,0 +1,65 @@
+.today-container { 
+    background: white; 
+    border-radius: 24px; 
+    padding: 2.5rem; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+  }
+  .today-scroll-row {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1.5rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
+  .today-scroll-row::-webkit-scrollbar { display: none; }
+  .today-card-wrapper { 
+    flex: 0 0 240px; 
+    scroll-snap-align: start;
+    max-width: 240px; 
+  }
+  .today-card {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 20px;
+  }
+  .today-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25) !important;
+  }
+  .card-icon { font-size: 2.8rem; opacity: 0.85; line-height: 1; }
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.95);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    z-index: 5;
+    opacity: 0;
+  }
+  .scroll-btn.scroll-left { left: 10px; }
+  .scroll-btn.scroll-right { right: 10px; }
+  .scroll-btn.active { opacity: 1; }
+  .scroll-btn:hover { 
+    background: white; 
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  }
+  
+  @media (max-width: 768px) {
+    .today-container { padding: 1.5rem; }
+    .today-card-wrapper { flex: 0 0 180px; max-width: 180px; }
+    .card-icon { font-size: 2.2rem; }
+  }
+  @media (max-width: 576px) {
+    .today-card-wrapper { flex: 0 0 160px; max-width: 160px; }
+  }

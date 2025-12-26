@@ -2,11 +2,14 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { employeeListFFT } from '../../model/employee-list';
+
 
 @Component({
   selector: 'app-leave-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbDatepickerModule],
+  imports: [CommonModule, NgSelectModule, ReactiveFormsModule, NgbDatepickerModule],
   templateUrl: './leave-dialog.html',
   styleUrl: './leave-dialog.scss',
 })
@@ -15,6 +18,7 @@ export class LeaveDialog {
 
   leaveForm: FormGroup;
   totalDays = signal(0); 
+  names=employeeListFFT;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {
     this.leaveForm = this.fb.group({

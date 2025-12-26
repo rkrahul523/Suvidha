@@ -1,0 +1,33 @@
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-header bg-gradient-primary text-white rounded-top">
+            <h6 class="mb-0 fw-bold"><i class="bi bi-pie-chart me-2"></i>Leave Type Distribution</h6>
+          </div>
+          <div class="card-body chart-container">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [type]="pieChartType"
+                    [options]="pieChartOptions">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-header bg-gradient-success text-white rounded-top">
+            <h6 class="mb-0 fw-bold"><i class="bi bi-bar-chart me-2"></i>Monthly Leave Trend</h6>
+          </div>
+          <div class="card-body chart-container">
+            <canvas baseChart
+                    [data]="barChartData"
+                    [type]="barChartType"
+                    [options]="barChartOptions">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
