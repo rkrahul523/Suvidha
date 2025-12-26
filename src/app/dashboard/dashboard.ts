@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LeaveDialog } from './leave-dialog/leave-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +14,7 @@ import { Charts } from './charts/charts';
 import { Calendar } from './calendar/calendar';
 import { CommonModule } from '@angular/common';
 import { LeaveManager } from './leave-manager/leave-manager';
+import { TimeTableApiService } from '../services/time-api-service';
 
 //import { LeaveDialogComponent } from './leave-dialog.component';
 @Component({
@@ -27,17 +28,39 @@ import { LeaveManager } from './leave-manager/leave-manager';
     NgSelectModule,
     NgSelectComponent,
     Header, Footer,
-    ShowLeave, Charts, Calendar,LeaveManager
+    ShowLeave, Charts, Calendar,LeaveManager,
+ 
  
 ],
   standalone: true,
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
   names=employeeListFFT;
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal , private api: TimeTableApiService) {}
 
+
+  ngOnInit(){
+    this.api.getAllLeave().subscribe((res: any) => {
+      //if (res && res.status) {
+console.log(res)
+      //  this.fetchedData= res//.data;
+      //  this.calculateTimeTable();
+
+        //console.log(res)
+        // this.rowData = res.data;
+        // setTimeout(() => {
+        //   // this.gridColumnApi.autoSizeAllColumns();
+        //   this.onPageSizeChanged();
+        // })
+
+     // } else {
+        // this.rowData = [];
+      //}
+
+    })
+  }
   openLeave() {
     this.modal.open(LeaveDialog, {
       size: 'lg',
@@ -45,5 +68,7 @@ export class Dashboard {
       centered: true
     });
   }
+
+
 
 }
