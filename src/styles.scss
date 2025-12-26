@@ -7,14 +7,14 @@
 @use '@angular/material' as mat;
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$magenta-palette,
-      tertiary: mat.$violet-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  // @include mat.theme((
+  //   color: (
+  //     primary: mat.$magenta-palette,
+  //     tertiary: mat.$violet-palette,
+  //   ),
+  //   typography: Roboto,
+  //   density: 0,
+  // ));
 }
 
 body {
