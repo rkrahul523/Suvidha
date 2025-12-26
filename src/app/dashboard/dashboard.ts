@@ -13,6 +13,7 @@ import { ShowLeave } from './show-leave/show-leave';
 import { Charts } from './charts/charts';
 import { Calendar } from './calendar/calendar';
 import { CommonModule } from '@angular/common';
+import { LeaveManager } from './leave-manager/leave-manager';
 
 //import { LeaveDialogComponent } from './leave-dialog.component';
 @Component({
@@ -26,7 +27,7 @@ import { CommonModule } from '@angular/common';
     NgSelectModule,
     NgSelectComponent,
     Header, Footer,
-    ShowLeave, Charts, Calendar
+    ShowLeave, Charts, Calendar,LeaveManager
  
 ],
   standalone: true,

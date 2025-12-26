@@ -1,54 +1,90 @@
-
     <div class="calendar-card h-100">
+      <!-- Header -->
       <div class="calendar-header px-4 py-3">
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="mb-0 fw-bold text-white d-flex align-items-center">
-            <i class="bi bi-calendar3-week me-2"></i>December 2025
+            <i class="bi bi-calendar3-week me-2"></i>
+            {{ currentMonth() }} {{ currentYear() }}
           </h6>
           <div class="calendar-nav">
-            <button class="btn-nav prev" (click)="prevMonth()">
+            <button class="btn-nav prev" (click)="prevMonth()" type="button">
               <i class="bi bi-chevron-left"></i>
             </button>
-            <button class="btn-nav next" (click)="nextMonth()">
+            <button class="btn-nav next" (click)="nextMonth()" type="button">
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
         </div>
       </div>
       
+      <!-- Body -->
       <div class="calendar-body p-3 p-md-4">
         <!-- Weekdays -->
-        <div class="weekdays row g-2 mb-3 text-center">
-          <div class="col day-header">Sun</div>
-          <div class="col day-header">Mon</div>
-          <div class="col day-header">Tue</div>
-          <div class="col day-header">Wed</div>
-          <div class="col day-header">Thu</div>
-          <div class="col day-header">Fri</div>
-          <div class="col day-header">Sat</div>
+        <div class="weekdays row g-2 mb-4 text-center">
+          @for (dayName of weekdays(); track dayName; let i = $index) {
+            <div class="col day-header" [class.weekend-header]="i === 0 || i === 6">
+              {{ dayName }}
+            </div>
+          }
         </div>
         
         <!-- Days Grid -->
         <div class="days-container">
-          @for (week of weeks(); track $index) {
+          @for (week of weeks(); track week.length; let weekIndex = $index) {
             <div class="week row g-2">
-              @for (day of week; track day.date + '-' + $parent.$index) {
-                <div class="col day-cell position-relative p-1 p-md-2"
+              @for (day of week; track day.date; let dayIndex = $index) {
+                <div class="col day-cell position-relative p-2"
                      [ngClass]="{
                        'today': day.isToday,
-                       'has-leave': day.leaves > 0 && !day.isEmpty,
+                       'weekend': day.dayOfWeek === 0 || day.dayOfWeek === 6,
+                       'has-leave': day.leaves.length > 0 && !day.isEmpty,
                        'selectable': !day.isEmpty,
-                       'empty': day.isEmpty
+                       'empty': day.isEmpty,
+                       'hovered': hoveredDay()?.date === day.date,
+                       'multiple-leaves': day.leaves.length > 1
                      }"
-                     (click)="selectDay(day)">
+                     (mouseenter)="hoverDay(day)"
+                     (mouseleave)="hoverDay(null)"
+                     (click)="selectDay(day)"
+                     role="button"
+                     tabindex="0"
+                     [attr.aria-label]="getDayAriaLabel(day)"
+                     [attr.title]="day.leaves.length > 0 ? getDayTitle(day) : ''">
                   
                   @if (!day.isEmpty) {
                     <div class="day-number">{{ day.date }}</div>
-                    @for (type of day.leaveTypes; track type; let last = $last) {
-                      <div class="leave-indicator" 
-                           [ngClass]="'type-' + type.toLowerCase() + (last ? '' : ' me-1')">
+                    
+                    <!-- ✅ FIXED: Multiple leaves stack properly -->
+                    <div class="leaves-container">
+                      @for (leave of day.leaves; track leave.employee; let i = $index) {
+                        <div class="leave-indicator type-{{ leave.type.toLowerCase() }}"
+                             [attr.title]="getLeaveTitle(leave)"
+                             [style.--index]="i"
+                             [style.--total]="day.leaves.length">
+                          <span class="leave-abbr">{{ leave.type }}</span>
+                        </div>
+                      }
+                    </div>
+                  }
+                  
+                  <!-- Tooltip -->
+                  @if (hoveredDay() && hoveredDay()!.date === day.date && day.leaves.length > 0) {
+                    <div class="hover-tooltip">
+                      <div class="tooltip-header">
+                        {{ day.leaves.length }} Leave{{ day.leaves.length > 1 ? 's' : '' }} on {{ hoveredDay()!.date }} {{ currentMonthAbbr() }}:
                       </div>
-                    }
+                      @for (leave of day.leaves; track leave.employee) {
+                        <div class="tooltip-item">
+                          <div class="employee">{{ leave.employee }}</div>
+                          <div class="leave-info">
+                            <span class="type-badge type-{{ leave.type.toLowerCase() }}">
+                              {{ leave.type }}
+                            </span>
+                            <span class="dates">{{ leave.fromDate }} - {{ leave.toDate }}</span>
+                          </div>
+                        </div>
+                      }
+                    </div>
                   }
                 </div>
               }
@@ -58,3 +94,4 @@
       </div>
     </div>
 
+    
