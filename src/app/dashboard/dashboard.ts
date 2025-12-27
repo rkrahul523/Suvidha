@@ -42,24 +42,12 @@ export class Dashboard implements OnInit {
 
 
   ngOnInit(){
-    this.api.getAllLeave().subscribe((res: any) => {
-      //if (res && res.status) {
-console.log(res)
-      //  this.fetchedData= res//.data;
-      //  this.calculateTimeTable();
+//    this.api.getAllLeave().subscribe((res: any) => {
+     
+// console.log(res)
+  
 
-        //console.log(res)
-        // this.rowData = res.data;
-        // setTimeout(() => {
-        //   // this.gridColumnApi.autoSizeAllColumns();
-        //   this.onPageSizeChanged();
-        // })
-
-     // } else {
-        // this.rowData = [];
-      //}
-
-    })
+//     })
   }
   openLeave() {
     this.modal.open(LeaveDialog, {
