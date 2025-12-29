@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveDialog } from '../leave-dialog/leave-dialog';
+import { TimeTableApiService } from '../../services/time-api-service';
 
 @Component({
   selector: 'app-header',
@@ -10,16 +11,19 @@ import { LeaveDialog } from '../leave-dialog/leave-dialog';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements OnInit{
   isMobileMenuOpen = signal(false);
   userName = signal('Rahul Sharma');
 
-  constructor(private modal: NgbModal ,private route:Router){
+  constructor(private modal: NgbModal ,private route:Router, private api:TimeTableApiService){
 
   }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen.update(open => !open);
+  }
+  ngOnInit(){
+    this.userName.set(this.api.currentUser)
   }
 
 

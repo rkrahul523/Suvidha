@@ -60,6 +60,7 @@ test(){
           this.api.token= res.token;
           this.api.user.next(res.data);
           this.api.department= res.data.department;
+          this.api.currentUser= res.data.name;
          
           this.api.successToast(res.message, 'Login success')
           setTimeout(()=>{
