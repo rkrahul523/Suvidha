@@ -5,3 +5,25 @@
   .modal-backdrop {
     z-index: 1050 !important;
   }
+
+
+  /* Success toast - green background */
+.success-snackbar {
+  --mdc-snack-bar-container-color: #4caf50;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}
+
+/* Error toast - red background */
+.error-snackbar {
+  --mdc-snack-bar-container-color: #f44336;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}
+
+/* Warning toast - orange background */
+.warning-snackbar {
+  --mdc-snack-bar-container-color: #ff9800;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}

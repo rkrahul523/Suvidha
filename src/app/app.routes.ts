@@ -5,14 +5,15 @@ import { report } from 'process';
 import { GenReport } from './gen-report/gen-report';
 
 export const routes: Routes = [
-    {
-        path:"**", redirectTo:'login'
-    },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    
         { path: 'login', component: Login },
-        { path: 'dashboard', component: Dashboard },
-        { path: 'report', component: GenReport },
+        { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard').then(m => m.Dashboard) },
+         { path: 'report', component: GenReport },
 
-
+         {
+            path:"**", redirectTo:'login'
+        },
         // {
         //     path: 'protected',
         //     loadComponent: () => import('./protected.component').then(m => m.ProtectedComponent),
@@ -22,8 +23,7 @@ export const routes: Routes = [
         //   },
         // src/app/login
         //   { path: 'login', loadComponent: () => import('./login.component').then(m => m.LoginComponent) },
-          { path: '', redirectTo: '/login', pathMatch: 'full' }
-        
+         
 
 
 ];

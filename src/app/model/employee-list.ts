@@ -159,27 +159,147 @@ export const employeeListFFT=[
 ]
 
 export const employeeListDASH=[
-    
     {
-    name:"Dr. N.K. Singh",
-    designation:"",
-    id:1
-},
-]
-export const employeeListECE=[
-    
+      "name": "Dr. Anil Kumar",
+      "designation": "Professor & Head",
+      "id": 1
+    },
     {
-    name:"Dr. N.K. Singh",
-    designation:"",
-    id:1
-},
-]
+      "name": "Dr. S.R. Kumar",
+      "designation": "Professor",
+      "id": 2
+    },
+    {
+      "name": "Dr. Arvind Pandey",
+      "designation": "Professor",
+      "id": 3
+    },
+    {
+      "name": "Ms. Sujata S. Gupta",
+      "designation": "Assistant Professor",
+      "id": 4
+    },
+    {
+      "name": "Dr. Partha S. Mondal",
+      "designation": "Assistant Professor",
+      "id": 5
+    },
+    {
+      "name": "Dr. Subhankar Basu",
+      "designation": "Assistant Professor",
+      "id": 6
+    },
+    {
+      "name": "Dr. Sriparna Chattopadhyay",
+      "designation": "Assistant Professor",
+      "id": 7
+    },
+    {
+      "name": "Dr. H.Vignesh Babu",
+      "designation": "Assistant Professor",
+      "id": 8
+    },
+    {
+      "name": "Dr. Abhilash T. Nair",
+      "designation": "Assistant Professor",
+      "id": 9
+    },
+    {
+      "name": "Dr. Sumbul Rahman",
+      "designation": "Assistant Professor",
+      "id": 10
+    },
+    {
+      "name": "Dr. Khushboo",
+      "designation": "Assistant Professor",
+      "id": 11
+    },
+    {
+      "name": "Dr. Nilima Das",
+      "designation": "Assistant Professor",
+      "id": 12
+    },
+    {
+      "name": "Dr. Vandana",
+      "designation": "Assistant Professor",
+      "id": 13
+    },
+    {
+      "name": "Mr. Vikram Kumar",
+      "designation": "MTS",
+      "id": 14
+    },
+    {
+      "name": "Mr. Prasanjeet Kumar Patar",
+      "designation": "Technician",
+      "id": 15
+    },
+    {
+      "name": "Mr. Laxmi Nayak",
+      "designation": "MTS",
+      "id": 16
+    }
+  ]
+  
 export const employeeListMME=[
     
     {
     name:"Dr. N.K. Singh",
     designation:"",
     id:1
+},
+]
+export const  employeeListECE=[
+    
+    {
+    name:"Dr. Madhu Kumari",
+    designation:"",
+    id:1
+},
+    {
+    name:"Dr. Vikash Kumar Gupta",
+    designation:"",
+    id:2
+},
+    {
+    name:"Dr. Shalini Mahato",
+    designation:"",
+    id:3
+},
+    {
+    name:"Dr. Dinesh kr. Prabhakar",
+    designation:"",
+    id:4
+},
+    {
+    name:"Mr. Abhishek Bakhla",
+    designation:"",
+    id:5
+},
+    {
+    name:"Dr. Rahul Mishra",
+    designation:"",
+    id:6
+},
+    {
+    name:"Mr. Vikas Kumar",
+    designation:"",
+    id:7
+},
+    {
+    name:"Mr. Ajeet Gupta",
+    designation:"",
+    id:8
+},
+    {
+    name:"Mr. Pawan Kumar Singh",
+    designation:"",
+    id:9
+},
+    {
+    name:"Mr. Ashutosh Pandey",
+    designation:"",
+    id:10
 },
 ]
 

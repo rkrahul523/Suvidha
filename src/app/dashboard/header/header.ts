@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveDialog } from '../leave-dialog/leave-dialog';
 
@@ -14,7 +14,7 @@ export class Header {
   isMobileMenuOpen = signal(false);
   userName = signal('Rahul Sharma');
 
-  constructor(private modal: NgbModal ,){
+  constructor(private modal: NgbModal ,private route:Router){
 
   }
 
@@ -34,5 +34,7 @@ export class Header {
   signOut() {
     console.log('Signing out...');
     this.isMobileMenuOpen.set(false);
+      localStorage.removeItem("token");
+      this.route.navigateByUrl(`/login`)
   }
 }

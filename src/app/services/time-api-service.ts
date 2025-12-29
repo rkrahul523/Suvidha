@@ -9,11 +9,13 @@ import { Leave } from '../dashboard/leave-manager/leave-manager';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Observable, of, BehaviorSubject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
     providedIn: 'root'
 })
 export class TimeTableApiService {
   private http = inject(HttpClient);
+  token:string;
   private timeapiUrl = 'https://api.ipgeolocation.io/ipgeo?apiKey=c44d4e73d2e44e0e9c57a3959f9683b6'; // API for IST time
 
     // apiURL = !window.location.origin.includes('localhost') ?
@@ -38,9 +40,10 @@ public department= 'FFT'
 
     constructor(
       private toastr: ToastrService,
-      private route: Router
+      private route: Router,
+      private snackBar: MatSnackBar
     ) {
-
+    this.token='';
     }
 
     // getU_id() {
@@ -53,7 +56,7 @@ public department= 'FFT'
     }
 
     getAllLeave(){
-      const data= { department: 'FFT' };
+      const data= { department: this.department };
         return this.http.post(this.apiURL + this.getAllleave, data)
     }
     addLeave(data: any){
@@ -67,7 +70,7 @@ public department= 'FFT'
     
 
 
-    loginURL='validate-user-details';
+    loginURL='validateLogin';
   currentUser='';
 
   user=new BehaviorSubject<any>(null);
@@ -89,7 +92,7 @@ public department= 'FFT'
   }
 
   isUserLoggedIn(): boolean {
-    if (localStorage.getItem("token") != null) {
+    if (this.token != null) {
       return true;
     }
     return false;
@@ -116,20 +119,31 @@ public department= 'FFT'
    
 
 
+
+
+
+
+
+
+
+
      warnToast(message: any, subtext='File Info') {
-        this.toastr.info(message, subtext, {
-          timeOut: 3000,
-        });
+      this.snackBar.open(message, subtext, { 
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      });
       }
      successToast(message: any, subtext='File Info') {
-        this.toastr.success(message, subtext, {
-          timeOut: 3000,
-        });
+      this.snackBar.open(message, subtext, { 
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
       }
      errorToast(message: any, subtext='File Info') {
-        this.toastr.error(message, subtext, {
-          timeOut: 3000,
-        });
+      this.snackBar.open(message, subtext, { 
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
       }
 
 
