@@ -87,7 +87,8 @@ public department= 'FFT'
   }
 
   logout(): void {
-    localStorage.removeItem("token");
+    this.token='';
+   // localStorage.removeItem("token");
     this.route.navigateByUrl(`/login`)
   }
 

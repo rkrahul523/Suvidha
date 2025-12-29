@@ -34,7 +34,7 @@ export class Header {
   signOut() {
     console.log('Signing out...');
     this.isMobileMenuOpen.set(false);
-      localStorage.removeItem("token");
+     // localStorage.removeItem("token");
       this.route.navigateByUrl(`/login`)
   }
 }
