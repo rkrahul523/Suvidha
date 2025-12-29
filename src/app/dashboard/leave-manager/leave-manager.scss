@@ -150,10 +150,18 @@
     width: fit-content;
     margin: 0 auto;
   }
-  .leave-type.type-sl { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+  .leave-type.type-ul { background: linear-gradient(135deg, #e74c3c, #c0392b); }
   .leave-type.type-cl { background: linear-gradient(135deg, #f39c12, #e67e22); }
-  .leave-type.type-al { background: linear-gradient(135deg, #3498db, #2980b9); }
+  .leave-type.type-hpl { background: linear-gradient(135deg, #ad16e9, #8d0cc9); }
+  .leave-type.type-vl { background: linear-gradient(135deg, #181bdf, #0b4c77); }
+  .leave-type.type-el { background: linear-gradient(135deg, #72e00b, #0bd40b); }
 
+
+  .detail-type.type-el { background: #181bdf; }
+  .detail-type.type-cl { background: #72e00b; }
+  .detail-type.type-hpl { background: #3498db; }
+  .detail-type.type-vl { background: #bcda15; }
+  .detail-type.type-ul { background: #e74c3c; }
   .date-range {
     font-size: 0.75rem;
     font-weight: 600;
@@ -208,9 +216,11 @@
     display: inline-block;
     margin-bottom: 8px;
   }
-  .detail-type.type-sl { background: #e74c3c; }
-  .detail-type.type-cl { background: #f39c12; }
-  .detail-type.type-al { background: #3498db; }
+  .detail-type.type-el { background: #181bdf; }
+  .detail-type.type-cl { background: #72e00b; }
+  .detail-type.type-hpl { background: #3498db; }
+  .detail-type.type-vl { background: #bcda15; }
+  .detail-type.type-ul { background: #e74c3c; }
 
   .detail-dates {
     color: #6c757d;

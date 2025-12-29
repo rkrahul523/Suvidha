@@ -1,11 +1,9 @@
-import { Component, signal, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, signal, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Leave } from '../leave-manager/leave-manager';
+import { TimeTableApiService } from '../../services/time-api-service';
 
-interface LeaveEmployee {
-  name: string;
-  type: 'Sick' | 'Casual' | 'Annual';
-  date: string;
-}
+
 @Component({
   selector: 'app-show-leave',
   standalone: true,
@@ -13,35 +11,44 @@ interface LeaveEmployee {
   templateUrl: './show-leave.html',
   styleUrl: './show-leave.scss',
 })
-export class ShowLeave {
+export class ShowLeave implements OnInit{
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   
-  employees = signal<LeaveEmployee[]>([
-    { name: 'John Doe', type: 'Sick', date: 'Dec 26, 2025' },
-    { name: 'Jane Smith', type: 'Casual', date: 'Dec 26, 2025' },
-    { name: 'Mike Wilson', type: 'Annual', date: 'Dec 26, 2025' },
-    { name: 'Sarah Brown', type: 'Sick', date: 'Dec 26, 2025' },
-    { name: 'David Lee', type: 'Casual', date: 'Dec 26, 2025' },
-    { name: 'Priya Patel', type: 'Annual', date: 'Dec 26, 2025' },
-    { name: 'Raj Kumar', type: 'Sick', date: 'Dec 26, 2025' },
-    { name: 'Anita Singh', type: 'Casual', date: 'Dec 26, 2025' }
-  ]);
+  employees = signal<Leave[]>([]);
 
+  constructor(private api: TimeTableApiService){
+    this.employees= this.api.upcomingLeave
+  }
+
+  ngOnInit(){
+
+  }
+  
   showLeftArrow = signal(false);
   showRightArrow = signal(true);
 
-  getCardClass(type: LeaveEmployee['type']): string {
-    return {
-      'Sick': 'bg-danger text-white',
-      'Casual': 'bg-warning text-dark',
-      'Annual': 'bg-info text-white'
-    }[type] || '';
+  getCardClass(type: Leave['type']): string {
+    const classMap: Record<Leave['type'], string> = {
+      'EL': 'bg-success text-white',    // Earned Leave - Green
+      'CL': 'bg-warning text-dark',     // Casual Leave - Yellow/Orange
+      'UL': 'bg-danger text-white',     // Unauthorised Leave - Red
+      'HPL': 'bg-secondary text-white', // Half Pay Leave - Gray
+      'VL': 'bg-info text-white'        // Vacation Leave - Blue
+    };
+    return classMap[type];
   }
-
-  getIcon(type: LeaveEmployee['type']): string {
-    return { 'Sick': '🤒', 'Casual': '☕', 'Annual': '✈️' }[type] || '📅';
+  
+  getIcon(type: Leave['type']): string {
+    const iconMap: Record<Leave['type'], string> = {
+      'EL': '🌟',    // Earned Leave
+      'CL': '☕',    // Casual Leave
+      'UL': '🚫',   // Unauthorised Leave
+      'HPL': '💸',  // Half Pay Leave
+      'VL': '✈️'    // Vacation Leave
+    };
+    return iconMap[type] || '📅';
   }
-
+  
   onScroll() {
     const scrollLeft = this.scrollContainer.nativeElement.scrollLeft;
     const scrollWidth = this.scrollContainer.nativeElement.scrollWidth;

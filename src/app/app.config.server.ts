@@ -5,6 +5,7 @@ import { serverRoutes } from './app.routes.server';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
@@ -13,7 +14,13 @@ const serverConfig: ApplicationConfig = {
       MatDialogModule,
       MatNativeDateModule
     ),
-  //  provideAnimations(),
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      progressBar: true
+    }),
+   provideAnimations(),
     // provideNgb()
   ]
 };

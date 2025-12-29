@@ -27,21 +27,21 @@ export class Calendar {
     // ✅ UPDATED: December + January 2026 leaves
     leavesConfig = signal<Leave[]>([
       // ✅ DECEMBER 2025
-      { employee: 'John Doe', type: 'SL', fromDate: '26-12-2025', toDate: '26-12-2025' },
-      { employee: 'Jane Smith', type: 'CL', fromDate: '28-12-2025', toDate: '30-12-2025' },
-      { employee: 'Mike Wilson', type: 'AL', fromDate: '15-12-2025', toDate: '20-12-2025' },
-      { employee: 'Sarah Brown', type: 'SL', fromDate: '05-12-2025', toDate: '05-12-2025' },
-      { employee: 'David Lee', type: 'CL', fromDate: '31-12-2025', toDate: '31-12-2025' },
-      { employee: 'Priya Patel', type: 'AL', fromDate: '10-12-2025', toDate: '12-12-2025' },
-      { employee: 'Raj Kumar', type: 'SL', fromDate: '02-12-2025', toDate: '03-12-2025' },
+      // { employee: 'John Doe', type: 'SL', fromDate: '26-12-2025', toDate: '26-12-2025' },
+      // { employee: 'Jane Smith', type: 'CL', fromDate: '28-12-2025', toDate: '30-12-2025' },
+      // { employee: 'Mike Wilson', type: 'AL', fromDate: '15-12-2025', toDate: '20-12-2025' },
+      // { employee: 'Sarah Brown', type: 'SL', fromDate: '05-12-2025', toDate: '05-12-2025' },
+      // { employee: 'David Lee', type: 'CL', fromDate: '31-12-2025', toDate: '31-12-2025' },
+      // { employee: 'Priya Patel', type: 'AL', fromDate: '10-12-2025', toDate: '12-12-2025' },
+      // { employee: 'Raj Kumar', type: 'SL', fromDate: '02-12-2025', toDate: '03-12-2025' },
       
-      // ✅ JANUARY 2026 - NEW LEAVES
-      { employee: 'Alice Johnson', type: 'SL', fromDate: '03-01-2026', toDate: '04-01-2026' },
-      { employee: 'Bob Chen', type: 'CL', fromDate: '10-01-2026', toDate: '12-01-2026' },
-      { employee: 'Emma Davis', type: 'AL', fromDate: '18-01-2026', toDate: '25-01-2026' },
-      { employee: 'Tom Wilson', type: 'SL', fromDate: '07-01-2026', toDate: '07-01-2026' },
-      { employee: 'Lisa Patel', type: 'CL', fromDate: '28-01-2026', toDate: '31-01-2026' },
-      { employee: 'Mark Lee', type: 'AL', fromDate: '15-01-2026', toDate: '15-01-2026' }
+      // // ✅ JANUARY 2026 - NEW LEAVES
+      // { employee: 'Alice Johnson', type: 'SL', fromDate: '03-01-2026', toDate: '04-01-2026' },
+      // { employee: 'Bob Chen', type: 'CL', fromDate: '10-01-2026', toDate: '12-01-2026' },
+      // { employee: 'Emma Davis', type: 'AL', fromDate: '18-01-2026', toDate: '25-01-2026' },
+      // { employee: 'Tom Wilson', type: 'SL', fromDate: '07-01-2026', toDate: '07-01-2026' },
+      // { employee: 'Lisa Patel', type: 'CL', fromDate: '28-01-2026', toDate: '31-01-2026' },
+      // { employee: 'Mark Lee', type: 'AL', fromDate: '15-01-2026', toDate: '15-01-2026' }
     ]);
   
     currentMonthIndex = signal(11); // December

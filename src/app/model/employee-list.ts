@@ -104,58 +104,83 @@ export const employeeListFFT=[
 //     id:20
 // },
 
-//     {
-//     name:"Shankar Behera",
-//     designation:"",
-//     id:17
-// },
-//     {
-//     name:"Chandan Kumar",
-//     designation:"",
-//     id:18
-// },
-//     {
-//     name:"Pran Kumar",
-//     designation:"",
-//     id:19
-// },
-//     {
-//     name:"Raju Ram",
-//     designation:"",
-//     id:20
-// },
-//     {
-//     name:"Jitray Munda",
-//     designation:"",
-//     id:21
-// },
-//     {
-//     name:"Munna Prasad",
-//     designation:"",
-//     id:22
-// },
-//     {
-//     name:"Rahul kumar",
-//     designation:"",
-//     id:23
-// },
-//     {
-//     name:"Md. Firoz",
-//     designation:"",
-//     id:24
-// },
-//     {
-//     name:"Divesher Mukhiyar",
-//     designation:"",
-//     id:25
-// },
-//     {
-//     name:"Vishal Kumar",
-//     designation:"",
-//     id:26
-// },
+    {
+    name:"Mr. Shankar Behera",
+    designation:"",
+    id:17
+},
+    {
+    name:"Mr. Chandan Kumar",
+    designation:"",
+    id:18
+},
+    {
+    name:"Mr. Pran Kumar",
+    designation:"",
+    id:19
+},
+    {
+    name:"Mr. Raju Ram",
+    designation:"",
+    id:20
+},
+    {
+    name:"Mr. Jitray Munda",
+    designation:"",
+    id:21
+},
+    {
+    name:"Mr. Munna Prasad",
+    designation:"",
+    id:22
+},
+    {
+    name:"Mr. Rahul kumar",
+    designation:"",
+    id:23
+},
+    {
+    name:"Mr. Md. Firoz",
+    designation:"",
+    id:24
+},
+    {
+    name:"Mr. Divesher Mukhiyar",
+    designation:"",
+    id:25
+},
+    {
+    name:"Mr. Vishal Kumar",
+    designation:"",
+    id:26
+},
 
 
+]
+
+export const employeeListDASH=[
+    
+    {
+    name:"Dr. N.K. Singh",
+    designation:"",
+    id:1
+},
+]
+export const employeeListECE=[
+    
+    {
+    name:"Dr. N.K. Singh",
+    designation:"",
+    id:1
+},
+]
+export const employeeListMME=[
+    
+    {
+    name:"Dr. N.K. Singh",
+    designation:"",
+    id:1
+},
 ]
 
 
@@ -185,6 +210,10 @@ export interface ILEmployee {
       otherLeave: number;
     };
   }
+
+
+
+
 
   export interface ILLeave {
     id: number;

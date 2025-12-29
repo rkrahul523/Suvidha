@@ -1,7 +1,4 @@
-<p>dashboard works!</p>
-<button class="btn btn-primary" (click)="openLeave()">
-  <i class="bi bi-calendar-plus"></i> Apply Leave
-</button>
+
 
     <div class="dashboard-wrapper">
       <app-header></app-header>
@@ -13,41 +10,11 @@
             <div class="col-lg-8">
               <app-show-leave></app-show-leave>
               <div class="mt-2 mb-2">
-                <app-leave-manager></app-leave-manager>
-              </div>
-              <!-- Upcoming Leaves -->
-              <div class="card shadow-lg mb-5 border-0 overflow-hidden">
-                <div class="card-header bg-primary text-white py-4">
-                  <h5 class="mb-0 fw-bold d-flex align-items-center">
-                    <i class="bi bi-clock-history me-3 fs-5"></i>
-                    Upcoming Leaves
-                  </h5>
-                </div>
-                <div class="card-body p-4">
-                  <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                      <div class="leave-item p-4 rounded-3 border border-light-subtle hover-lift">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                          <h6 class="mb-1 fw-bold">John Doe</h6>
-                          <span class="badge bg-danger fs-6 px-3 py-2">Dec 28-30</span>
-                        </div>
-                        <small class="text-muted fw-semibold">Sick Leave</small>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                      <div class="leave-item p-4 rounded-3 border border-light-subtle hover-lift">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                          <h6 class="mb-1 fw-bold">Jane Smith</h6>
-                          <span class="badge bg-success fs-6 px-3 py-2">Jan 5-7</span>
-                        </div>
-                        <small class="text-muted fw-semibold">Annual Leave</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-          
+                <app-leave-manager ></app-leave-manager>
+              </div> 
+
+
+              <app-gen-report></app-gen-report>
               <app-charts></app-charts>
             </div>
             

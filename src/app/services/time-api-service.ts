@@ -1,12 +1,14 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Leave } from '../dashboard/leave-manager/leave-manager';
 // import { Observable } from 'rxjs/dist/types/internal/Observable';
 // import { AuthenticationService } from '../../login/services/authentication.service';
-// import { ToastrService } from 'ngx-toastr';
-
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
@@ -15,18 +17,28 @@ export class TimeTableApiService {
   private timeapiUrl = 'https://api.ipgeolocation.io/ipgeo?apiKey=c44d4e73d2e44e0e9c57a3959f9683b6'; // API for IST time
 
     // apiURL = !window.location.origin.includes('localhost') ?
-      apiURL=  'https://big-basket-tracker.onrender.com/'
+      // apiURL=  'https://big-basket-tracker.onrender.com/'
     //     :
-    //apiURL=  'http://localhost:5000/';
+    apiURL=  'http://localhost:5000/';
 
+    public leaveManagerData= signal<Leave[]>([
+      { id: 1, day:0.5, employee: 'John Doe', type: 'HPL', fromDate: '26-12-2025', toDate: '26-12-2025' , leaveId: "1262666"},
+    ]);
+    public upcomingLeave= signal<Leave[]>([
+      { id: 1, employee: 'John Doe', type: 'HPL', fromDate: '26-12-2025', toDate: '26-12-2025' , leaveId: "1262666"},
+    ]);
 
+public department= 'FFT'
     private    getAllTimeTable='get-all-time-table'
        private  getAllleave='getAllLeaveData'
+       private  addeave='addLeave'
+       private  deleteLeave='deleteLeave'
 
     private addTimeTable='add-time-table'
 
     constructor(
-      
+      private toastr: ToastrService,
+      private route: Router
     ) {
 
     }
@@ -44,10 +56,49 @@ export class TimeTableApiService {
       const data= { department: 'FFT' };
         return this.http.post(this.apiURL + this.getAllleave, data)
     }
+    addLeave(data: any){
+     // const data= { department: 'FFT' };
+        return this.http.post(this.apiURL + this.addeave, {...data, department: this.department})
+    }
+    deleteEmpLeave(data: any){
+     // const data= { department: 'FFT' };
+        return this.http.post(this.apiURL + this.deleteLeave, {...data, department: this.department})
+    }
     
 
 
-    
+    loginURL='validate-user-details';
+  currentUser='';
+
+  user=new BehaviorSubject<any>(null);
+  username=null;
+  getUerDetailsURL='get-user-details';
+
+
+  login(loginData: any): Observable<any> {
+    // Mock a successful call to an API server.
+    this.username= loginData.username;
+    //this.currentUser= getEmployeeName(loginData.username);
+    return this.http.post(this.apiURL+this.loginURL,  loginData)
+ 
+  }
+
+  logout(): void {
+    localStorage.removeItem("token");
+    this.route.navigateByUrl(`/login`)
+  }
+
+  isUserLoggedIn(): boolean {
+    if (localStorage.getItem("token") != null) {
+      return true;
+    }
+    return false;
+  }
+
+  getUserDetails(token : any){
+      console.log("in get userdetails", this.username )
+    return this.http.post(this.apiURL+this.getUerDetailsURL, { token, username:this.username })
+   }
   
     getCurrentTime(): any {
       return this.http.get(this.timeapiUrl);
@@ -65,21 +116,21 @@ export class TimeTableApiService {
    
 
 
-    //  warnToast(message: any, subtext='File Info') {
-    //     this.toastr.info(message, subtext, {
-    //       timeOut: 3000,
-    //     });
-    //   }
-    //  successToast(message: any, subtext='File Info') {
-    //     this.toastr.success(message, subtext, {
-    //       timeOut: 3000,
-    //     });
-    //   }
-    //  errorToast(message: any, subtext='File Info') {
-    //     this.toastr.error(message, subtext, {
-    //       timeOut: 3000,
-    //     });
-    //   }
+     warnToast(message: any, subtext='File Info') {
+        this.toastr.info(message, subtext, {
+          timeOut: 3000,
+        });
+      }
+     successToast(message: any, subtext='File Info') {
+        this.toastr.success(message, subtext, {
+          timeOut: 3000,
+        });
+      }
+     errorToast(message: any, subtext='File Info') {
+        this.toastr.error(message, subtext, {
+          timeOut: 3000,
+        });
+      }
 
 
 

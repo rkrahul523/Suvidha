@@ -2,74 +2,85 @@
 
   <!-- Employee Name -->
   <div class="mb-3">
-    <label>Employee Name</label>
-    <ng-select class="w-100 mr-2 "   [items]="names" [selectOnTab]="true" 
-    placeholder="Select Name" formControlName="employeeName" bindValue="name" bindLabel="name">
-   </ng-select>
-    </div>
+    <label class="form-label">Employee Name <span class="text-danger">*</span></label>
+    <ng-select class="w-100" [items]="names" [selectOnTab]="true" 
+               placeholder="Select Name" formControlName="employeeName" 
+                bindLabel="name">
+    </ng-select>
+  </div>
 
   <!-- Leave Type -->
   <div class="mb-3">
-    <label>Nature of Leave</label>
+    <label class="form-label">Nature of Leave <span class="text-danger">*</span></label>
     <select class="form-control" formControlName="leaveType">
       <option value="">Select</option>
       <option value="CL">Casual Leave</option>
       <option value="EL">Earned Leave</option>
+      <option value="HPL">HalfPay Leave</option>
+      <option value="VL">Vacation Leave</option>
+      <option value="UL">Unauthorised Leave</option>
     </select>
   </div>
 
   <!-- Date FormArray -->
   <div formArrayName="dates">
     <div class="row g-2 mb-2" *ngFor="let group of dates.controls; let i = index" [formGroupName]="i">
-
-      <!-- From Date -->
-      <div class="col-md-5">
-        <label>From</label>
-        <!-- <ngb-datepicker
-          formControlName="fromDate"
-          #d1="ngbDatepicker"
-        (click)="d1?.toggle()"
-          (select)="calculateDays()">
-        </ngb-datepicker> -->
-     
-
-      <div class="input-group">
-        <input
-          class="form-control"
-          placeholder="dd-mm-yyyy"
-          name="dp"
-          formControlName="fromDate"
-          ngbDatepicker
-          (select)="calculateDays()"
-          #d1="ngbDatepicker"
-        />
-        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d1.toggle()" type="button"></button>
-      </div>
-    </div>
-      <!-- To Date -->
-      <div class="col-md-5">
-        <label>To</label>
-       
-
-      <div class="input-group">
-        <input
-          class="form-control"
-          placeholder="dd-mm-yyyy"
-          name="dp"
-          formControlName="toDate"
-          ngbDatepicker
-          [minDate]="dates.at(i).get('fromDate')?.value! || undefined"
-        (select)="calculateDays()"
-          #d2="ngbDatepicker"
-        />
-        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
-      </div>
       
-
+      <!-- From Date -->
+      <div class="col-md-4">
+        <label class="form-label">From</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="fromDate"
+            ngbDatepicker
+            (select)="calculateDays()"
+            #d1="ngbDatepicker"
+          />
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d1.toggle()" type="button"></button>
+        </div>
       </div>
 
-      <div class="col-md-2 d-flex align-items-end">
-        <button *ngIf="i > 0" type="button" class="btn btn-danger" (click)="removeRow(i)">
+      <!-- To Date -->
+      <div class="col-md-4">
+        <label class="form-label">To</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="toDate"
+            ngbDatepicker
+            [minDate]="dates.at(i).get('fromDate')?.value || undefined"
+            (select)="calculateDays()"
+            #d2="ngbDatepicker"
+          />
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
+        </div>
+      </div>
+
+      <!-- Half Day Checkbox - ONLY for Casual Leave + SINGLE DAY -->
+      <div class="col-md-3 d-flex align-items-end" *ngIf="isCasualLeave()">
+        <div class="form-check w-100">
+          <input 
+            class="form-check-input" 
+            type="checkbox" 
+            id="halfDay{{i}}"
+            formControlName="isHalfDay"
+            [disabled]="!isSingleDay(i)"
+          />
+          <label class="form-check-label small" for="halfDay{{i}}">
+            Half Day (0.5) 
+            <span class="text-muted" *ngIf="!isSingleDay(i)">[Select same date]</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Remove Button -->
+      <div class="col-md-1 d-flex align-items-end">
+        <button *ngIf="i > 0" type="button" class="btn btn-danger btn-sm" (click)="removeRow(i)">
           <i class="bi bi-trash"></i>
         </button>
       </div>
@@ -83,12 +94,12 @@
 
   <!-- Total Days -->
   <div class="alert alert-info mt-3">
-    <strong>Total Days:</strong> {{ totalDays() }}
+    <strong>Total Days:</strong> {{ totalDays() | number:'1.1-1' }}
   </div>
 
   <!-- Modal Footer -->
   <div class="modal-footer">
-    <button class="btn btn-secondary" (click)="activeModal.dismiss()">Cancel</button>
+    <button class="btn btn-secondary" type="button" (click)="activeModal.dismiss()">Cancel</button>
     <button class="btn btn-success" type="submit" [disabled]="leaveForm.invalid">
       <i class="bi bi-check-circle"></i> Submit
     </button>

@@ -29,9 +29,11 @@
                     [(ngModel)]="typeFilterValue"
                     (ngModelChange)="updateTypeFilter($event)">
               <option value="">All Types</option>
-              <option value="SL">SL</option>
-              <option value="CL">CL</option>
-              <option value="AL">AL</option>
+              <option value="CL">Casual Leave</option>
+              <option value="EL">Earned Leave</option>
+              <option value="HPL">HalfPay Leave</option>
+              <option value="VL">Vacation Leave</option>
+              <option value="UL">Unauthorised Leave</option>
             </select>
           </div>
           <div class="col-3">
@@ -61,13 +63,14 @@
           </div>
         }
         
-        @for (leave of filteredLeaves(); track leave.id) {
+        @for (leave of filteredLeaves(); track leave.leaveId) {
           <div class="leave-box position-relative" 
-               (mouseenter)="hoverLeave(leave.id)"
+               (mouseenter)="hoverLeave(leave.leaveId)"
                (mouseleave)="hoverLeave(null)">
             
             <!-- Delete Badge -->
-            <button class="delete-btn" (click)="deleteLeave(leave.id)" title="Delete">
+
+            <button class="delete-btn" (click)="deleteLeave(leave.leaveId)" title="Delete">
               <i class="bi bi-trash3-fill"></i>
             </button>
 
@@ -82,16 +85,16 @@
                 <small>{{ leave.toDate }}</small>
               </div>
               <div class="days-badge">
-                {{ getDays(leave.fromDate, leave.toDate) }}d
+                {{ leave.day }}d
               </div>
             </div>
 
             <!-- Hover Detail -->
-            @if (hoveredLeaveId() === leave.id) {
+            @if (hoveredLeaveId() === leave.leaveId) {
               <div class="detail-box">
                 <div class="detail-header">{{ leave.employee }}</div>
                 <div class="detail-type type-{{ leave.type.toLowerCase() }}">
-                  {{ leave.type }} Leave • {{ getDays(leave.fromDate, leave.toDate) }} days
+                  {{ leave.type }} Leave • {{ leave.day }} days
                 </div>
                 <div class="detail-dates">
                   {{ leave.fromDate }} → {{ leave.toDate }}
