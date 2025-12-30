@@ -1,34 +1,31 @@
+<div class="row g-4">
+  <!-- Pie Chart -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-lg border-0 overflow-hidden">
+      <div class="card-header bg-gradient-primary text-white rounded-top py-3">
+        <h6 class="mb-0 fw-bold d-flex align-items-center">
+          <i class="bi bi-pie-chart-fill me-2 fs-5"></i>
+          Leave Type Distribution
+        </h6>
+      </div>
+      <div class="card-body chart-container p-4">
+        <canvas #pieChartCanvas></canvas>
+      </div>
+    </div>
+  </div>
 
-        <div class="row g-4">
-          <!-- Pie Chart -->
-          <div class="col-lg-6">
-            <div class="card h-100 shadow-lg border-0 overflow-hidden">
-              <div class="card-header bg-gradient-primary text-white rounded-top py-3">
-                <h6 class="mb-0 fw-bold d-flex align-items-center">
-                  <i class="bi bi-pie-chart-fill me-2 fs-5"></i>
-                  Leave Type Distribution
-                </h6>
-              </div>
-              <div class="card-body chart-container p-4">
-                <canvas #pieChartCanvas></canvas>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Bar Chart -->
-          <div class="col-lg-6">
-            <div class="card h-100 shadow-lg border-0 overflow-hidden">
-              <div class="card-header bg-gradient-success text-white rounded-top py-3">
-                <h6 class="mb-0 fw-bold d-flex align-items-center">
-                  <i class="bi bi-bar-chart-fill me-2 fs-5"></i>
-                  Monthly Leave Trend
-                </h6>
-              </div>
-              <div class="card-body chart-container p-4">
-                <canvas #barChartCanvas></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-  
+  <!-- Bar Chart -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-lg border-0 overflow-hidden">
+      <div class="card-header bg-gradient-success text-white rounded-top py-3">
+        <h6 class="mb-0 fw-bold d-flex align-items-center">
+          <i class="bi bi-bar-chart-fill me-2 fs-5"></i>
+          Monthly Leave Trend
+        </h6>
+      </div>
+      <div class="card-body chart-container p-4">
+        <canvas #barChartCanvas></canvas>
+      </div>
+    </div>
+  </div>
+</div>

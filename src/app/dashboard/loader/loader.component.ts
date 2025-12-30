@@ -6,20 +6,16 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-loader',
   standalone: true,
-  imports: [CommonModule],  // Add this line
+  imports: [CommonModule], // Add this line
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent implements OnInit {
-
-  isLoading: Subject<boolean> ;
+  isLoading: Subject<boolean>;
 
   constructor(private loaderService: LoaderService) {
-    this.isLoading=  this.loaderService.isLoading;
- 
+    this.isLoading = this.loaderService.isLoading;
   }
 
-  ngOnInit(): void {
-    }
-
+  ngOnInit(): void {}
 }

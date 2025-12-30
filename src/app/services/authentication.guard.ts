@@ -4,7 +4,7 @@ import { TimeTableApiService } from './time-api-service';
 
 // Class-based guard (recommended for shared logic)
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationGuard {
   private authService = inject(TimeTableApiService);
@@ -15,9 +15,9 @@ export class AuthenticationGuard {
   canLoad: CanLoadFn = () => this.authenticate();
 
   private authenticate(): boolean {
-    const currentUser = this.authService.user.getValue();
+    const currentUser = localStorage.getItem('userId');
     if (!this.authService.isUserLoggedIn() || !currentUser) {
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl('/login');
       return false;
     }
     return true;

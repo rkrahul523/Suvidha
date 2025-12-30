@@ -11,148 +11,140 @@ import { Router } from '@angular/router';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class TimeTableApiService {
   private http = inject(HttpClient);
-  token:string;
+  token: string;
   private timeapiUrl = 'https://api.ipgeolocation.io/ipgeo?apiKey=c44d4e73d2e44e0e9c57a3959f9683b6'; // API for IST time
 
-    // apiURL = !window.location.origin.includes('localhost') ?
-      apiURL=  'https://big-basket-tracker.onrender.com/'
-    //     :
-    // apiURL=  'http://localhost:5000/';
+  // apiURL = !window.location.origin.includes('localhost') ?
+  apiURL = 'https://big-basket-tracker.onrender.com/';
+  //     :
+  // apiURL=  'http://localhost:5000/';
 
-    public leaveManagerData= signal<Leave[]>([
-      { id: 1, day:0.5, employee: 'John Doe', type: 'HPL', fromDate: '26-12-2025', toDate: '26-12-2025' , leaveId: "1262666"},
-    ]);
-    public upcomingLeave= signal<Leave[]>([
-      { id: 1, employee: 'John Doe', type: 'HPL', fromDate: '26-12-2025', toDate: '26-12-2025' , leaveId: "1262666"},
-    ]);
+  public leaveManagerData = signal<Leave[]>([
+    {
+      id: 1,
+      day: 0.5,
+      employee: 'John Doe',
+      type: 'HPL',
+      fromDate: '26-12-2025',
+      toDate: '26-12-2025',
+      leaveId: '1262666',
+    },
+  ]);
+  public upcomingLeave = signal<Leave[]>([
+    {
+      id: 1,
+      employee: 'John Doe',
+      type: 'HPL',
+      fromDate: '26-12-2025',
+      toDate: '26-12-2025',
+      leaveId: '1262666',
+    },
+  ]);
 
-public department= 'FFT'
-    private    getAllTimeTable='get-all-time-table'
-       private  getAllleave='getAllLeaveData'
-       private  addeave='addLeave'
-       private  deleteLeave='deleteLeave'
+  public department = 'FFT';
+  private getAllTimeTable = 'get-all-time-table';
+  private getAllleave = 'getAllLeaveData';
+  private addeave = 'addLeave';
+  private deleteLeave = 'deleteLeave';
 
-    private addTimeTable='add-time-table'
+  private addTimeTable = 'add-time-table';
 
-    constructor(
-      private toastr: ToastrService,
-      private route: Router,
-      private snackBar: MatSnackBar
-    ) {
-    this.token='';
-    }
+  constructor(
+    private toastr: ToastrService,
+    private route: Router,
+    private snackBar: MatSnackBar,
+  ) {
+    this.token = '';
+  }
 
-    // getU_id() {
-    //     const userId: any = this.authentication.user.getValue();
-    //     return userId.userId;   
-    // }
+  // getU_id() {
+  //     const userId: any = this.authentication.user.getValue();
+  //     return userId.userId;
+  // }
 
-    addTime(timeData: any) {
-        return this.http.post(this.apiURL + this.addTimeTable, { timeData })
-    }
+  addTime(timeData: any) {
+    return this.http.post(this.apiURL + this.addTimeTable, { timeData });
+  }
 
-    getAllLeave(){
-      const data= { department: this.department };
-        return this.http.post(this.apiURL + this.getAllleave, data)
-    }
-    addLeave(data: any){
-     // const data= { department: 'FFT' };
-        return this.http.post(this.apiURL + this.addeave, {...data, department: this.department})
-    }
-    deleteEmpLeave(data: any){
-     // const data= { department: 'FFT' };
-        return this.http.post(this.apiURL + this.deleteLeave, {...data, department: this.department})
-    }
-    
+  getAllLeave() {
+    const dep = localStorage.getItem('department') ?? '';
+    return this.http.post(this.apiURL + this.getAllleave, { department: dep });
+  }
+  addLeave(data: any) {
+    // const data= { department: 'FFT' };
+    const dep = localStorage.getItem('department') ?? '';
+    return this.http.post(this.apiURL + this.addeave, { ...data, department: dep });
+  }
+  deleteEmpLeave(data: any) {
+    const dep = localStorage.getItem('department') ?? '';
+    return this.http.post(this.apiURL + this.deleteLeave, { ...data, department: dep });
+  }
 
+  loginURL = 'validateLogin';
+  currentUser = '';
 
-    loginURL='validateLogin';
-  currentUser='';
-
-  user=new BehaviorSubject<any>(null);
-  username=null;
-  getUerDetailsURL='get-user-details';
-
+  user = new BehaviorSubject<any>(null);
+  username = null;
+  getUerDetailsURL = 'get-user-details';
 
   login(loginData: any): Observable<any> {
     // Mock a successful call to an API server.
-    this.username= loginData.username;
+    this.username = loginData.username;
     //this.currentUser= getEmployeeName(loginData.username);
-    return this.http.post(this.apiURL+this.loginURL,  loginData)
- 
+    return this.http.post(this.apiURL + this.loginURL, loginData);
   }
 
   logout(): void {
-    this.token='';
-   // localStorage.removeItem("token");
-    this.route.navigateByUrl(`/login`)
+    this.token = '';
+    localStorage.removeItem('token');
+    this.route.navigateByUrl(`/login`);
   }
 
   isUserLoggedIn(): boolean {
-    if (this.token != null) {
+    if (localStorage.getItem('token') != null) {
       return true;
     }
     return false;
   }
 
-  getUserDetails(token : any){
-      console.log("in get userdetails", this.username )
-    return this.http.post(this.apiURL+this.getUerDetailsURL, { token, username:this.username })
-   }
-  
-    getCurrentTime(): any {
-      return this.http.get(this.timeapiUrl);
-    }
+  getUserDetails(token: any) {
+    console.log('in get userdetails', this.username);
+    return this.http.post(this.apiURL + this.getUerDetailsURL, { token, username: this.username });
+  }
 
+  getCurrentTime(): any {
+    return this.http.get(this.timeapiUrl);
+  }
 
-    getAlltime() {
-      return this.http.get('assets/docs/time-table.json');
-        return this.http.get(this.apiURL + this.getAllTimeTable)
-    }
-   
-    // getAllDak() {
-    //     return this.http.get(this.apiURL + this.getAllDakUrl, { params: { user_id: this.getU_id() } })
-    // }
-   
+  getAlltime() {
+    return this.http.get('assets/docs/time-table.json');
+    return this.http.get(this.apiURL + this.getAllTimeTable);
+  }
 
+  // getAllDak() {
+  //     return this.http.get(this.apiURL + this.getAllDakUrl, { params: { user_id: this.getU_id() } })
+  // }
 
-
-
-
-
-
-
-
-
-     warnToast(message: any, subtext='File Info') {
-      this.snackBar.open(message, subtext, { 
-        duration: 3000,
-        panelClass: ['success-snackbar']
-      });
-      }
-     successToast(message: any, subtext='File Info') {
-      this.snackBar.open(message, subtext, { 
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-      }
-     errorToast(message: any, subtext='File Info') {
-      this.snackBar.open(message, subtext, { 
-        duration: 3000,
-        panelClass: ['error-snackbar']
-      });
-      }
-
-
-
-
-
-
-
-
-
+  warnToast(message: any, subtext = 'File Info') {
+    this.snackBar.open(message, subtext, {
+      duration: 3000,
+      panelClass: ['success-snackbar'],
+    });
+  }
+  successToast(message: any, subtext = 'File Info') {
+    this.snackBar.open(message, subtext, {
+      duration: 3000,
+      panelClass: ['error-snackbar'],
+    });
+  }
+  errorToast(message: any, subtext = 'File Info') {
+    this.snackBar.open(message, subtext, {
+      duration: 3000,
+      panelClass: ['error-snackbar'],
+    });
+  }
 }

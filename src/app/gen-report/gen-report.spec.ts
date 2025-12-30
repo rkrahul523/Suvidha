@@ -8,9 +8,8 @@ describe('GenReport', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GenReport]
-    })
-    .compileComponents();
+      imports: [GenReport],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GenReport);
     component = fixture.componentInstance;

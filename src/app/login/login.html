@@ -1,82 +1,98 @@
+<div class="container">
+  <div class="login-card">
+    <div class="header">
+      <div class="logo">🚀</div>
+      <h1 class="title">E Suvidha</h1>
+      <p class="subtitle">Welcome to seamless leave management</p>
+    </div>
 
-    <div class="container">
-      <div class="login-card">
-        <div class="header">
-          <div class="logo">🚀</div>
-          <h1 class="title">E Suvidha</h1>
-          <p class="subtitle">Welcome to seamless leave management</p>
-        </div>
-        
-        <div class="tabs">
-          <div class="tab" [class.active]="activeTab() === 'timetable'" (click)="setTab('timetable')">
-            📅 Time-table
+    <div class="tabs">
+      <div class="tab" [class.active]="activeTab() === 'timetable'" (click)="setTab('timetable')">
+        📅 Time-table
+      </div>
+      <div class="tab" [class.active]="activeTab() === 'login'" (click)="setTab('login')">
+        🔐 Login
+      </div>
+    </div>
+
+    <div class="tab-content">
+      @if (activeTab() === 'login') {
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-input"
+              [(ngModel)]="username"
+              name="username"
+              required
+              placeholder="Enter your Username"
+            />
           </div>
-          <div class="tab" [class.active]="activeTab() === 'login'" (click)="setTab('login')">
-            🔐 Login
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-input"
+              [(ngModel)]="password"
+              name="password"
+              required
+              minlength="6"
+              placeholder="Enter your password"
+            />
           </div>
+          <div class="login-button d-block">
+            <button type="submit" class="login-btn" [disabled]="!loginForm.valid">
+              Sign In
+              <span
+                class="spinner-border text-primary loading-spinner"
+                role="status"
+                *ngIf="loaderFlag()"
+              >
+                <span class="sr-only"></span>
+              </span>
+            </button>
+          </div>
+        </form>
+        <div style="text-align: center; margin-top: 1.5rem; color: #64748b">
+          <small>Don't have an account? <a href="#" style="color: #4facfe">Sign up</a></small>
         </div>
-        
-        <div class="tab-content">
-          @if (activeTab() === 'login') {
-            <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-              <div class="form-group">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-input" [(ngModel)]="username" name="username" required placeholder="Enter your Username">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" [(ngModel)]="password" name="password" required minlength="6" placeholder="Enter your password">
-              </div>
-              <div class="login-button d-block">
-                <button type="submit" class="login-btn" [disabled]="!loginForm.valid">Sign In
-                    <span class="spinner-border text-primary loading-spinner" role="status" *ngIf="loaderFlag()">
-                        <span class="sr-only"></span>
-                      </span>
-                </button>
-           
-               
-              </div>
-                     </form>
-            <div style="text-align: center; margin-top: 1.5rem; color: #64748b;">
-              <small>Don't have an account? <a href="#" style="color: #4facfe;">Sign up</a></small>
-            </div>
-          }
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Fullscreen Timetable Overlay -->
+@if (activeTab() === 'timetable') {
+  <div class="timetable-fullscreen" [@slideInFull]>
+    <button class="back-btn" (click)="setTab('login')">← Back</button>
+    <div class="timetable-header">
+      <h1 style="font-size: 32px; margin: 0">📅 Your Timetable</h1>
+      <p style="margin: 0.5rem 0 0 0; opacity: 0.9">Today's Schedule</p>
+    </div>
+    <div class="timetable-body">
+      <div class="timetable-grid">
+        <div class="schedule-card">
+          <div class="time-slot">09:00 AM - 10:30 AM</div>
+          <div class="subject">Mathematics</div>
+          <div class="teacher">Prof. Smith</div>
+        </div>
+        <div class="schedule-card">
+          <div class="time-slot">10:45 AM - 12:15 PM</div>
+          <div class="subject">Physics</div>
+          <div class="teacher">Dr. Johnson</div>
+        </div>
+        <div class="schedule-card">
+          <div class="time-slot">01:00 PM - 02:30 PM</div>
+          <div class="subject">Chemistry</div>
+          <div class="teacher">Prof. Brown</div>
+        </div>
+        <div class="schedule-card">
+          <div class="time-slot">03:00 PM - 04:30 PM</div>
+          <div class="subject">Computer Science</div>
+          <div class="teacher">Ms. Davis</div>
         </div>
       </div>
     </div>
-    
-    <!-- Fullscreen Timetable Overlay -->
-    @if (activeTab() === 'timetable') {
-      <div class="timetable-fullscreen" [@slideInFull]>
-        <button class="back-btn" (click)="setTab('login')">← Back</button>
-        <div class="timetable-header">
-          <h1 style="font-size: 32px; margin: 0;">📅 Your Timetable</h1>
-          <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Today's Schedule</p>
-        </div>
-        <div class="timetable-body">
-          <div class="timetable-grid">
-            <div class="schedule-card">
-              <div class="time-slot">09:00 AM - 10:30 AM</div>
-              <div class="subject">Mathematics</div>
-              <div class="teacher">Prof. Smith</div>
-            </div>
-            <div class="schedule-card">
-              <div class="time-slot">10:45 AM - 12:15 PM</div>
-              <div class="subject">Physics</div>
-              <div class="teacher">Dr. Johnson</div>
-            </div>
-            <div class="schedule-card">
-              <div class="time-slot">01:00 PM - 02:30 PM</div>
-              <div class="subject">Chemistry</div>
-              <div class="teacher">Prof. Brown</div>
-            </div>
-            <div class="schedule-card">
-              <div class="time-slot">03:00 PM - 04:30 PM</div>
-              <div class="subject">Computer Science</div>
-              <div class="teacher">Ms. Davis</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    }
-
+  </div>
+}

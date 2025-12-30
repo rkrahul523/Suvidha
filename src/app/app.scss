@@ -1,13 +1,12 @@
 .modal {
-    z-index: 1055 !important;
-  }
-  
-  .modal-backdrop {
-    z-index: 1050 !important;
-  }
+  z-index: 1055 !important;
+}
 
+.modal-backdrop {
+  z-index: 1050 !important;
+}
 
-  /* Success toast - green background */
+/* Success toast - green background */
 .success-snackbar {
   --mdc-snack-bar-container-color: #4caf50;
   --mdc-protected-button-ink-color: white;

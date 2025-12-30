@@ -1,223 +1,286 @@
 :host {
-    display: block;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Full screen timetable */
+.timetable-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFull 0.4s ease-out;
+}
+@keyframes slideInFull {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  /* Full screen timetable */
-  .timetable-fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    animation: slideInFull 0.4s ease-out;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  @keyframes slideInFull {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    position: relative;
-    z-index: 1;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+.header {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  padding: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+.subtitle {
+  opacity: 0.9;
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  background: #f8fafc;
+  border-radius: 0 0 24px 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 1.25rem 0;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  position: relative;
+  color: #64748b;
+}
+
+.tab.active {
+  color: #4facfe;
+  background: white;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  border-radius: 2px;
+}
+
+.tab-content {
+  padding: 2.5rem;
+  min-height: 300px;
+}
+
+/* Timetable Fullscreen Content */
+.timetable-header {
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.timetable-body {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  color: white;
+}
+
+.timetable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.schedule-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.time-slot {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.subject {
+  font-size: 18px;
+  opacity: 0.9;
+}
+.teacher {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+}
+
+.back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+}
+
+/* Login Tab - unchanged */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #334155;
+}
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
+.form-input:focus {
+  outline: none;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(79, 172, 254, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .login-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 480px;
-    overflow: hidden;
-    animation: slideUp 0.6s ease-out;
+    margin: 1rem;
+    max-width: none;
   }
-  
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
   .header {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    padding: 2rem;
-    text-align: center;
-    color: white;
-  }
-  
-  .logo {
-    width: 60px;
-    height: 60px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 16px;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .title { font-size: 28px; font-weight: 700; margin: 0; }
-  .subtitle { opacity: 0.9; margin: 0; }
-  
-  .tabs {
-    display: flex;
-    background: #f8fafc;
-    border-radius: 0 0 24px 24px;
-  }
-  
-  .tab {
-    flex: 1;
-    padding: 1.25rem 0;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    position: relative;
-    color: #64748b;
-  }
-  
-  .tab.active {
-    color: #4facfe;
-    background: white;
-  }
-  
-  .tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    border-radius: 2px;
-  }
-  
-  .tab-content {
-    padding: 2.5rem;
-    min-height: 300px;
-  }
-  
-  /* Timetable Fullscreen Content */
-  .timetable-header {
-    padding: 2rem;
-    text-align: center;
-    color: white;
-    flex-shrink: 0;
-  }
-  
-  .timetable-body {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    color: white;
-  }
-  
-  .timetable-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .schedule-card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
     padding: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: all 0.3s ease;
   }
-  
-  .schedule-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255,255,255,0.25);
+  .title {
+    font-size: 24px;
   }
-  
-  .time-slot { font-size: 24px; font-weight: bold; margin-bottom: 0.5rem; }
-  .subject { font-size: 18px; opacity: 0.9; }
-  .teacher { font-size: 14px; opacity: 0.8; margin-top: 0.25rem; }
-  
-  .back-btn {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    font-weight: 600;
+  .tab-content {
+    padding: 1.5rem;
   }
-  
-  .back-btn:hover {
-    background: rgba(255,255,255,0.3);
-    transform: translateX(-2px);
+  .timetable-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  
-  /* Login Tab - unchanged */
-  .form-group { margin-bottom: 1.5rem; }
-  .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #334155; }
-  .form-input {
-    width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0;
-    border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: white;
-  }
-  .form-input:focus {
-    outline: none; border-color: #4facfe; box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-  }
-  .login-btn {
-    width: 100%; padding: 16px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 600;
-    cursor: pointer; transition: all 0.3s ease; margin-top: 1rem;
-  }
-  .login-btn:hover:not(:disabled) {
-    transform: translateY(-2px); box-shadow: 0 12px 24px rgba(79, 172, 254, 0.4);
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .login-card { margin: 1rem; max-width: none; }
-    .header { padding: 1.5rem; }
-    .title { font-size: 24px; }
-    .tab-content { padding: 1.5rem; }
-    .timetable-grid { grid-template-columns: 1fr; gap: 1rem; }
-  }
+}
 
+.success-snackbar {
+  --mdc-snack-bar-container-color: #4caf50;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}
 
-  .success-snackbar {
-    --mdc-snack-bar-container-color: #4caf50;
-    --mdc-protected-button-ink-color: white;
-    color: white;
-  }
-  
-  /* Error toast - red background */
-  .error-snackbar {
-    --mdc-snack-bar-container-color: #f44336;
-    --mdc-protected-button-ink-color: white;
-    color: white;
-  }
-  
-  /* Warning toast - orange background */
-  .warning-snackbar {
-    --mdc-snack-bar-container-color: #ff9800;
-    --mdc-protected-button-ink-color: white;
-    color: white;
-  }
-  
+/* Error toast - red background */
+.error-snackbar {
+  --mdc-snack-bar-container-color: #f44336;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}
+
+/* Warning toast - orange background */
+.warning-snackbar {
+  --mdc-snack-bar-container-color: #ff9800;
+  --mdc-protected-button-ink-color: white;
+  color: white;
+}

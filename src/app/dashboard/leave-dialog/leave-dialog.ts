@@ -1,33 +1,54 @@
-import { Component, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDateStruct, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Subscription } from 'rxjs';
-import { employeeListFFT, employeeListDASH, employeeListECE, employeeListMME } from '../../model/employee-list';
+import {
+  employeeListFFT,
+  employeeListDASH,
+  employeeListECE,
+  employeeListMME,
+} from '../../model/employee-list';
 import { TimeTableApiService } from '../../services/time-api-service';
-
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-leave-modal',
   standalone: true,
-  imports: [CommonModule, NgSelectModule, ReactiveFormsModule, NgbDatepickerModule],
+  imports: [
+    CommonModule,
+    NgSelectModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './leave-dialog.html',
   styleUrl: './leave-dialog.scss',
 })
 export class LeaveDialog implements OnInit, OnDestroy {
   leaveForm!: FormGroup;
   totalDaysSignal = signal(0);
-  names: any  = [];
+  names: any = [];
   private subscription?: Subscription;
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private api: TimeTableApiService) { }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private fb: FormBuilder,
+    private api: TimeTableApiService,
+    private snackBar: MatSnackBar,
+  ) {
+    effect(() => {
+      const apiData = this.api.leaveManagerData();
+      this.assignDepartment();
+    });
+  }
 
   ngOnInit() {
     this.assignDepartment();
     this.leaveForm = this.fb.group({
       employeeName: ['', Validators.required],
       leaveType: ['', Validators.required],
-      dates: this.fb.array([this.createRow()])
+      dates: this.fb.array([this.createRow()]),
     });
 
     this.subscription = this.leaveForm.valueChanges.subscribe(() => {
@@ -36,20 +57,22 @@ export class LeaveDialog implements OnInit, OnDestroy {
   }
 
   assignDepartment() {
-    let department = this.api.department;
+    let department = localStorage.getItem('department');
     switch (department) {
-      case 'FFT': this.names = employeeListFFT;
+      case 'FFT':
+        this.names = employeeListFFT;
         break;
-      case 'DASH': this.names = employeeListDASH;
+      case 'DASH':
+        this.names = employeeListDASH;
         break;
-      case 'ECE': this.names = employeeListECE;
+      case 'ECE':
+        this.names = employeeListECE;
         break;
-      case 'MME': this.names = employeeListMME;
+      case 'MME':
+        this.names = employeeListMME;
         break;
     }
   }
-
-
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
@@ -63,7 +86,7 @@ export class LeaveDialog implements OnInit, OnDestroy {
     return this.fb.group({
       fromDate: [null, Validators.required],
       toDate: [null, Validators.required],
-      isHalfDay: [false]
+      isHalfDay: [false],
     });
   }
 
@@ -127,17 +150,16 @@ export class LeaveDialog implements OnInit, OnDestroy {
     this.calculateDays();
     const formValue = {
       ...this.leaveForm.value,
-      totalDays: this.totalDays()
+      totalDays: this.totalDays(),
     };
 
     // const from = new Date(formValue.fromDate.year, formValue.fromDate.month - 1, formValue.fromDate.day);
     // const to = new Date(formValue.toDate.year, formValue.toDate.month - 1, formValue.toDate.day);
-    
+
     // if (from > to) {
     //   alert(`🚫 Date Range Error!`);
     //   return;
     // }
-
 
     console.log('Submitting:', formValue);
     // {
@@ -151,43 +173,44 @@ export class LeaveDialog implements OnInit, OnDestroy {
     //     isHalfDay: true,
     // }
 
-    const data= this.convertLeaveData(formValue)
+    const data = this.convertLeaveData(formValue);
     this.api.addLeave(data).subscribe((res: any) => {
       if (res && res.status) {
         this.api.successToast(res.message, 'fetching all Leaves');
-       
+        this.snackBar.open(res.message, 'Error Login', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
       } else {
         this.api.warnToast(res.message, 'fetching all Leaves');
       }
-    })
+    });
 
-   
-   // this.activeModal.close(formValue);
+    // this.activeModal.close(formValue);
   }
 
-
-   convertLeaveData(input: any): any {
+  convertLeaveData(input: any): any {
     const dateRange = input.dates[0];
     const fromDate = dateRange.fromDate;
     const toDate = dateRange.toDate;
-    
+
     // Check if dates are same AND explicitly marked as half day
-    const isSameDate = fromDate.day === toDate.day && 
-                       fromDate.month === toDate.month && 
-                       fromDate.year === toDate.year;
-    
-    const isHalfDay = (isSameDate && dateRange.day === 0.5);
-   
+    const isSameDate =
+      fromDate.day === toDate.day &&
+      fromDate.month === toDate.month &&
+      fromDate.year === toDate.year;
+
+    const isHalfDay = isSameDate && dateRange.day === 0.5;
+
     return {
       EmployeeName: input.employeeName.name || '',
       leaveType: input.leaveType,
       id: input.employeeName.id,
       dateFrom: `${String(fromDate.day).padStart(2, '0')}-${String(fromDate.month).padStart(2, '0')}-${fromDate.year}`,
       dateTo: `${String(toDate.day).padStart(2, '0')}-${String(toDate.month).padStart(2, '0')}-${toDate.year}`,
-      leaveId: Date.now().toString()+`${input.employeeName.id}`,
-      day: input.totalDays,  
-      isHalfDay: isHalfDay
+      leaveId: Date.now().toString() + `${input.employeeName.id}`,
+      day: input.totalDays,
+      isHalfDay: isHalfDay,
     };
   }
-  
 }

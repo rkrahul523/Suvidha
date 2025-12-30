@@ -1,30 +1,27 @@
+<div class="dashboard-wrapper">
+  <app-header></app-header>
 
-
-    <div class="dashboard-wrapper">
-      <app-header></app-header>
-      
-      <main class="main-content">
-        <div class="container-fluid px-3 px-md-4 px-lg-5">
-          <div class="row g-4 g-lg-5">
-            <!-- Main Content (70%) -->
-            <div class="col-lg-8">
-              <app-show-leave></app-show-leave>
-              <div class="mt-2 mb-2">
-                <app-leave-manager ></app-leave-manager>
-              </div> 
-
-
-              <app-gen-report></app-gen-report>
-              <app-charts></app-charts>
-            </div>
-            
-            <!-- Calendar Sidebar (30%) -->
-            <div class="col-lg-4">
-              <app-calendar></app-calendar>
-            </div>
+  <main class="main-content">
+    <div class="container-fluid px-3 px-md-4 px-lg-5">
+      <div class="row g-4 g-lg-5">
+        <!-- Main Content (70%) -->
+        <div class="col-lg-8">
+          <app-show-leave></app-show-leave>
+          <div class="mt-2 mb-2">
+            <app-leave-manager></app-leave-manager>
           </div>
+
+          <app-gen-report></app-gen-report>
+          <app-charts></app-charts>
         </div>
-      </main>
-      
-      <app-footer></app-footer>
+
+        <!-- Calendar Sidebar (30%) -->
+        <div class="col-lg-4">
+          <app-calendar></app-calendar>
+        </div>
+      </div>
     </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

@@ -8,9 +8,8 @@ describe('LeaveDialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaveDialog]
-    })
-    .compileComponents();
+      imports: [LeaveDialog],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LeaveDialog);
     component = fixture.componentInstance;

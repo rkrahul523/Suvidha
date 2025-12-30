@@ -2,28 +2,31 @@ import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpHeaders } from '@ang
 import { inject } from '@angular/core';
 import { TimeTableApiService } from './time-api-service';
 
-export const apiInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+export const apiInterceptor: HttpInterceptorFn = (
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+) => {
   const authentication = inject(TimeTableApiService);
-  
-  const token = authentication.token;
-  const currentUser = authentication.user.getValue();
-  
+
+  const token: any = localStorage.getItem('token') ? localStorage.getItem('token') : '';
+  const currentUser = localStorage.getItem('userId');
+
   let authReq = req;
-  
+
   if (currentUser) {
     authReq = req.clone({
       headers: new HttpHeaders({
         token,
-        'user': `${currentUser.u_id}`
-      })
+        user: `${currentUser}`,
+      }),
     });
   } else {
     authReq = req.clone({
       headers: new HttpHeaders({
-        token
-      })
+        token,
+      }),
     });
   }
 
-  return next(authReq);  // Direct call, no .handle()
+  return next(authReq); // Direct call, no .handle()
 };

@@ -1,32 +1,37 @@
-
-.dialog-content { min-height: 450px; }
-.leave-form { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 1.5rem; 
+.dialog-content {
+  min-height: 450px;
 }
-.full-width { width: 100%; }
-.date-range-row { 
-  display: flex; 
-  align-items: end; 
-  gap: 1rem; 
-  margin-bottom: 1rem; 
-  padding: 1.25rem; 
-  border: 1px solid #e0e0e0; 
+.leave-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.full-width {
+  width: 100%;
+}
+.date-range-row {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   background: #fafafa;
 }
-.date-fields { 
-  flex: 1; 
-  display: flex; 
-  gap: 1rem; 
+.date-fields {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
 }
-.date-field { flex: 1; }
-.total-days { 
-  display: flex; 
-  align-items: center; 
-  gap: 0.75rem; 
-  padding: 1rem; 
+.date-field {
+  flex: 1;
+}
+.total-days {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 12px;
@@ -34,8 +39,11 @@
 }
 
 @media (max-width: 600px) {
-  .date-range-row { flex-direction: column; align-items: stretch; }
-  .date-fields { flex-direction: column; }
+  .date-range-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .date-fields {
+    flex-direction: column;
+  }
 }
-
-

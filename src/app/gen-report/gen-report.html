@@ -1,64 +1,64 @@
 <div class="report-wrapper">
+  <div class="report-header">
+    <h2>Employee Leave Report</h2>
 
-    <div class="report-header">
-      <h2>Employee Leave Report</h2>
-  
-      <form [formGroup]="reportForm" class="filters">
-        <div class="field">
-          <label>Start Date</label>
-          <input type="date" formControlName="startDate">
-        </div>
-  
-        <div class="field">
-          <label>End Date</label>
-          <input type="date" formControlName="endDate">
-        </div>
-  
-        <button type="button"
-                class="btn primary"
-                (click)="generateReport()"
-                [disabled]="reportForm.invalid">
-          Generate
-        </button>
-  
-        <button type="button"
-                class="btn excel"
-                (click)="exportToExcel()"
-                [disabled]="!reportData().length">
-          Export to Excel
-        </button>
-      </form>
-    </div>
-  
-    <div class="table-container" *ngIf="reportData().length">
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th *ngFor="let lt of leaveTypes">{{ lt }}</th>
-          </tr>
-        </thead>
-  
-        <tbody>
-          <tr *ngFor="let row of reportData()">
-            <td class="employee">{{ row.employee }}</td>
-            <td *ngFor="let lt of leaveTypes" class="tooltip-cell">
-              <span class="cell-value" [class.empty]="!row[lt].value">
-                {{ row[lt].value || '-' }}
-  
-                <div class="tooltip-box" *ngIf="row[lt].tooltip.length">
-                  <div class="tooltip-title">{{ lt }} Leave</div>
-                  <div class="tooltip-line"
-                       *ngFor="let t of row[lt].tooltip">
-                    {{ t }}
-                  </div>
-                </div>
-              </span>
-            </td>    
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
+    <form [formGroup]="reportForm" class="filters">
+      <div class="field">
+        <label>Start Date</label>
+        <input type="date" formControlName="startDate" />
+      </div>
+
+      <div class="field">
+        <label>End Date</label>
+        <input type="date" formControlName="endDate" />
+      </div>
+
+      <button
+        type="button"
+        class="btn primary"
+        (click)="generateReport()"
+        [disabled]="reportForm.invalid"
+      >
+        Generate
+      </button>
+
+      <button
+        type="button"
+        class="btn excel"
+        (click)="exportToExcel()"
+        [disabled]="!reportData().length"
+      >
+        Export to Excel
+      </button>
+    </form>
   </div>
-  
+
+  <div class="table-container" *ngIf="reportData().length">
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th *ngFor="let lt of leaveTypes">{{ lt }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of reportData()">
+          <td class="employee">{{ row.employee }}</td>
+          <td *ngFor="let lt of leaveTypes" class="tooltip-cell">
+            <span class="cell-value" [class.empty]="!row[lt].value">
+              {{ row[lt].value || '-' }}
+
+              <div class="tooltip-box" *ngIf="row[lt].tooltip.length">
+                <div class="tooltip-title">{{ lt }} Leave</div>
+                <div class="tooltip-line" *ngFor="let t of row[lt].tooltip">
+                  {{ t }}
+                </div>
+              </div>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

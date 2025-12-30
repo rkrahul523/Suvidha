@@ -8,9 +8,8 @@ describe('LeaveManager', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaveManager]
-    })
-    .compileComponents();
+      imports: [LeaveManager],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LeaveManager);
     component = fixture.componentInstance;

@@ -10,13 +10,10 @@ const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
 
-    importProvidersFrom(
-      MatDialogModule,
-      MatNativeDateModule
-    ),
-   
+    importProvidersFrom(MatDialogModule, MatNativeDateModule),
+
     // provideNgb()
-  ]
+  ],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);

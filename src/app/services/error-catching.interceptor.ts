@@ -14,7 +14,7 @@ export const errorCatchingInterceptor: HttpInterceptorFn = (req, next) => {
         console.log('Unauthorized User logging out');
         authentication.logout();
       }
-      
+
       let errorMsg = '';
       // if (error.error instanceof ErrorEvent) {
       //   console.log('This is client side error');
@@ -23,9 +23,9 @@ export const errorCatchingInterceptor: HttpInterceptorFn = (req, next) => {
       //   console.log('This is server side error');
       //   errorMsg = `Error Code: ${error.status}, Message: ${error.message}`;
       // }
-      authentication.errorToast('Please try Again', 'Something went wrong!!!')
+      authentication.errorToast('Please try Again', 'Something went wrong!!!');
       // toastr.error('Please try Again', 'Something went wrong!!!', { timeOut: 3000 });
       return throwError(() => errorMsg);
-    })
+    }),
   );
 };

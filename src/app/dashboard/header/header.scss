@@ -1,78 +1,103 @@
 .header {
-    height: 70px; 
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
-    z-index: 1030;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-  .navbar-brand { color: white !important; text-decoration: none; }
-  .nav-link { 
-    color: rgba(255,255,255,0.9) !important; 
-    padding: 0.75rem 1.5rem !important;
-    border-radius: 8px;
-    transition: all 0.3s;
-    margin: 0 0.25rem;
-  }
-  .nav-link:hover, .nav-link.active { 
-    color: white !important; 
-    background: rgba(255,255,255,0.1);
-    transform: translateY(-2px);
-  }
-  .profile-img { width: 40px; height: 40px; border: 2px solid rgba(255,255,255,0.3); }
-  
-  /* Mobile Menu */
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1031;
-    backdrop-filter: blur(5px);
-  }
-  .mobile-sidebar {
-    position: fixed;
-    top: 70px; left: 0; bottom: 0;
-    width: 280px;
-    background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
-    z-index: 1032;
-    transform: translateX(-100%);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .header.mobile-open .mobile-sidebar { transform: translateX(0); }
-  .mobile-nav-list { list-style: none; padding: 2rem 1.5rem 1.5rem; margin: 0; }
-  .mobile-nav-link {
-    display: block;
-    color: rgba(255,255,255,0.9);
-    padding: 1rem 0;
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .mobile-nav-link:hover, .mobile-nav-link.active {
-    color: white;
-    padding-left: 1rem;
-    background: rgba(255,255,255,0.1);
-  }
-  
-  @media (max-width: 991px) {
-    .navbar-collapse { position: absolute; }
-  }
-  @media (max-width: 768px) {
-    .header { padding: 0 1rem; }
-    .navbar-brand { font-size: 1.2rem; }
-  }
+  height: 70px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+  z-index: 1030;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.navbar-brand {
+  color: white !important;
+  text-decoration: none;
+}
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 8px;
+  transition: all 0.3s;
+  margin: 0 0.25rem;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
+/* Mobile Menu */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1031;
+  backdrop-filter: blur(5px);
+}
+.mobile-sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+  z-index: 1032;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.header.mobile-open .mobile-sidebar {
+  transform: translateX(0);
+}
+.mobile-nav-list {
+  list-style: none;
+  padding: 2rem 1.5rem 1.5rem;
+  margin: 0;
+}
+.mobile-nav-link {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: white;
+  padding-left: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    position: absolute;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
 
 // gen-report.scss or global styles.scss
 .profile-dropdown-toggle {
   cursor: pointer !important;
   transition: all 0.2s ease;
-  
+
   &:hover {
-    background: rgba(255,255,255,0.2) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
@@ -91,7 +116,7 @@
   .dropdown-toggle {
     white-space: nowrap;
   }
-  
+
   .dropdown-menu {
     pointer-events: auto !important;
   }

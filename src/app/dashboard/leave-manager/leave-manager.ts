@@ -2,7 +2,7 @@ import { Component, signal, computed, effect } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimeTableApiService } from '../../services/time-api-service';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 export interface Leave {
   id: number;
   day?: number;
@@ -16,7 +16,7 @@ export interface Leave {
 @Component({
   selector: 'app-leave-manager',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgFor, NgIf],
+  imports: [CommonModule, FormsModule, NgFor, NgIf, MatSnackBarModule],
   templateUrl: './leave-manager.html',
   styleUrl: './leave-manager.scss',
 })
@@ -30,17 +30,17 @@ export class LeaveManager {
   // Signals for reactive filtering
   employeeFilter = signal('');
   typeFilter = signal('');
-  hoveredLeaveId = signal<string | null>(null);  // Changed to string for leaveId
+  hoveredLeaveId = signal<string | null>(null); // Changed to string for leaveId
 
   uniqueEmployees = computed(() => {
-    return Array.from(new Set(this.allLeaves().map(l => l.employee))).sort();
+    return Array.from(new Set(this.allLeaves().map((l) => l.employee))).sort();
   });
 
   filteredLeaves = computed(() => {
     const empFilter = this.employeeFilter();
     const typeFilter = this.typeFilter();
 
-    return this.allLeaves().filter(leave => {
+    return this.allLeaves().filter((leave) => {
       const empMatch = !empFilter || leave.employee === empFilter;
       const typeMatch = !typeFilter || leave.type === typeFilter;
       return empMatch && typeMatch;
@@ -103,18 +103,16 @@ export class LeaveManager {
 
   /** Updated deleteLeave using unique leaveId (string) */
   deleteLeave(leaveId: string) {
-    const leave = this.allLeaves().find(l => l.leaveId === leaveId);
+    const leave = this.allLeaves().find((l) => l.leaveId === leaveId);
     if (leave && confirm(`Delete ${leave.employee}'s ${leave.type} leave?\nLeave ID: ${leaveId}`)) {
-
       this.api.deleteEmpLeave(leave).subscribe((res: any) => {
         if (res && res.status) {
-          this.allLeaves.update(leaves => leaves.filter(l => l.leaveId !== leaveId));
+          this.allLeaves.update((leaves) => leaves.filter((l) => l.leaveId !== leaveId));
           if (this.hoveredLeaveId() === leaveId) {
             this.hoveredLeaveId.set(null);
           }
         }
-      })
-
+      });
     }
   }
 }

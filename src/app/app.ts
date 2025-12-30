@@ -8,9 +8,8 @@ import { ToastrModule } from 'ngx-toastr';
   standalone: true,
   imports: [RouterOutlet, LoaderComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  
   protected readonly title = signal('SuvidhaApp');
 }

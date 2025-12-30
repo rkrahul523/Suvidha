@@ -8,9 +8,8 @@ describe('ShowLeave', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShowLeave]
-    })
-    .compileComponents();
+      imports: [ShowLeave],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShowLeave);
     component = fixture.componentInstance;

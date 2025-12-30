@@ -1,108 +1,107 @@
+<div class="leave-manager-card p-3">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+    <h6 class="mb-0 fw-bold text-dark small">
+      <i class="bi bi-list-check me-1"></i>
+      Leaves ({{ filteredLeaves().length }})
+    </h6>
+    <button class="btn btn-sm btn-outline-secondary px-2 py-0" (click)="resetFilters()">
+      <i class="bi bi-arrow-clockwise"></i>
+    </button>
+  </div>
 
-    <div class="leave-manager-card p-3">
-      <!-- Header -->
-      <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
-        <h6 class="mb-0 fw-bold text-dark small">
-          <i class="bi bi-list-check me-1"></i>
-          Leaves ({{ filteredLeaves().length }})
-        </h6>
-        <button class="btn btn-sm btn-outline-secondary px-2 py-0" (click)="resetFilters()">
-          <i class="bi bi-arrow-clockwise"></i>
-        </button>
+  <!-- ✅ FIXED: Full Name Filter Badges -->
+  <div class="filter-section mb-3 p-2 rounded-2">
+    <div class="row g-2 align-items-end">
+      <div class="col-5">
+        <select
+          class="form-select form-select-sm filter-select"
+          [(ngModel)]="employeeFilterValue"
+          (ngModelChange)="updateEmployeeFilter($event)"
+        >
+          <option value="">All Employees</option>
+          @for (emp of uniqueEmployees(); track emp) {
+            <option [value]="emp">{{ emp }}</option>
+          }
+        </select>
       </div>
-
-      <!-- ✅ FIXED: Full Name Filter Badges -->
-      <div class="filter-section mb-3 p-2 rounded-2">
-        <div class="row g-2 align-items-end">
-          <div class="col-5">
-            <select class="form-select form-select-sm filter-select" 
-                    [(ngModel)]="employeeFilterValue"
-                    (ngModelChange)="updateEmployeeFilter($event)">
-              <option value="">All Employees</option>
-              @for (emp of uniqueEmployees(); track emp) {
-                <option [value]="emp">{{ emp }}</option>
-              }
-            </select>
-          </div>
-          <div class="col-4">
-            <select class="form-select form-select-sm filter-select" 
-                    [(ngModel)]="typeFilterValue"
-                    (ngModelChange)="updateTypeFilter($event)">
-              <option value="">All Types</option>
-              <option value="CL">Casual Leave</option>
-              <option value="EL">Earned Leave</option>
-              <option value="HPL">HalfPay Leave</option>
-              <option value="VL">Vacation Leave</option>
-              <option value="UL">Unauthorised Leave</option>
-            </select>
-          </div>
-          <div class="col-3">
-            <!-- ✅ FULL NAME BADGES -->
-            <div class="filter-badges-container">
-              @if (employeeFilter()) {
-                <span class="filter-badge employee-badge" (click)="clearEmployeeFilter()">
-                  {{ getEmployeeDisplayName(employeeFilter()) }} <i class="bi bi-x ms-1"></i>
-                </span>
-              }
-              @if (typeFilter()) {
-                <span class="filter-badge type-badge" (click)="clearTypeFilter()">
-                  {{ typeFilter() }} <i class="bi bi-x ms-1"></i>
-                </span>
-              }
-            </div>
-          </div>
+      <div class="col-4">
+        <select
+          class="form-select form-select-sm filter-select"
+          [(ngModel)]="typeFilterValue"
+          (ngModelChange)="updateTypeFilter($event)"
+        >
+          <option value="">All Types</option>
+          <option value="CL">Casual Leave</option>
+          <option value="EL">Earned Leave</option>
+          <option value="HPL">HalfPay Leave</option>
+          <option value="VL">Vacation Leave</option>
+          <option value="UL">Unauthorised Leave</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <!-- ✅ FULL NAME BADGES -->
+        <div class="filter-badges-container">
+          @if (employeeFilter()) {
+            <span class="filter-badge employee-badge" (click)="clearEmployeeFilter()">
+              {{ getEmployeeDisplayName(employeeFilter()) }} <i class="bi bi-x ms-1"></i>
+            </span>
+          }
+          @if (typeFilter()) {
+            <span class="filter-badge type-badge" (click)="clearTypeFilter()">
+              {{ typeFilter() }} <i class="bi bi-x ms-1"></i>
+            </span>
+          }
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- ✅ BIGGER Cards Grid -->
-      <div class="leaves-grid">
-        @if (filteredLeaves().length === 0) {
-          <div class="empty-state text-center py-4 text-muted">
-            <i class="bi bi-calendar-x fs-3 mb-3"></i>
-            <small class="text-muted">No leaves found matching filters</small>
+  <!-- ✅ BIGGER Cards Grid -->
+  <div class="leaves-grid">
+    @if (filteredLeaves().length === 0) {
+      <div class="empty-state text-center py-4 text-muted">
+        <i class="bi bi-calendar-x fs-3 mb-3"></i>
+        <small class="text-muted">No leaves found matching filters</small>
+      </div>
+    }
+
+    @for (leave of filteredLeaves(); track leave.leaveId) {
+      <div
+        class="leave-box position-relative"
+        (mouseenter)="hoverLeave(leave.leaveId)"
+        (mouseleave)="hoverLeave(null)"
+      >
+        <!-- Delete Badge -->
+
+        <button class="delete-btn" (click)="deleteLeave(leave.leaveId)" title="Delete">
+          <i class="bi bi-trash3-fill"></i>
+        </button>
+
+        <!-- Full Info Bigger Card -->
+        <div class="leave-content">
+          <div class="employee-name">{{ leave.employee }}</div>
+          <div class="leave-type type-{{ leave.type.toLowerCase() }}">
+            {{ leave.type }}
           </div>
-        }
-        
-        @for (leave of filteredLeaves(); track leave.leaveId) {
-          <div class="leave-box position-relative" 
-               (mouseenter)="hoverLeave(leave.leaveId)"
-               (mouseleave)="hoverLeave(null)">
-            
-            <!-- Delete Badge -->
+          <div class="date-range">
+            {{ leave.fromDate }} →<br />
+            <small>{{ leave.toDate }}</small>
+          </div>
+          <div class="days-badge">{{ leave.day }}d</div>
+        </div>
 
-            <button class="delete-btn" (click)="deleteLeave(leave.leaveId)" title="Delete">
-              <i class="bi bi-trash3-fill"></i>
-            </button>
-
-            <!-- Full Info Bigger Card -->
-            <div class="leave-content">
-              <div class="employee-name">{{ leave.employee }}</div>
-              <div class="leave-type type-{{ leave.type.toLowerCase() }}">
-                {{ leave.type }}
-              </div>
-              <div class="date-range">
-                {{ leave.fromDate }} →<br>
-                <small>{{ leave.toDate }}</small>
-              </div>
-              <div class="days-badge">
-                {{ leave.day }}d
-              </div>
+        <!-- Hover Detail -->
+        @if (hoveredLeaveId() === leave.leaveId) {
+          <div class="detail-box">
+            <div class="detail-header">{{ leave.employee }}</div>
+            <div class="detail-type type-{{ leave.type.toLowerCase() }}">
+              {{ leave.type }} Leave • {{ leave.day }} days
             </div>
-
-            <!-- Hover Detail -->
-            @if (hoveredLeaveId() === leave.leaveId) {
-              <div class="detail-box">
-                <div class="detail-header">{{ leave.employee }}</div>
-                <div class="detail-type type-{{ leave.type.toLowerCase() }}">
-                  {{ leave.type }} Leave • {{ leave.day }} days
-                </div>
-                <div class="detail-dates">
-                  {{ leave.fromDate }} → {{ leave.toDate }}
-                </div>
-              </div>
-            }
+            <div class="detail-dates">{{ leave.fromDate }} → {{ leave.toDate }}</div>
           </div>
         }
       </div>
-    </div>
- 
+    }
+  </div>
+</div>
