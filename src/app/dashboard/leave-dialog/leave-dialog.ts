@@ -181,11 +181,11 @@ export class LeaveDialog implements OnInit, OnDestroy {
     const data = this.convertLeaveData(formValue);
     this.api.addLeave(data).subscribe((res: any) => {
       if (res && res.status) {
-        this.api.successToast(res.message, 'fetching all Leaves');
+        this.api.successToast(res.message, 'Add Leave');
        
         this.activeModal.close(formValue);
       } else {
-        this.api.warnToast(res.message, 'No Reecords Found');
+        this.api.warnToast(res.message, 'Error');
       }
     });
 

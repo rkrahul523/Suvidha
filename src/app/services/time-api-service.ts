@@ -24,25 +24,25 @@ export class TimeTableApiService {
   // apiURL=  'http://localhost:5000/';
 
   public leaveManagerData = signal<Leave[]>([
-    {
-      id: 1,
-      day: 0.5,
-      employee: 'John Doe',
-      type: 'HPL',
-      fromDate: '26-12-2025',
-      toDate: '26-12-2025',
-      leaveId: '1262666',
-    },
+    // {
+    //   id: 1,
+    //   day: 0.5,
+    //   employee: 'John Doe',
+    //   type: 'HPL',
+    //   fromDate: '26-12-2025',
+    //   toDate: '26-12-2025',
+    //   leaveId: '1262666',
+    // },
   ]);
   public upcomingLeave = signal<Leave[]>([
-    {
-      id: 1,
-      employee: 'John Doe',
-      type: 'HPL',
-      fromDate: '26-12-2025',
-      toDate: '26-12-2025',
-      leaveId: '1262666',
-    },
+    // {
+    //   id: 1,
+    //   employee: 'John Doe',
+    //   type: 'HPL',
+    //   fromDate: '26-12-2025',
+    //   toDate: '26-12-2025',
+    //   leaveId: '1262666',
+    // },
   ]);
 
   public department = 'FFT';

@@ -42,17 +42,17 @@ export class Charts implements AfterViewInit, OnDestroy {
   // 20 DUMMY RECORDS with MIXED leave types for pie chart distribution
   public leaveManagerData = signal<Leave[]>([
     // CL Records (for bar chart)
-    {"id": 2, "employee": "Dr. K.K. Singh", "type": "CL", "fromDate": "04-12-2025", "toDate": "04-12-2025", "day": 0.5, "leaveId": "CL001"},
-    {"id": 2, "employee": "Dr. K.K. Singh", "type": "CL", "fromDate": "20-01-2026", "toDate": "20-01-2026", "day": 0.5, "leaveId": "CL002"},
-    {"id": 3, "employee": "Dr. A. Patel", "type": "CL", "fromDate": "05-12-2025", "toDate": "05-12-2025", "day": 1, "leaveId": "CL003"},
-    {"id": 4, "employee": "Dr. B. Sharma", "type": "CL", "fromDate": "06-12-2025", "toDate": "06-12-2025", "day": 2, "leaveId": "CL004"},
-    {"id": 5, "employee": "Dr. C. Gupta", "type": "CL", "fromDate": "07-12-2025", "toDate": "07-12-2025", "day": 0.5, "leaveId": "CL005"},
+    // {"id": 2, "employee": "Dr. K.K. Singh", "type": "CL", "fromDate": "04-12-2025", "toDate": "04-12-2025", "day": 0.5, "leaveId": "CL001"},
+    // {"id": 2, "employee": "Dr. K.K. Singh", "type": "CL", "fromDate": "20-01-2026", "toDate": "20-01-2026", "day": 0.5, "leaveId": "CL002"},
+    // {"id": 3, "employee": "Dr. A. Patel", "type": "CL", "fromDate": "05-12-2025", "toDate": "05-12-2025", "day": 1, "leaveId": "CL003"},
+    // {"id": 4, "employee": "Dr. B. Sharma", "type": "CL", "fromDate": "06-12-2025", "toDate": "06-12-2025", "day": 2, "leaveId": "CL004"},
+    // {"id": 5, "employee": "Dr. C. Gupta", "type": "CL", "fromDate": "07-12-2025", "toDate": "07-12-2025", "day": 0.5, "leaveId": "CL005"},
     
-    // EL Records (for pie chart)
-    {"id": 6, "employee": "Dr. D. Kumar", "type": "EL", "fromDate": "08-12-2025", "toDate": "10-12-2025", "day": 3, "leaveId": "EL001"},
-    {"id": 7, "employee": "Dr. E. Jain", "type": "EL", "fromDate": "09-12-2025", "toDate": "11-12-2025", "day": 3, "leaveId": "EL002"},
-    {"id": 8, "employee": "Dr. F. Reddy", "type": "EL", "fromDate": "12-12-2025", "toDate": "14-12-2025", "day": 3, "leaveId": "EL003"},
-    {"id": 9, "employee": "Dr. G. Joshi", "type": "EL", "fromDate": "15-12-2025", "toDate": "17-12-2025", "day": 3, "leaveId": "EL004"},
+    // // EL Records (for pie chart)
+    // {"id": 6, "employee": "Dr. D. Kumar", "type": "EL", "fromDate": "08-12-2025", "toDate": "10-12-2025", "day": 3, "leaveId": "EL001"},
+    // {"id": 7, "employee": "Dr. E. Jain", "type": "EL", "fromDate": "09-12-2025", "toDate": "11-12-2025", "day": 3, "leaveId": "EL002"},
+    // {"id": 8, "employee": "Dr. F. Reddy", "type": "EL", "fromDate": "12-12-2025", "toDate": "14-12-2025", "day": 3, "leaveId": "EL003"},
+    // {"id": 9, "employee": "Dr. G. Joshi", "type": "EL", "fromDate": "15-12-2025", "toDate": "17-12-2025", "day": 3, "leaveId": "EL004"},
     
     // UL Records (for pie chart)
     // {"id": 10, "employee": "Dr. H. Khan", "type": "UL", "fromDate": "18-12-2025", "toDate": "25-12-2025", "day": 8, "leaveId": "UL001"},
@@ -78,6 +78,9 @@ export class Charts implements AfterViewInit, OnDestroy {
       const apiData: any  = this.api.leaveManagerData();
       if (apiData && apiData.length > 0) {
         this.leaveManagerData.set(apiData);
+        if (this.isBrowser) {
+          this.createCharts();
+        }
       }
     });
   }

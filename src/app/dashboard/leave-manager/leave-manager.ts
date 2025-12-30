@@ -107,10 +107,13 @@ export class LeaveManager {
     if (leave && confirm(`Delete ${leave.employee}'s ${leave.type} leave?\nLeave ID: ${leaveId}`)) {
       this.api.deleteEmpLeave(leave).subscribe((res: any) => {
         if (res && res.status) {
+          this.api.successToast(res.message, 'Delete Leave');
           this.allLeaves.update((leaves) => leaves.filter((l) => l.leaveId !== leaveId));
           if (this.hoveredLeaveId() === leaveId) {
             this.hoveredLeaveId.set(null);
           }
+        }else{
+          this.api.errorToast(res.message, 'Error');
         }
       });
     }
