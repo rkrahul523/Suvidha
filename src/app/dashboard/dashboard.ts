@@ -55,7 +55,7 @@ export class Dashboard implements OnInit {
         this.updatedLeaveManagertab(res.data);
         this.showUpcomingLeave();
       } else {
-        this.api.warnToast(res.message, 'fetching all Leaves');
+        this.api.warnToast(res.message, 'No Record Found');
       }
     });
   }

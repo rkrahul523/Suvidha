@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "employee": "Dr. N.K. Singh",
+        "type": "UL",
+        "fromDate": "11-12-2025",
+        "toDate": "18-12-2025",
+        "day": 8,
+        "leaveId": "17668436019491"
+    },
+    {
+        "id": 1,
+        "employee": "Dr. N.K. Singh",
+        "type": "UL",
+        "fromDate": "23-01-2026",
+        "toDate": "30-01-2026",
+        "day": 8,
+        "leaveId": "17669004769081"
+    },
+    {
+        "id": 2,
+        "employee": "Dr. K.K. Singh",
+        "type": "EL",
+        "fromDate": "11-12-2025",
+        "toDate": "12-12-2025",
+        "day": 2,
+        "leaveId": "17668441112552"
+    },
+    {
+        "id": 2,
+        "employee": "Dr. K.K. Singh",
+        "type": "EL",
+        "fromDate": "08-01-2026",
+        "toDate": "16-01-2026",
+        "day": 9,
+        "leaveId": "17669004459082"
+    },
+    {
+        "id": 2,
+        "employee": "Dr. K.K. Singh",
+        "type": "UL",
+        "fromDate": "23-01-2026",
+        "toDate": "30-01-2026",
+        "day": 8,
+        "leaveId": "17669004682462"
+    },
+    {
+        "id": 2,
+        "employee": "Dr. K.K. Singh",
+        "type": "CL",
+        "fromDate": "04-12-2025",
+        "toDate": "04-12-2025",
+        "day": 0.5,
+        "leaveId": "17668440820022"
+    },
+    {
+        "id": 2,
+        "employee": "Dr. K.K. Singh",
+        "type": "CL",
+        "fromDate": "20-01-2026",
+        "toDate": "20-01-2026",
+        "day": 0.5,
+        "leaveId": "17669019233932"
+    }
+]

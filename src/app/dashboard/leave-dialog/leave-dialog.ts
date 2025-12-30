@@ -12,6 +12,8 @@ import {
 } from '../../model/employee-list';
 import { TimeTableApiService } from '../../services/time-api-service';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService, ToastRef, ToastrModule } from 'ngx-toastr';
+
 @Component({
   selector: 'app-leave-modal',
   standalone: true,
@@ -21,6 +23,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     NgbDatepickerModule,
     MatSnackBarModule,
+    ToastrModule
   ],
   templateUrl: './leave-dialog.html',
   styleUrl: './leave-dialog.scss',
@@ -36,6 +39,7 @@ export class LeaveDialog implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private api: TimeTableApiService,
     private snackBar: MatSnackBar,
+    private toastr:ToastrService
   ) {
     effect(() => {
       const apiData = this.api.leaveManagerData();
@@ -55,6 +59,7 @@ export class LeaveDialog implements OnInit, OnDestroy {
       this.calculateDays();
     });
   }
+
 
   assignDepartment() {
     let department = localStorage.getItem('department');
@@ -177,16 +182,14 @@ export class LeaveDialog implements OnInit, OnDestroy {
     this.api.addLeave(data).subscribe((res: any) => {
       if (res && res.status) {
         this.api.successToast(res.message, 'fetching all Leaves');
-        this.snackBar.open(res.message, 'Error Login', {
-          duration: 3000,
-          panelClass: ['success-snackbar'],
-        });
+       
+        this.activeModal.close(formValue);
       } else {
-        this.api.warnToast(res.message, 'fetching all Leaves');
+        this.api.warnToast(res.message, 'No Reecords Found');
       }
     });
 
-    // this.activeModal.close(formValue);
+    
   }
 
   convertLeaveData(input: any): any {

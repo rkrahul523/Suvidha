@@ -67,10 +67,7 @@ export class Login {
               this.router.navigateByUrl('/dashboard');
             });
           } else {
-            this.snackBar.open(res.message, 'Error Login', {
-              duration: 3000,
-              panelClass: ['success-snackbar'],
-            });
+            this.api.errorToast(res.message, 'Login Failure ');
             this.loaderFlag.set(false);
           }
         },

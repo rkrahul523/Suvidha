@@ -130,21 +130,36 @@ export class TimeTableApiService {
   // }
 
   warnToast(message: any, subtext = 'File Info') {
-    this.snackBar.open(message, subtext, {
-      duration: 3000,
-      panelClass: ['success-snackbar'],
-    });
+    this.toastr.success(
+      message,
+      subtext,
+      {
+        timeOut: 3000,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+      }
+    );
   }
   successToast(message: any, subtext = 'File Info') {
-    this.snackBar.open(message, subtext, {
-      duration: 3000,
-      panelClass: ['error-snackbar'],
-    });
+    this.toastr.success(
+      message,
+      subtext,
+      {
+        timeOut: 3000,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+      }
+    );
   }
   errorToast(message: any, subtext = 'File Info') {
-    this.snackBar.open(message, subtext, {
-      duration: 3000,
-      panelClass: ['error-snackbar'],
-    });
+    this.toastr.error(
+      message,
+      subtext,
+      {
+        timeOut: 3000,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+      }
+    );
   }
 }
