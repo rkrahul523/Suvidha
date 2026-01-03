@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { LeaveManager, Leave } from './leave-manager/leave-manager';
 import { TimeTableApiService } from '../services/time-api-service';
 import { GenReport } from '../gen-report/gen-report';
+import { TodayLeaves } from './today-leave/today-leave';
 
 //import { LeaveDialogComponent } from './leave-dialog.component';
 @Component({
@@ -34,7 +35,7 @@ import { GenReport } from '../gen-report/gen-report';
     Charts,
     Calendar,
     LeaveManager,
-    GenReport,
+    GenReport,TodayLeaves
   ],
   standalone: true,
   templateUrl: './dashboard.html',

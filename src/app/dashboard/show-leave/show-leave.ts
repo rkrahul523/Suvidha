@@ -1,4 +1,4 @@
-import { Component, signal, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, signal, AfterViewInit, ElementRef, ViewChild, OnInit, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Leave } from '../leave-manager/leave-manager';
 import { TimeTableApiService } from '../../services/time-api-service';
@@ -16,7 +16,13 @@ export class ShowLeave implements OnInit {
   employees = signal<Leave[]>([]);
 
   constructor(private api: TimeTableApiService) {
-    this.employees = this.api.upcomingLeave;
+    // = this.api.upcomingLeave;
+    effect(() => {
+      const apiData = this.api.leaveManagerData();
+      if (apiData && apiData.length > 0) {
+        this.employees.set(apiData);
+      }
+    });
   }
 
   ngOnInit() {}

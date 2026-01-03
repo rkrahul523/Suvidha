@@ -1,0 +1,73 @@
+<div class="today-leaves-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <div class="icon">📅</div>
+        <div>
+          <h2>Today's Leaves</h2>
+          <div class="count">{{ getTotalOnLeave() }} employee{{ getTotalOnLeave() !== 1 ? 's' : '' }} on leave</div>
+        </div>
+      </div>
+      <div class="refresh-time">
+        Updated: {{ allLeaves().length > 0 ? 'Live' : 'Loading...' }}
+      </div>
+    </div>
+  
+    <!-- Loading state -->
+    <div *ngIf="loading(); else content">
+      <div class="loading">
+        <div class="spinner"></div>
+        <span>Loading today's leaves...</span>
+      </div>
+    </div>
+  
+    <ng-template #content>
+      <!-- Empty state -->
+      <div *ngIf="todayLeaves().length === 0" class="empty-state">
+        <div class="empty-icon">🎉</div>
+        <h3>All Clear!</h3>
+        <p>No one is on leave today</p>
+      </div>
+  
+      <!-- Scrollable cards -->
+      <div *ngIf="todayLeaves().length > 0" 
+           class="scroll-container" 
+           #scrollContainer 
+           (scroll)="onScroll()"
+           role="region" 
+           aria-label="Today's leave cards">
+        
+        <!-- Scroll arrows -->
+        <button *ngIf="showLeftArrow()" 
+                class="scroll-arrow left" 
+                (click)="scrollLeft()" 
+                aria-label="Scroll left">
+          ‹
+        </button>
+        
+        <div class="cards-grid">
+          <div *ngFor="let leave of todayLeaves(); trackBy: trackByLeaveId" 
+               class="leave-card" 
+               [class]="getCardClass(leave.type)">
+            <div class="card-header">
+              <span class="icon">{{ getIcon(leave.type) }}</span>
+              <span class="type-badge">{{ getLeaveTypeLabel(leave.type) }}</span>
+            </div>
+            <div class="employee-name">{{ leave.employee }}</div>
+            <div class="dates">
+              <span class="date">{{ leave.fromDate }} → {{ leave.toDate }}</span>
+              <span class="days">{{ leave.day }} day{{ leave.day !== 1 ? 's' : '' }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <button *ngIf="showRightArrow()" 
+                class="scroll-arrow right" 
+                (click)="scrollRight()" 
+                aria-label="Scroll right">
+          ›
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  

@@ -43,14 +43,16 @@ export class Calendar {
     // { employee: 'Mark Lee', type: 'AL', fromDate: '15-01-2026', toDate: '15-01-2026' }
   ]);
 
-  currentMonthIndex = signal(11); // December
-  currentYear = signal(2025);
+  
+  currentMonthIndex = signal(0);
+  currentYear = signal(2026);
   hoveredDay = signal<CalendarDay | null>(null);
 
   weekdays = computed(() => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
   weeks = computed(() => this.generateWeeks());
 
   constructor() {
+    this.initCurrentDate();
     effect(() => {
       const month = this.currentMonthIndex();
       const year = this.currentYear();
@@ -61,6 +63,13 @@ export class Calendar {
           .filter((d) => d.leaves.length > 0).length,
       );
     });
+  }
+
+  private initCurrentDate() {
+    const now = new Date();
+    this.currentMonthIndex.set(now.getMonth());
+    this.currentYear.set(now.getFullYear());
+   // this.lastRefreshTime.set(now);
   }
 
   /** ✅ FIXED: Perfect month-aware + multi-day rendering */
