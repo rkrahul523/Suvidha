@@ -4,11 +4,12 @@ import { Dashboard } from './dashboard/dashboard';
 import { report } from 'process';
 import { GenReport } from './gen-report/gen-report';
 import { AuthenticationGuard } from './services/authentication.guard';
+import { MainContainer } from './main-container/main-container';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: 'login', component: Login },
+  { path: 'login', component: MainContainer },
   {
     path: 'dashboard',
     loadComponent: () => import('./dashboard/dashboard').then((m) => m.Dashboard),

@@ -4,10 +4,11 @@ import { FormStyle, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimeTableApiService } from '../services/time-api-service';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { DashTimetableComponent } from '../dashboard/dash-time-table/dash-time-table';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule, MatSnackBarModule],
+  imports: [FormsModule, CommonModule, MatSnackBarModule ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -19,6 +20,7 @@ export class Login {
   setTab(tab: 'timetable' | 'login') {
     this.activeTab.set(tab);
   }
+
 
   constructor(
     private api: TimeTableApiService,

@@ -204,7 +204,26 @@ export class Charts implements AfterViewInit, OnDestroy {
   }
 
   private getCLByEmployee(): { employee: string; days: number }[] {
-    const clLeaves = this.leaveManagerData().filter(leave => leave.type === 'CL');
+    const clLeaves = this.leaveManagerData().filter(leave => {
+      // Check type is CL
+      if (leave.type !== 'CL') return false;
+      
+      // Parse DD-MM-YYYY format
+      const [day, month, year] = leave.fromDate.split('-').map(Number);
+      const fromDate = new Date(year, month - 1, day); // month is 0-indexed
+      const toDate = leave.toDate ? 
+        (() => {
+          const [d, m, y] = leave.toDate.split('-').map(Number);
+          return new Date(y, m - 1, d);
+        })() : fromDate;
+      
+      // 2026 range check
+      const start2026 = new Date(2026, 0, 1);  // Jan 1, 2026
+      const end2026 = new Date(2026, 11, 31);  // Dec 31, 2026
+      
+      return fromDate >= start2026 && toDate <= end2026;
+    });
+    
     const employeeMap = new Map<string, number>();
     clLeaves.forEach(leave => {
       employeeMap.set(leave.employee, (employeeMap.get(leave.employee) || 0) + leave.day);
