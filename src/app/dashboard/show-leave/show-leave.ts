@@ -37,6 +37,8 @@ export class ShowLeave implements OnInit {
       UL: 'bg-danger text-white', // Unauthorised Leave - Red
       HPL: 'bg-secondary text-white', // Half Pay Leave - Gray
       VL: 'bg-info text-white', // Vacation Leave - Blue
+      DL: 'bg-info text-white', // Vacation Leave - Blue
+      RH: 'bg-info text-white', // Vacation Leave - Blue
     };
     return classMap[type];
   }
@@ -48,6 +50,8 @@ export class ShowLeave implements OnInit {
       UL: '🚫', // Unauthorised Leave
       HPL: '💸', // Half Pay Leave
       VL: '✈️', // Vacation Leave
+      DL: '✈️', // Vacation Leave
+      RH: '✈️', // Vacation Leave
     };
     return iconMap[type] || '📅';
   }

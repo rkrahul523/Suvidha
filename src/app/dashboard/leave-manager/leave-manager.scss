@@ -167,6 +167,12 @@
 .leave-type.type-el {
   background: linear-gradient(135deg, #72e00b, #0bd40b);
 }
+.leave-type.type-rh {
+  background: linear-gradient(135deg, #7a14ee, #44e944);
+}
+.leave-type.type-dl {
+  background: linear-gradient(135deg, #1f4100, #0c4b0c);
+}
 
 .detail-type.type-el {
   background: #181bdf;
@@ -181,6 +187,12 @@
   background: #bcda15;
 }
 .detail-type.type-ul {
+  background: #e74c3c;
+}
+.detail-type.type-dl {
+  background: #e74c3c;
+}
+.detail-type.type-rh {
   background: #e74c3c;
 }
 .date-range {

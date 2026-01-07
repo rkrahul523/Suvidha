@@ -7,7 +7,7 @@ export interface Leave {
   id: number;
   day?: number;
   employee: string;
-  type: 'EL' | 'CL' | 'UL' | 'HPL' | 'VL';
+  type: 'EL' | 'CL' | 'UL' | 'HPL' | 'VL' | 'RH' | 'DL';
   fromDate: string;
   toDate: string;
   leaveId: string;

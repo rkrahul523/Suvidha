@@ -99,7 +99,7 @@ export class Dashboard implements OnInit {
       const employeeName = employee.EmployeeName;
 
       // Leave types array
-      const leaveTypes = ['VL', 'EL', 'HPL', 'UL', 'CL'];
+      const leaveTypes = ['VL', 'EL', 'HPL', 'UL', 'CL', 'DL', 'RH'];
 
       leaveTypes.forEach((type) => {
         const leaveTypeData = employee[type] || [];

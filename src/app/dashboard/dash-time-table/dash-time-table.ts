@@ -26,6 +26,9 @@ export class DashTimetableComponent {
 
   days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
   currentDay = signal('MON');
+  timeSlots = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+
 
   // ✅ SIMPLIFIED: Just unique course names
   uniqueCourses = computed(() => Array.from(new Set(
@@ -112,6 +115,10 @@ export class DashTimetableComponent {
   trackBySlot(index: number): number {
     return index;
   }
+  // NEW METHOD - replaces .every() logic
+hasClassAtSlot(course: string, slot: number): boolean {
+  return this.getCourseData(course).some(cls => cls.startTime === slot);
+}
 }
 
 

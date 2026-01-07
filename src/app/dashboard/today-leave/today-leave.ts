@@ -74,14 +74,16 @@ export class TodayLeaves implements OnInit, AfterViewInit {
       CL: 'leave-cl gradient-orange', 
       UL: 'leave-ul gradient-red',
       HPL: 'leave-hpl gradient-gray',
-      VL: 'leave-vl gradient-blue'
+      VL: 'leave-vl gradient-blue',
+      DL: 'leave-vl gradient-blue',
+      RH: 'leave-vl gradient-blue',
     }[type] || 'leave-default';
   }
 
   getIcon(type: Leave['type']): string {
     return {
       EL: '⭐', CL: '☕', UL: '🚫', 
-      HPL: '💰', VL: '✈️'
+      HPL: '💰', VL: '✈️', DL: '✈️', RH: '✈️'
     }[type] || '📅';
   }
 
@@ -91,7 +93,9 @@ export class TodayLeaves implements OnInit, AfterViewInit {
       CL: 'Casual Leave', 
       UL: 'Unauthorized', 
       HPL: 'Half Pay Leave', 
-      VL: 'Vacation'
+      VL: 'Vacation',
+      RH: 'Restricted Holiday',
+      DL: 'Duty Leave',
     }[type] || type;
   }
 

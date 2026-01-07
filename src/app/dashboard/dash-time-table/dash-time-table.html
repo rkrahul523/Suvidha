@@ -1,79 +1,83 @@
 <div class="time-table-container">
-    <!-- Day Changer Header -->
-    <div class="table-header">
-      <div class="weekday-container">
-        <div class="weekday" 
-             *ngFor="let day of days; let i = index"
-             [class.active]="day === currentDay()"
-             (click)="changeDay(day)">
-          <span [ngClass]="{'bg-success': day === currentDay()}">{{ day }}</span>
-        </div>
+  <!-- Day Changer Header -->
+  <div class="table-header">
+    <div class="weekday-container">
+      <div class="weekday" 
+           *ngFor="let day of days; let i = index"
+           [class.active]="day === currentDay()"
+           (click)="changeDay(day)">
+        <span [ngClass]="{'bg-success': day === currentDay()}">{{ day }}</span>
       </div>
-      <h3 class="text-center">{{ currentTime() }}</h3>
     </div>
-  
-    <!-- Timetable Table -->
-    <div class="table-container p-3">
-      <table class="table table-bordered text-center">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">09:00-10:00</th>
-            <th scope="col">10:00-11:00</th>
-            <th scope="col">11:00-12:00</th>
-            <th scope="col">12:00-13:00</th>
-            <th scope="col">13:00-14:00</th>
-            <th scope="col">14:00-15:00</th>
-            <th scope="col">15:00-16:00</th>
-            <th scope="col">16:00-17:00</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
-            <th scope="row">{{ course }}</th>
-            
-            <ng-container *ngFor="let slot of [9,10,11,12,14,15,16]">
-              <ng-container *ngFor="let cls of getCourseData(course)">
-                <td *ngIf="cls.startTime === slot"
-                    [ngClass]="{
-                      'current-class': isTimeBetween(cls.startTime, cls.endTime),
-                      'normal-class': !isTimeBetween(cls.startTime, cls.endTime)
-                    }"
-                    [attr.colspan]="cls.endTime - cls.startTime"
-                    class="position-relative">
-                  <div class="class-short">{{ cls.short }}</div>
-                  <div class="class-faculty" [ngbTooltip]="cls.head">
-                    {{ cls.sub }}
-                  </div>
-                  <span *ngIf="isTimeBetween(cls.startTime, cls.endTime)" 
-                        class="live-badge">LIVE</span>
-                </td>
-              </ng-container>
+    <h3 class="text-center">{{ currentTime() }}</h3>
+  </div>
+
+  <!-- Fixed Timetable Table -->
+  <div class="table-container p-3">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">Course</th>
+          <th scope="col">09:00-10:00</th>
+          <th scope="col">10:00-11:00</th>
+          <th scope="col">11:00-12:00</th>
+          <th scope="col">12:00-13:00</th>
+          <th scope="col">13:00-14:00</th>
+          <th scope="col">14:00-15:00</th>
+          <th scope="col">15:00-16:00</th>
+          <th scope="col">16:00-17:00</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
+          <th scope="row" class="">{{ course }}</th>
+          
+          <!-- Loop through ALL 9 time slots -->
+          <ng-container *ngFor="let slot of timeSlots; trackBy: trackBySlot">
+            <!-- Show CLASS cell if there's a class at this slot -->
+            <ng-container *ngFor="let cls of getCourseData(course)">
+              <td *ngIf="cls.startTime === slot"
+                  [ngClass]="{
+                    'current-class': isTimeBetween(cls.startTime, cls.endTime),
+                    'normal-class': !isTimeBetween(cls.startTime, cls.endTime)
+                  }"
+                  [attr.colspan]="cls.endTime - cls.startTime"
+                  class="position-relative">
+                <div class="class-short">{{ cls.short }}</div>
+                <div class="class-faculty" [ngbTooltip]="cls.head">
+                  {{ cls.sub }}
+                </div>
+                <span *ngIf="isTimeBetween(cls.startTime, cls.endTime)" class="live-badge">🔴 LIVE</span>
+              </td>
             </ng-container>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- ✅ FACULTY AVAILABLE/ OCCUPIED CHIPS - FIXED -->
-    <div class="faculty-status-container">
-      <div class="status-section">
-        <h4>✅ Available Faculty ({{ avlFaculty().length }})</h4>
-        <div class="avl-chip-container">
-          <div class="chip bg-success" *ngFor="let faculty of avlFaculty()">
-            <span class="chip-content">{{ faculty }}</span>
-          </div>
+            
+            <!-- EMPTY CELL - only show if NO class starts at this slot -->
+            <td *ngIf="!hasClassAtSlot(course, slot)" class="empty-slot"></td>
+          </ng-container>
+        </tr>
+      </tbody>
+      
+    </table>
+  </div>
+
+  <!-- Faculty Status -->
+  <div class="faculty-status-container">
+    <div class="status-section">
+      <h4>✅ Available Faculty ({{ avlFaculty().length }})</h4>
+      <div class="avl-chip-container">
+        <div class="chip bg-success" *ngFor="let faculty of avlFaculty()">
+          {{ faculty }}
         </div>
       </div>
-  
-      <div class="status-section">
-        <h4>🔴 Occupied Faculty ({{ occFaculty().length }})</h4>
-        <div class="avl-chip-container">
-          <div class="chip bg-danger" *ngFor="let faculty of occFaculty()">
-            <span class="chip-content">{{ faculty }}</span>
-          </div>
+    </div>
+
+    <div class="status-section">
+      <h4>🔴 Occupied Faculty ({{ occFaculty().length }})</h4>
+      <div class="avl-chip-container">
+        <div class="chip bg-danger" *ngFor="let faculty of occFaculty()">
+          {{ faculty }}
         </div>
       </div>
     </div>
   </div>
-  
+</div>
