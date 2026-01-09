@@ -50,7 +50,7 @@ export class GenReport implements OnInit {
   /* =========================
      STATIC DATA
      ========================= */
-  leaveTypes = ['EL', 'CL', 'UL', 'HPL', 'VL'] as const;
+  leaveTypes = [ 'CL', 'RH', 'EL', 'HPL', 'VL', 'DL', 'UL'] as const;
 
   employeeListFFT: any = employeeListFFT;
 
