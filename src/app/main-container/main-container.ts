@@ -2,12 +2,13 @@ import { Component, signal } from '@angular/core';
 import { DashTimetableComponent } from '../dashboard/dash-time-table/dash-time-table';
 import { Login } from '../login/login';
 import { CommonModule } from '@angular/common';
+import { FftTimeTable } from '../dashboard/fft-time-table/fft-time-table';
 
-type Tab = 'login' | 'Dashtimetable';
+type Tab = 'login' | 'Dashtimetable' | 'FFTtimetable';
 @Component({
   selector: 'app-main-container',
   standalone: true,
-  imports: [CommonModule,DashTimetableComponent, Login],
+  imports: [CommonModule,DashTimetableComponent, Login, FftTimeTable],
   templateUrl: './main-container.html',
   styleUrl: './main-container.scss',
 })

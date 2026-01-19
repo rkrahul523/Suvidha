@@ -108,17 +108,29 @@ export class DashTimetableComponent {
     return Array.from(new Set(this.flattenedTimetable().map(cls => cls.sub)));
   }
 
-  trackByCourse(index: number, course: string): string {
-    return course;
-  }
 
-  trackBySlot(index: number): number {
-    return index;
-  }
   // NEW METHOD - replaces .every() logic
 hasClassAtSlot(course: string, slot: number): boolean {
   return this.getCourseData(course).some(cls => cls.startTime === slot);
 }
+
+// All required trackBy functions + mobile detection
+trackByCourse(index: number, course: string): string {
+  return course;
+}
+
+trackBySlot(index: number, slot: number): number {
+  return slot;
+}
+
+trackByClass(index: number, cls: any): any {
+  return cls.short || cls.startTime || index; // Multiple fallback keys
+}
+
+isMobile(): boolean {
+  return window.innerWidth <= 768;
+}
+
 }
 
 

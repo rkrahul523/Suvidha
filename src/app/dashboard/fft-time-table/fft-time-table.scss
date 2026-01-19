@@ -1,0 +1,403 @@
+/* COMPLETE RESPONSIVE STYLES */
+.time-table-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    width: 100%;
+    box-sizing: border-box;
+  
+    .table-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  
+      .weekday-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+  
+        .weekday {
+          cursor: pointer;
+          padding: 18px 30px;
+          border-radius: 50px;
+          background: rgba(255,255,255,0.25);
+          border: 3px solid rgba(255,255,255,0.3);
+          transition: all 0.4s ease;
+  
+          span {
+            font-weight: 800;
+            font-size: 20px;
+          }
+  
+          &.active span {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+          }
+        }
+      }
+    }
+  
+    .table-container {
+      .desktop-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+  
+      table {
+        .course-name {
+          background: #f8f9fa !important;
+          font-weight: 600;
+          position: sticky;
+          left: 0;
+          z-index: 10;
+          max-width: 200px;
+          min-width: 150px;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
+          border-right: 3px solid #dee2e6 !important;
+        }
+        
+        .normal-class {
+          background: #e3f2fd;
+          border-left: 4px solid #2196f3;
+          min-height: 80px;
+          vertical-align: middle;
+        }
+        
+        .current-class {
+          background: linear-gradient(135deg, #ff6b6b, #feca57);
+          border-left: 4px solid #ff4757;
+          animation: pulse 2s infinite;
+          color: white;
+          vertical-align: middle;
+        }
+        
+        .empty-slot {
+          background: #f8f9fa;
+          border-right: 1px solid #dee2e6;
+          min-height: 80px;
+          position: relative;
+          
+          &:hover {
+            background: #e9ecef;
+          }
+        }
+        
+        .live-badge {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          font-size: 0.7rem;
+          font-weight: bold;
+          padding: 2px 8px;
+          border-radius: 12px;
+          background: rgba(255,255,255,0.9);
+          color: #dc3545;
+        }
+        
+        .class-short {
+          font-weight: bold;
+          font-size: 1.1rem;
+          margin-bottom: 2px;
+        }
+        
+        .class-faculty {
+          font-size: 0.85rem;
+          opacity: 0.9;
+        }
+  
+        th, td {
+          padding: 12px 8px;
+          font-size: 14px;
+        }
+      }
+    }
+  
+    /* MOBILE CARD LAYOUT */
+    .mobile-timetable {
+      display: none;
+      padding: 10px 0;
+    }
+  
+    .mobile-course-card {
+      background: white;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+  
+      .course-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 20px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+  
+      .mobile-slots {
+        padding: 15px;
+  
+        .slot-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px;
+          margin-bottom: 8px;
+          background: #f8f9fa;
+          border-radius: 10px;
+          border-left: 4px solid #2196f3;
+  
+          &.current-class {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            border-left-color: #ff4757;
+            animation: pulse 2s infinite;
+          }
+  
+          .slot-time {
+            font-weight: 600;
+            font-size: 14px;
+          }
+  
+          .slot-content {
+            text-align: right;
+            flex: 1;
+  
+            .class-short {
+              font-weight: bold;
+              font-size: 15px;
+              margin-bottom: 2px;
+            }
+  
+            .class-faculty {
+              font-size: 13px;
+              opacity: 0.9;
+            }
+  
+            .live-badge {
+              font-size: 11px;
+              padding: 2px 6px;
+              background: rgba(255,255,255,0.9);
+              color: #dc3545;
+              border-radius: 8px;
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+    }
+  
+    /* FACULTY CHIPS */
+    .faculty-status-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin: 30px 20px;
+      padding: 30px;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+  
+      .status-section {
+        flex: 1;
+        max-width: 400px;
+  
+        h4 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #1e293b;
+          font-weight: 700;
+          font-size: 18px;
+          padding-bottom: 10px;
+          border-bottom: 3px solid #e2e8f0;
+        }
+  
+        .avl-chip-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          justify-content: center;
+          padding: 20px;
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  
+          .chip {
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+  
+            &.bg-success {
+              background: linear-gradient(135deg, #10b981, #059669) !important;
+              color: white !important;
+            }
+  
+            &.bg-danger {
+              background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+              color: white !important;
+            }
+  
+            &:hover {
+              transform: translateY(-5px) scale(1.05);
+              box-shadow: 0 15px 40px rgba(0,0,0,0.25) !important;
+            }
+          }
+        }
+      }
+    }
+  
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,71,87,0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(255,71,87,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,71,87,0); }
+    }
+  }
+  
+  /* MOBILE RESPONSIVE BREAKPOINTS */
+  @media (max-width: 992px) {
+    .time-table-container {
+      margin: 15px;
+      
+      .table-header {
+        padding: 25px 15px;
+        
+        .weekday-container {
+          gap: 10px;
+          
+          .weekday {
+            padding: 15px 25px;
+            
+            span {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+      
+      .table-container table th,
+      .table-container table td {
+        padding: 10px 6px;
+        font-size: 13px;
+      }
+      
+      .faculty-status-container {
+        flex-direction: column;
+        gap: 20px;
+        margin: 20px 10px;
+        padding: 25px;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .time-table-container {
+      margin: 10px;
+      
+      .table-header {
+        padding: 20px 10px;
+        
+        .weekday-container {
+          flex-direction: column;
+          gap: 12px;
+          
+          .weekday {
+            padding: 14px 20px;
+            width: 200px;
+            
+            span {
+              font-size: 17px;
+            }
+          }
+        }
+      }
+      
+      // Hide desktop table, show mobile cards
+      .desktop-table {
+        display: none;
+      }
+      
+      .mobile-timetable {
+        display: block;
+      }
+      
+      .faculty-status-container {
+        margin: 20px 5px;
+        padding: 20px 15px;
+        
+        .status-section {
+          max-width: 100%;
+          
+          .avl-chip-container {
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 15px;
+            
+            .chip {
+              padding: 10px 20px;
+              font-size: 14px;
+              flex: 1 1 48%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .time-table-container {
+      margin: 5px;
+      
+      .table-header {
+        padding: 15px 8px;
+        
+        .weekday-container {
+          .weekday {
+            padding: 12px 16px;
+            width: 180px;
+            
+            span {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      
+      .mobile-course-card {
+        margin-bottom: 15px;
+        
+        .course-header {
+          padding: 12px 15px;
+          font-size: 15px;
+        }
+        
+        .mobile-slots {
+          padding: 12px;
+          
+          .slot-item {
+            padding: 10px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            
+            .slot-content {
+              width: 100%;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+  

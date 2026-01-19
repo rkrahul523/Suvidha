@@ -296,6 +296,11 @@ export const employeeListECE = [
     designation: '',
     id: 10,
   },
+  {
+    name: 'Dr. Ravinder Pal',
+    designation: '',
+    id: 11,
+  },
 ];
 
 export function getEmployeeName(id: number) {

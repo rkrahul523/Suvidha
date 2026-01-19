@@ -20,6 +20,15 @@
             <i class="bi bi-calendar3 me-2"></i>DASH Timetable
           </button>
         </li>
+        <li class="nav-item">
+          <button 
+            class="nav-link" 
+            [class.active]="activeTab() === 'FFTtimetable'"
+            (click)="setActiveTab('FFTtimetable')"
+            type="button">
+            <i class="bi bi-calendar3 me-2"></i>FFT Timetable
+          </button>
+        </li>
       </ul>
 
       <!-- Tab Content -->
@@ -36,6 +45,11 @@
           class="tab-pane fade show" 
           [class.active]="activeTab() === 'Dashtimetable'">
           <app-dash-time-table></app-dash-time-table>
+        </div>
+        <div 
+          class="tab-pane fade show" 
+          [class.active]="activeTab() === 'FFTtimetable'">
+          <app-fft-time-table></app-fft-time-table>
         </div>
       </div>
     </div>
