@@ -1,418 +1,605 @@
+
+
 export const dashtime=[
     {
         "BTECH_MME_4th_Semester": {
-            "WED": [
-                {
-                    "short": "NME",
-                    "course": "BTECH_MME_4th_Semester",
-                    "startTime": 12,
-                    "endTime": 13,
-                    "sub": "Dr. Arvind Pandey",
-                    "day": "WED",
-                    "head": "Numerical Methods for Engineers"
-                }
-            ],
             "MON": [
                 {
-                    "short": "NME",
-                    "endTime": 13,
-                    "startTime": 12,
                     "day": "MON",
-                    "head": "Numerical Methods for Engineers",
                     "course": "BTECH_MME_4th_Semester",
-                    "sub": "Dr. Arvind Pandey"
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
+            "WED": [
+                {
+                    "day": "WED",
+                    "course": "BTECH_MME_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ],
             "FRI": [
                 {
-                    "course": "BTECH_MME_4th_Semester",
-                    "endTime": 15,
-                    "short": "NME",
-                    "head": "Numerical Methods for Engineers",
-                    "sub": "Dr. Arvind Pandey",
                     "day": "FRI",
-                    "startTime": 14
+                    "course": "BTECH_MME_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 14,
+                    "endTime": 15
                 }
             ]
         }
     },
     {
         "BTECH_MME_2nd_Semester": {
-            "WED": [
+            "FRI": [
                 {
-                    "short": "CS",
-                    "head": "Communication Skills ",
-                    "endTime": 15,
-                    "day": "WED",
-                    "startTime": 14,
+                    "day": "FRI",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
                     "sub": "Dr. Khushboo",
-                    "course": "BTECH_MME_2nd_Semester"
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ],
             "MON": [
                 {
-                    "head": "Communication Skills LAB",
-                    "startTime": 15,
-                    "endTime": 17,
-                    "sub": "Dr. Khushboo",
-                    "short": "CS",
                     "day": "MON",
-                    "course": "BTECH_MME_2nd_Semester"
-                }
-            ]
-        }
-    },
-    {
-        "BTech_CE_4th_Semester": {
-            "WED": [
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 9,
+                    "endTime": 10
+                },
                 {
-                    "short": "NMCT",
-                    "day": "WED",
-                    "endTime": 15,
-                    "sub": "Dr. Arvind Pandey",
-                    "head": "Numerical Methods and Computational Techniques",
-                    "course": "BTech_CE_4th_Semester",
-                    "startTime": 14
-                }
-            ],
-            "THU": [
+                    "day": "MON",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 15,
+                    "endTime": 17
+                },
                 {
-                    "startTime": 12,
-                    "sub": "Dr. Arvind Pandey",
-                    "head": "Numerical Methods and Computational Techniques",
-                    "course": "BTech_CE_4th_Semester",
-                    "endTime": 13,
-                    "short": "NMCT",
-                    "day": "THU"
+                    "day": "MON",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 10,
+                    "endTime": 11
                 }
             ],
             "TUE": [
                 {
-                    "startTime": 10,
                     "day": "TUE",
-                    "head": "Numerical Methods and Computational Techniques",
-                    "short": "NMCT",
-                    "sub": "Dr. Arvind Pandey",
-                    "course": "BTech_CE_4th_Semester",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "TUE",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "TUE",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 10,
+                    "endTime": 11
+                }
+            ],
+            "WED": [
+                {
+                    "day": "WED",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 10,
                     "endTime": 11
                 },
                 {
-                    "startTime": 9,
-                    "head": "Indian knowledge system",
-                    "endTime": 10,
-                    "short": "IKS",
+                    "day": "WED",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
                     "sub": "Dr. Khushboo",
-                    "day": "TUE",
-                    "course": "BTech_CE_4th_Semester"
-                }
-            ]
-        }
-    },
-    {
-        "BTech_PIE_2nd_Semester": {
-            "MON": [
+                    "startTime": 14,
+                    "endTime": 15
+                },
                 {
-                    "startTime": 10,
-                    "short": "CS",
-                    "course": "BTech_PIE_2nd_Semester",
-                    "head": "Communication Skills",
-                    "day": "MON",
-                    "sub": "Ms. Sujata S. Gupta",
-                    "endTime": 11
+                    "day": "WED",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ],
             "THU": [
                 {
-                    "head": "Engineering Chemistry ",
+                    "day": "THU",
+                    "course": "BTECH_MME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
                     "startTime": 12,
-                    "short": "CHE",
-                    "endTime": 13,
-                    "sub": "Dr. H.Vignesh Babu",
-                    "course": "BTech_PIE_2nd_Semester",
-                    "day": "THU"
-                }
-            ],
-            "FRI": [
-                {
-                    "sub": "Dr. H.Vignesh Babu",
-                    "course": "BTech_PIE_2nd_Semester",
-                    "startTime": 11,
-                    "head": "Engineering Chemistry ",
-                    "endTime": 12,
-                    "short": "CHE",
-                    "day": "FRI"
-                }
-            ],
-            "WED": [
-                {
-                    "day": "WED",
-                    "course": "BTech_PIE_2nd_Semester",
-                    "short": "CHE",
-                    "endTime": 12,
-                    "head": "Engineering Chemistry ",
-                    "sub": "Dr. H.Vignesh Babu",
-                    "startTime": 11
-                },
-                {
-                    "short": "CHE",
-                    "head": "Engineering Chemistry  LAB",
-                    "sub": "Dr. H.Vignesh Babu",
-                    "startTime": 15,
-                    "course": "BTech_PIE_2nd_Semester",
-                    "endTime": 17,
-                    "day": "WED"
+                    "endTime": 13
                 }
             ]
         }
     },
     {
-        "BTech PIE 4 Semester": {}
-    },
-    {
-        "BTECH_ME_2nd_Semester": {
+        "BTECH_CE_4th_Semester": {
+            "THU": [
+                {
+                    "day": "THU",
+                    "course": "BTECH_CE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
             "WED": [
                 {
-                    "endTime": 13,
-                    "sub": "Dr. Partha S. Mondal",
-                    "short": "PHY",
-                    "startTime": 12,
-                    "head": "Engineering Physics",
                     "day": "WED",
-                    "course": "BTECH_ME_2nd_Semester"
+                    "course": "BTECH_CE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ],
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "BTECH_CE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 10,
+                    "endTime": 11
                 },
                 {
-                    "short": "PHY",
-                    "sub": "Dr. Partha S. Mondal",
+                    "day": "MON",
+                    "course": "BTECH_CE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ],
+            "TUE": [
+                {
+                    "day": "TUE",
+                    "course": "BTECH_CE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ]
+        }
+    },
+    {
+        "BTECH_PIE_2nd_Semester": {
+            "WED": [
+                {
                     "day": "WED",
-                    "course": "BTECH_ME_2nd_Semester",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "WED",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
                     "startTime": 15,
-                    "head": "Engineering Physics LAB",
                     "endTime": 17
                 }
             ],
+            "THU": [
+                {
+                    "day": "THU",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "THU",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 10,
+                    "endTime": 11
+                }
+            ],
             "MON": [
                 {
-                    "sub": "Dr. Partha S. Mondal",
                     "day": "MON",
-                    "short": "PHY",
-                    "startTime": 9,
-                    "endTime": 10,
-                    "course": "BTECH_ME_2nd_Semester",
-                    "head": "Engineering Physics"
-                },
-                {
-                    "day": "MON",
-                    "head": "Mathematics-II",
-                    "endTime": 11,
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
                     "startTime": 10,
-                    "short": "MATHS II",
-                    "course": "BTECH_ME_2nd_Semester",
-                    "sub": "Dr. Sriparna Chattopadhyay"
+                    "endTime": 11
                 },
                 {
-                    "head": "Mathematics-II",
-                    "startTime": 12,
-                    "short": "MATHS- II",
                     "day": "MON",
-                    "endTime": 13,
-                    "course": "BTECH_ME_2nd_Semester",
-                    "sub": "Dr. Nilima Das"
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ],
             "TUE": [
                 {
                     "day": "TUE",
-                    "endTime": 11,
-                    "sub": "Dr. Sriparna Chattopadhyay",
-                    "short": "MATHS II",
-                    "head": "Mathematics-II",
-                    "course": "BTECH_ME_2nd_Semester",
-                    "startTime": 10
-                },
-                {
-                    "sub": "Dr. Khushboo",
-                    "head": "English Communication for Professionals ",
-                    "short": "EC",
-                    "endTime": 12,
-                    "startTime": 11,
-                    "course": "BTECH_ME_2nd_Semester",
-                    "day": "TUE"
-                },
-                {
-                    "sub": "Dr. Nilima Das",
-                    "short": "MATHS- II",
-                    "day": "TUE",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
                     "startTime": 12,
-                    "endTime": 13,
-                    "head": "Mathematics-II",
-                    "course": "BTECH_ME_2nd_Semester"
-                }
-            ],
-            "THU": [
-                {
-                    "endTime": 11,
-                    "sub": "Dr. Partha S. Mondal",
-                    "startTime": 10,
-                    "day": "THU",
-                    "short": "PHY",
-                    "course": "BTECH_ME_2nd_Semester",
-                    "head": "Engineering Physics"
+                    "endTime": 13
                 },
                 {
-                    "endTime": 12,
-                    "short": "MATHS- II",
-                    "sub": "Dr. Nilima Das",
-                    "day": "THU",
-                    "head": "Mathematics-II",
-                    "startTime": 11,
-                    "course": "BTECH_ME_2nd_Semester"
+                    "day": "TUE",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 14,
+                    "endTime": 15
                 }
             ],
             "FRI": [
                 {
-                    "sub": "Dr. Nilima Das",
-                    "course": "BTECH_ME_2nd_Semester",
-                    "endTime": 13,
-                    "startTime": 12,
-                    "head": "Mathematics-II",
                     "day": "FRI",
-                    "short": "MATHS- II"
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. H.Vignesh Babu",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "FRI",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "FRI",
+                    "course": "BTECH_PIE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ]
+        }
+    },
+    {
+        "BTECH_PIE_4th_Semester": {
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "BTECH_PIE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 10,
+                    "endTime": 11
+                }
+            ],
+            "TUE": [
+                {
+                    "day": "TUE",
+                    "course": "BTECH_PIE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 9,
+                    "endTime": 10
+                }
+            ],
+            "FRI": [
+                {
+                    "day": "FRI",
+                    "course": "BTECH_PIE_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ]
+        }
+    },
+    {
+        "BTECH_ME_2nd_Semester": {
+            "THU": [
+                {
+                    "day": "THU",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "THU",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ],
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
+            "TUE": [
+                {
+                    "day": "TUE",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "TUE",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
+            "FRI": [
+                {
+                    "day": "FRI",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Khushboo",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "FRI",
+                    "course": "BTECH_ME_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Nilima Das",
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ]
         }
     },
     {
         "BTECH_ME_4th_Semester": {
-            "MON": [
+            "WED": [
                 {
-                    "short": "NME",
-                    "day": "MON",
-                    "sub": "Dr. Arvind Pandey",
-                    "startTime": 12,
-                    "endTime": 13,
-                    "head": "Numerical Methods for Engineers",
-                    "course": "BTECH_ME_4th_Semester"
+                    "day": "WED",
+                    "course": "BTECH_ME_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
+                    "startTime": 15,
+                    "endTime": 17
                 },
                 {
-                    "sub": "Dr. Vandana",
-                    "startTime": 11,
-                    "head": "Engineering Mathematics-IV",
-                    "day": "MON",
-                    "endTime": 12,
+                    "day": "WED",
                     "course": "BTECH_ME_4th_Semester",
-                    "short": "MATHS- IV"
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 10,
+                    "endTime": 11
                 }
             ],
-            "THU": [
+            "MON": [
                 {
-                    "endTime": 13,
-                    "sub": "Dr. Vandana",
-                    "head": "Engineering Mathematics-IV",
-                    "short": "MATHS- IV",
+                    "day": "MON",
                     "course": "BTECH_ME_4th_Semester",
-                    "day": "THU",
-                    "startTime": 12
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
+                    "startTime": 11,
+                    "endTime": 12
                 }
             ],
             "FRI": [
                 {
-                    "startTime": 11,
-                    "endTime": 12,
-                    "short": "MATHS- IV",
-                    "sub": "Dr. Vandana",
-                    "course": "BTECH_ME_4th_Semester",
                     "day": "FRI",
-                    "head": "Engineering Mathematics-IV"
-                }
-            ],
-            "WED": [
-                {
-                    "endTime": 11,
                     "course": "BTECH_ME_4th_Semester",
-                    "short": "MATHS- IV",
-                    "head": "Engineering Mathematics-IV",
-                    "day": "WED",
-                    "startTime": 10,
-                    "sub": "Dr. Vandana"
-                },
-                {
-                    "startTime": 15,
-                    "sub": "Ms. Sujata S. Gupta",
-                    "endTime": 17,
-                    "day": "WED",
-                    "short": "CI",
-                    "head": "Constitution of India ",
-                    "course": "BTECH_ME_4th_Semester"
-                }
-            ]
-        }
-    },
-    {
-        "BTech_CE_2nd_Semester": {
-            "MON": [
-                {
-                    "startTime": 10,
-                    "endTime": 11,
-                    "course": "BTech_CE_2nd_Semester",
-                    "day": "MON",
-                    "short": "PHY",
-                    "head": "Engineering Physics",
-                    "sub": "Dr. Arvind Pandey"
-                }
-            ],
-            "TUE": [
-                {
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
                     "startTime": 11,
-                    "head": "Engineering Physics",
-                    "short": "PHY",
-                    "sub": "Dr. Arvind Pandey",
-                    "course": "BTech_CE_2nd_Semester",
-                    "day": "TUE",
                     "endTime": 12
                 }
             ],
             "THU": [
                 {
-                    "startTime": 15,
-                    "endTime": 17,
-                    "short": "PHY",
                     "day": "THU",
-                    "head": "Engineering Physics LAB",
-                    "sub": "Dr. Arvind Pandey",
-                    "course": "BTech_CE_2nd_Semester"
-                }
-            ],
-            "WED": [
-                {
-                    "head": "Communication Skills",
-                    "sub": "Ms. Sujata S. Gupta",
-                    "short": "CS",
+                    "course": "BTECH_ME_4th_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Vandana",
                     "startTime": 12,
-                    "endTime": 13,
-                    "day": "WED",
-                    "course": "BTech_CE_2nd_Semester"
+                    "endTime": 13
+                }
+            ]
+        }
+    },
+    {
+        "BTECH_CE_2nd_Semester": {
+            "THU": [
+                {
+                    "day": "THU",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 15,
+                    "endTime": 17
                 }
             ],
             "FRI": [
                 {
+                    "day": "FRI",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
                     "sub": "Dr. Arvind Pandey",
                     "startTime": 11,
-                    "endTime": 12,
-                    "course": "BTech_CE_2nd_Semester",
-                    "day": "FRI",
-                    "short": "PHY",
-                    "head": "Engineering Physics"
+                    "endTime": 12
                 },
                 {
-                    "startTime": 12,
-                    "course": "BTech_CE_2nd_Semester",
                     "day": "FRI",
-                    "endTime": 13,
-                    "head": "Communication Skills",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
                     "sub": "Ms. Sujata S. Gupta",
-                    "short": "CS"
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "FRI",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 10,
+                    "endTime": 11
+                }
+            ],
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "MON",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ],
+            "WED": [
+                {
+                    "day": "WED",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "WED",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ],
+            "TUE": [
+                {
+                    "day": "TUE",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Arvind Pandey",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "TUE",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Ms. Sujata S. Gupta",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "TUE",
+                    "course": "BTECH_CE_2nd_Semester",
+                    "head": "NA",
+                    "short": "NA",
+                    "sub": "Dr. Sriparna Chattopadhyay",
+                    "startTime": 12,
+                    "endTime": 13
                 }
             ]
         }
-    }
-]
+    }]
