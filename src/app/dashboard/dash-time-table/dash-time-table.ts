@@ -21,16 +21,28 @@ export interface TimetableClass {
   styleUrl: './dash-time-table.scss',
 })
 export class DashTimetableComponent {
-  // Your COMPLETE data
   rawTimetableData = signal<any[]>(dashtime);
 
   days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
   currentDay = signal('MON');
   timeSlots = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
+  // ✅ TODAY'S DATE & DAY - AUTO SELECTS TODAY (THU)
+  todayDay = computed(() => {
+    const now = new Date();
+    return this.days[now.getDay() - 1] || 'MON';
+  });
 
+  todayDate = computed(() => {
+    const now = new Date();
+    return now.toLocaleDateString('en-IN', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  });
 
-  // ✅ SIMPLIFIED: Just unique course names
   uniqueCourses = computed(() => Array.from(new Set(
     this.rawTimetableData().flatMap(obj => Object.keys(obj))
   )));
@@ -44,11 +56,14 @@ export class DashTimetableComponent {
   avlFaculty = computed(() => this.getAvailableFaculty());
   occFaculty = computed(() => this.getOccupiedFaculty());
 
-  
-
   constructor() {
+    // ✅ AUTO-SELECT TODAY'S DAY
     effect(() => {
-      console.log(`📅 Day: ${this.currentDay()}, Courses: ${this.uniqueCourses().length}`);
+      const today = this.todayDay();
+      if (this.days.includes(today)) {
+        this.currentDay.set(today);
+      }
+      console.log(`📅 Today: ${this.todayDate()} | Selected: ${this.currentDay()}`);
     });
   }
 
@@ -108,29 +123,27 @@ export class DashTimetableComponent {
     return Array.from(new Set(this.flattenedTimetable().map(cls => cls.sub)));
   }
 
+  hasClassAtSlot(course: string, slot: number): boolean {
+    return this.getCourseData(course).some(cls => cls.startTime === slot);
+  }
 
-  // NEW METHOD - replaces .every() logic
-hasClassAtSlot(course: string, slot: number): boolean {
-  return this.getCourseData(course).some(cls => cls.startTime === slot);
+  trackByCourse(index: number, course: string): string {
+    return course;
+  }
+
+  trackBySlot(index: number, slot: number): number {
+    return slot;
+  }
+
+  trackByClass(index: number, cls: any): any {
+    return cls.short || cls.startTime || index;
+  }
+
+  trackByFaculty(index: number, faculty: string): string {
+    return faculty;
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
 }
-
-// All required trackBy functions + mobile detection
-trackByCourse(index: number, course: string): string {
-  return course;
-}
-
-trackBySlot(index: number, slot: number): number {
-  return slot;
-}
-
-trackByClass(index: number, cls: any): any {
-  return cls.short || cls.startTime || index; // Multiple fallback keys
-}
-
-isMobile(): boolean {
-  return window.innerWidth <= 768;
-}
-
-}
-
-

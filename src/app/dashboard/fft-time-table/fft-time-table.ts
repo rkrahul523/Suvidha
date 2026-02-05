@@ -12,6 +12,7 @@ export interface TimetableClass {
   day: string;
   head: string;
 }
+
 @Component({
   selector: 'app-fft-time-table',
   standalone: true,
@@ -25,29 +26,54 @@ export class FftTimeTable {
 
   days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
   currentDay = signal('MON');
-  timeSlots = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+  timeSlots = [9, 10, 11, 12, 13, 14, 15, 16];
 
+  // ✅ TODAY'S DATE & DAY
+  todayDay = computed(() => {
+    const now = new Date();
+    return this.days[now.getDay() - 1] || 'MON'; // Sunday = 0, so -1 adjustment
+  });
 
+  todayDate = computed(() => {
+    const now = new Date();
+    return now.toLocaleDateString('en-IN', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  });
 
-  // ✅ SIMPLIFIED: Just unique course names
-  uniqueCourses = computed(() => Array.from(new Set(
-    this.rawTimetableData().flatMap(obj => Object.keys(obj))
-  )));
+  // ✅ CURRENT HOUR DISPLAY
+  currentHour = computed(() => {
+    const now = new Date();
+    const hour = now.getHours();
+    return `${hour}:00-${hour + 1}:00`;
+  });
 
   currentTime = computed(() => {
     const now = new Date();
     return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
   });
 
+  // ✅ UNIQUE COURSES
+  uniqueCourses = computed(() => Array.from(new Set(
+    this.rawTimetableData().flatMap(obj => Object.keys(obj))
+  )));
+
+  // ✅ COMPUTED DATA
   flattenedTimetable = computed(() => this.getFlattenedData());
   avlFaculty = computed(() => this.getAvailableFaculty());
   occFaculty = computed(() => this.getOccupiedFaculty());
 
-  
-
   constructor() {
+    // ✅ AUTO-SELECT TODAY'S DAY
     effect(() => {
-      console.log(`📅 Day: ${this.currentDay()}, Courses: ${this.uniqueCourses().length}`);
+      const today = this.todayDay();
+      if (this.days.includes(today)) {
+        this.currentDay.set(today);
+      }
+      console.log(`📅 Today: ${today} | Selected: ${this.currentDay()}, Courses: ${this.uniqueCourses().length}`);
     });
   }
 
@@ -92,42 +118,65 @@ export class FftTimeTable {
     return now >= startTime && now < endTime;
   }
 
+  // ✅ UPDATED: Faculty status for CURRENT HOUR ONLY
   private getAvailableFaculty(): string[] {
-    const busyFaculty = new Set(this.flattenedTimetable().map(cls => cls.sub));
+    const currentHour = new Date().getHours();
+    const busyFaculty = new Set(
+      this.flattenedTimetable()
+        .filter(cls => cls.startTime <= currentHour && currentHour < cls.endTime)
+        .map(cls => cls.sub)
+    );
+    
     const allFaculty = [
-      'Dr. Anil Kumar', 'Dr. S.R. Kumar', 'Dr. Arvind Pandey', 'Ms. Sujata S. Gupta',
-      'Dr. Partha S. Mondal', 'Dr. Subhankar Basu', 'Dr. Sriparna Chattopadhyay',
-      'Dr. H.Vignesh Babu', 'Dr. Abhilash T. Nair', 'Dr. Sumbul Rahman',
-      'Dr. Khushboo', 'Dr. Nilima Das', 'Dr. Vandana'
+  'Dr. Anas Ahmad Siddique',
+  'Dr. Vineet Chak',
+  'Dr. Ajit Kr Pramanick',
+  'Dr. Pavitra Singh',
+  'Dr. R.K. Odhar',
+  'Dr. Deepak Kumar',
+  'Dr. K.K. Singh',
+  'Dr. Sunny Singhania',
+  'Dr. Himanshu Khandelwal',
+  'Dr. R. Rahul Kulkarni',
+  'Dr. Nandita Gupta',
+  'Dr. Amitesh Kumar',
+  'Dr. Vivek S Ayar'
     ];
+    
     return allFaculty.filter(faculty => !busyFaculty.has(faculty));
   }
 
   private getOccupiedFaculty(): string[] {
-    return Array.from(new Set(this.flattenedTimetable().map(cls => cls.sub)));
+    const currentHour = new Date().getHours();
+    return Array.from(new Set(
+      this.flattenedTimetable()
+        .filter(cls => cls.startTime <= currentHour && currentHour < cls.endTime)
+        .map(cls => cls.sub)
+    ));
   }
 
+  hasClassAtSlot(course: string, slot: number): boolean {
+    return this.getCourseData(course).some(cls => cls.startTime === slot);
+  }
 
-  // NEW METHOD - replaces .every() logic
-hasClassAtSlot(course: string, slot: number): boolean {
-  return this.getCourseData(course).some(cls => cls.startTime === slot);
-}
+  // TRACKBY FUNCTIONS
+  trackByCourse(index: number, course: string): string {
+    return course;
+  }
 
-// All required trackBy functions + mobile detection
-trackByCourse(index: number, course: string): string {
-  return course;
-}
+  trackBySlot(index: number, slot: number): number {
+    return slot;
+  }
 
-trackBySlot(index: number, slot: number): number {
-  return slot;
-}
+  trackByClass(index: number, cls: any): any {
+    return cls.short || cls.startTime || index;
+  }
 
-trackByClass(index: number, cls: any): any {
-  return cls.short || cls.startTime || index; // Multiple fallback keys
-}
+  trackByFaculty(index: number, faculty: string): string {
+    return faculty;
+  }
 
-isMobile(): boolean {
-  return window.innerWidth <= 768;
-}
-
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
 }

@@ -1,4 +1,45 @@
 /* COMPLETE RESPONSIVE STYLES */
+// Add to your fft-time-table.scss
+.today-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  .date-display {
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .today-day {
+      margin: 0.25rem 0 0 0;
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .today-header {
+    padding: 1rem;
+    
+    .date-display h2 {
+      font-size: 1.3rem;
+    }
+    
+    .today-day {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+
 .time-table-container {
     max-width: 1400px;
     margin: 20px auto;
@@ -401,3 +442,36 @@
     }
   }
   
+
+  /* Add to your SCSS */
+.faculty-status-container {
+  .current-hour-badge {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    background: rgba(255,255,255,0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .status-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+  }
+}

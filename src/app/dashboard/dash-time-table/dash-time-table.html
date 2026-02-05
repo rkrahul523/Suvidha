@@ -1,5 +1,13 @@
 <!-- COMPLETE RESPONSIVE TIMETABLE COMPONENT -->
 <div class="time-table-container">
+  <!-- 📅 TODAY'S DATE & DAY HEADER -->
+  <div class="today-header">
+    <div class="date-display">
+      <h2>📅 Today is {{ todayDate() }}</h2>
+      <h3 class="today-day">Day: {{ todayDay() }}</h3>
+    </div>
+  </div>
+
   <!-- Day Changer Header -->
   <div class="table-header">
     <div class="weekday-container">
@@ -61,24 +69,23 @@
       </table>
     </div>
 
-   <!-- MOBILE CARD LAYOUT (FIXED) -->
-<div class="mobile-timetable" *ngIf="isMobile()">
-  <div class="mobile-course-card" *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
-    <div class="course-header">{{ course }}</div>
-    <div class="mobile-slots">
-      <div class="slot-item" 
-           *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
-        <div class="slot-time">{{ cls.startTime }} - {{ cls.endTime }}</div>
-        <div class="slot-content">
-          <div class="class-short">{{ cls.short }}</div>
-          <div class="class-faculty">{{ cls.sub }}</div>
-          <span *ngIf="isTimeBetween(cls.startTime, cls.endTime)" class="live-badge">🔴 LIVE</span>
+    <!-- MOBILE CARD LAYOUT (FIXED) -->
+    <div class="mobile-timetable" *ngIf="isMobile()">
+      <div class="mobile-course-card" *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
+        <div class="course-header">{{ course }}</div>
+        <div class="mobile-slots">
+          <div class="slot-item" 
+               *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
+            <div class="slot-time">{{ cls.startTime }} - {{ cls.endTime }}</div>
+            <div class="slot-content">
+              <div class="class-short">{{ cls.short }}</div>
+              <div class="class-faculty">{{ cls.sub }}</div>
+              <span *ngIf="isTimeBetween(cls.startTime, cls.endTime)" class="live-badge">🔴 LIVE</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
   </div>
 
   <!-- Faculty Status -->
@@ -86,7 +93,7 @@
     <div class="status-section">
       <h4>✅ Available Faculty ({{ avlFaculty().length }})</h4>
       <div class="avl-chip-container">
-        <div class="chip bg-success" *ngFor="let faculty of avlFaculty()">
+        <div class="chip bg-success" *ngFor="let faculty of avlFaculty(); trackBy: trackByFaculty">
           {{ faculty }}
         </div>
       </div>
@@ -95,7 +102,7 @@
     <div class="status-section">
       <h4>🔴 Occupied Faculty ({{ occFaculty().length }})</h4>
       <div class="avl-chip-container">
-        <div class="chip bg-danger" *ngFor="let faculty of occFaculty()">
+        <div class="chip bg-danger" *ngFor="let faculty of occFaculty(); trackBy: trackByFaculty">
           {{ faculty }}
         </div>
       </div>

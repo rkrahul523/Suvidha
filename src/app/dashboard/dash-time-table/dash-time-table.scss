@@ -5,6 +5,29 @@
   width: 100%;
   box-sizing: border-box;
 
+  // ✅ TODAY HEADER
+  .today-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    .date-display {
+      h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .today-day {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.3rem;
+        opacity: 0.95;
+      }
+    }
+  }
+
   .table-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -265,7 +288,7 @@
   }
 }
 
-/* MOBILE RESPONSIVE BREAKPOINTS */
+/* MOBILE RESPONSIVE */
 @media (max-width: 992px) {
   .time-table-container {
     margin: 15px;
@@ -305,6 +328,13 @@
   .time-table-container {
     margin: 10px;
     
+    .today-header {
+      padding: 1.2rem 1rem;
+      
+      .date-display h2 { font-size: 1.5rem; }
+      .today-day { font-size: 1.1rem; }
+    }
+    
     .table-header {
       padding: 20px 10px;
       
@@ -323,7 +353,6 @@
       }
     }
     
-    // Hide desktop table, show mobile cards
     .desktop-table {
       display: none;
     }
