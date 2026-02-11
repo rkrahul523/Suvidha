@@ -8,15 +8,18 @@
     </div>
   </div>
 
-  <!-- Day Changer Header -->
+  <!-- 🔥 FIXED Day Changer -->
   <div class="table-header">
     <div class="weekday-container">
-      <div class="weekday" 
-           *ngFor="let day of days; let i = index"
-           [class.active]="day === currentDay()"
-           (click)="changeDay(day)">
-        <span [ngClass]="{'bg-success': day === currentDay()}">{{ day }}</span>
-      </div>
+      <button 
+        *ngFor="let day of days; let i = index"
+        class="weekday-btn"
+        [class.active]="day === currentDay()"
+        (click)="onDayClick(day); $event.stopPropagation()"
+        type="button">
+        <span>{{ day }}</span>
+        <small *ngIf="day === currentDay()" class="active-indicator">●</small>
+      </button>
     </div>
     <h3 class="text-center">{{ currentTime() }}</h3>
   </div>
@@ -40,11 +43,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
-            <th scope="row" class="">{{ course }}</th>
+            <th scope="row">{{ course }}</th>
             
-            <!-- Loop through ALL 9 time slots -->
             <ng-container *ngFor="let slot of timeSlots; trackBy: trackBySlot">
-              <!-- Show CLASS cell if there's a class at this slot -->
               <ng-container *ngFor="let cls of getCourseData(course)">
                 <td *ngIf="cls.startTime === slot"
                     [ngClass]="{
@@ -61,7 +62,6 @@
                 </td>
               </ng-container>
               
-              <!-- EMPTY CELL - only show if NO class starts at this slot -->
               <td *ngIf="!hasClassAtSlot(course, slot)" class="empty-slot"></td>
             </ng-container>
           </tr>
@@ -69,14 +69,13 @@
       </table>
     </div>
 
-    <!-- MOBILE CARD LAYOUT (FIXED) -->
+    <!-- MOBILE CARD LAYOUT -->
     <div class="mobile-timetable" *ngIf="isMobile()">
       <div class="mobile-course-card" *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
         <div class="course-header">{{ course }}</div>
         <div class="mobile-slots">
-          <div class="slot-item" 
-               *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
-            <div class="slot-time">{{ cls.startTime }} - {{ cls.endTime }}</div>
+          <div class="slot-item" *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
+            <div class="slot-time">{{ cls.startTime }}:00 - {{ cls.endTime }}:00</div>
             <div class="slot-content">
               <div class="class-short">{{ cls.short }}</div>
               <div class="class-faculty">{{ cls.sub }}</div>
@@ -88,10 +87,13 @@
     </div>
   </div>
 
-  <!-- Faculty Status -->
+  <!-- Faculty Status - FIXED -->
   <div class="faculty-status-container">
     <div class="status-section">
-      <h4>✅ Available Faculty ({{ avlFaculty().length }})</h4>
+      <h4>✅ Available Faculty Now 
+        <small class="current-hour-badge">({{ currentHour() }})</small>
+        <span class="badge bg-success ms-2">{{ avlFaculty().length }}</span>
+      </h4>
       <div class="avl-chip-container">
         <div class="chip bg-success" *ngFor="let faculty of avlFaculty(); trackBy: trackByFaculty">
           {{ faculty }}
@@ -100,7 +102,10 @@
     </div>
 
     <div class="status-section">
-      <h4>🔴 Occupied Faculty ({{ occFaculty().length }})</h4>
+      <h4>🔴 Occupied Faculty Now 
+        <small class="current-hour-badge">({{ currentHour() }})</small>
+        <span class="badge bg-danger ms-2">{{ occFaculty().length }}</span>
+      </h4>
       <div class="avl-chip-container">
         <div class="chip bg-danger" *ngFor="let faculty of occFaculty(); trackBy: trackByFaculty">
           {{ faculty }}

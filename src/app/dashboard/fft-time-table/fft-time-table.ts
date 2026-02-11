@@ -21,30 +21,24 @@ export interface TimetableClass {
   styleUrl: './fft-time-table.scss',
 })
 export class FftTimeTable {
-  // Your COMPLETE data
   rawTimetableData = signal<any[]>(ffttime);
-
   days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
   currentDay = signal('MON');
   timeSlots = [9, 10, 11, 12, 13, 14, 15, 16];
 
-  // ✅ TODAY'S DATE & DAY
+  // Today's date & time
   todayDay = computed(() => {
     const now = new Date();
-    return this.days[now.getDay() - 1] || 'MON'; // Sunday = 0, so -1 adjustment
+    return this.days[now.getDay() - 1] || 'MON';
   });
 
   todayDate = computed(() => {
     const now = new Date();
     return now.toLocaleDateString('en-IN', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
     });
   });
 
-  // ✅ CURRENT HOUR DISPLAY
   currentHour = computed(() => {
     const now = new Date();
     const hour = now.getHours();
@@ -56,29 +50,27 @@ export class FftTimeTable {
     return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
   });
 
-  // ✅ UNIQUE COURSES
-  uniqueCourses = computed(() => Array.from(new Set(
-    this.rawTimetableData().flatMap(obj => Object.keys(obj))
-  )));
-
-  // ✅ COMPUTED DATA
+  // 🔥 REACTIVE SIGNALS CHAIN
   flattenedTimetable = computed(() => this.getFlattenedData());
+  uniqueCourses = computed(() => Array.from(new Set(this.flattenedTimetable().map(cls => cls.course))));
   avlFaculty = computed(() => this.getAvailableFaculty());
   occFaculty = computed(() => this.getOccupiedFaculty());
 
   constructor() {
-    // ✅ AUTO-SELECT TODAY'S DAY
     effect(() => {
       const today = this.todayDay();
       if (this.days.includes(today)) {
         this.currentDay.set(today);
       }
-      console.log(`📅 Today: ${today} | Selected: ${this.currentDay()}, Courses: ${this.uniqueCourses().length}`);
     });
   }
 
-  changeDay(day: string) {
+  // 🔥 FIXED: Explicit click handler with FORCE UPDATE
+  onDayClick(day: string) {
+    console.log('🔹 CLICK DETECTED:', day);
     this.currentDay.set(day);
+    console.log('✅ DAY SET TO:', this.currentDay());
+    console.log('📊 CLASSES:', this.flattenedTimetable().length);
   }
 
   private getFlattenedData(): TimetableClass[] {
@@ -88,21 +80,23 @@ export class FftTimeTable {
 
     data.forEach(courseObj => {
       Object.entries(courseObj).forEach(([courseName, daysObj]: [string, any]) => {
-        Object.entries(daysObj).forEach(([dayKey, classes]: [string, any]) => {
-          if (dayKey === currentDayKey && Array.isArray(classes)) {
-            classes.forEach((cls: any) => {
-              result.push({
-                short: cls.short || '',
-                course: courseName,
-                startTime: cls.startTime || 0,
-                endTime: cls.endTime || 0,
-                sub: cls.sub || '',
-                day: cls.day || dayKey,
-                head: cls.head || ''
+        if (daysObj && typeof daysObj === 'object') {
+          Object.entries(daysObj).forEach(([dayKey, classes]: [string, any]) => {
+            if (dayKey === currentDayKey && Array.isArray(classes)) {
+              classes.forEach((cls: any) => {
+                result.push({
+                  short: cls.short || '',
+                  course: courseName,
+                  startTime: Number(cls.startTime) || 0,
+                  endTime: Number(cls.endTime) || 0,
+                  sub: cls.sub || '',
+                  day: dayKey,
+                  head: cls.head || ''
+                });
               });
-            });
-          }
-        });
+            }
+          });
+        }
       });
     });
 
@@ -118,7 +112,6 @@ export class FftTimeTable {
     return now >= startTime && now < endTime;
   }
 
-  // ✅ UPDATED: Faculty status for CURRENT HOUR ONLY
   private getAvailableFaculty(): string[] {
     const currentHour = new Date().getHours();
     const busyFaculty = new Set(
@@ -128,19 +121,10 @@ export class FftTimeTable {
     );
     
     const allFaculty = [
-  'Dr. Anas Ahmad Siddique',
-  'Dr. Vineet Chak',
-  'Dr. Ajit Kr Pramanick',
-  'Dr. Pavitra Singh',
-  'Dr. R.K. Odhar',
-  'Dr. Deepak Kumar',
-  'Dr. K.K. Singh',
-  'Dr. Sunny Singhania',
-  'Dr. Himanshu Khandelwal',
-  'Dr. R. Rahul Kulkarni',
-  'Dr. Nandita Gupta',
-  'Dr. Amitesh Kumar',
-  'Dr. Vivek S Ayar'
+      'Dr. Vivek S Ayar', 'Dr. Deepak Kumar', 'Dr. Nandita Gupta', 
+      'Dr. Amitesh Kumar', 'Dr. Himanshu Khandelwal', 'Dr. Pavitra Singh',
+      'Dr. Ajit Kr Pramanick', 'Dr. R.K. Odhar', 'Dr. R. Rahul Kulkarni',
+      'Dr. Vineet Chak', 'Dr. Manoj Kumar', 'Dr. N.K. Singh'
     ];
     
     return allFaculty.filter(faculty => !busyFaculty.has(faculty));
@@ -159,22 +143,11 @@ export class FftTimeTable {
     return this.getCourseData(course).some(cls => cls.startTime === slot);
   }
 
-  // TRACKBY FUNCTIONS
-  trackByCourse(index: number, course: string): string {
-    return course;
-  }
-
-  trackBySlot(index: number, slot: number): number {
-    return slot;
-  }
-
-  trackByClass(index: number, cls: any): any {
-    return cls.short || cls.startTime || index;
-  }
-
-  trackByFaculty(index: number, faculty: string): string {
-    return faculty;
-  }
+  // TrackBy functions
+  trackByCourse(index: number, course: string): string { return course; }
+  trackBySlot(index: number, slot: number): number { return slot; }
+  trackByClass(index: number, cls: TimetableClass): string { return `${cls.short}-${cls.startTime}`; }
+  trackByFaculty(index: number, faculty: string): string { return faculty; }
 
   isMobile(): boolean {
     return window.innerWidth <= 768;

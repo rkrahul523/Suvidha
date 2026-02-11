@@ -1,4 +1,3 @@
-<!-- COMPLETE RESPONSIVE TIMETABLE COMPONENT -->
 <div class="time-table-container">
   <!-- 📅 TODAY'S DATE & DAY HEADER -->
   <div class="today-header">
@@ -8,20 +7,22 @@
     </div>
   </div>
 
-  <!-- Day Changer Header -->
+  <!-- 🔥 FIXED: Day Changer with explicit click handling -->
   <div class="table-header">
     <div class="weekday-container">
-      <div class="weekday" 
-           *ngFor="let day of days; let i = index"
-           [class.active]="day === currentDay()"
-           (click)="changeDay(day)">
-        <span [ngClass]="{'bg-success': day === currentDay()}">{{ day }}</span>
-      </div>
+      <button 
+        *ngFor="let day of days; let i = index"
+        class="weekday-btn"
+        [class.active]="day === currentDay()"
+        (click)="onDayClick(day)">
+        <span>{{ day }}</span>
+        <small *ngIf="day === currentDay()" class="active-indicator">●</small>
+      </button>
     </div>
     <h3 class="text-center">{{ currentTime() }}</h3>
   </div>
 
-  <!-- Fixed Timetable Table -->
+  <!-- Timetable Table - UNCHANGED -->
   <div class="table-container p-3">
     <div class="desktop-table">
       <table class="table table-bordered text-center">
@@ -41,10 +42,7 @@
         <tbody>
           <tr *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
             <th scope="row">{{ course }}</th>
-            
-            <!-- Loop through ALL 9 time slots -->
             <ng-container *ngFor="let slot of timeSlots; trackBy: trackBySlot">
-              <!-- Show CLASS cell if there's a class at this slot -->
               <ng-container *ngFor="let cls of getCourseData(course)">
                 <td *ngIf="cls.startTime === slot"
                     [ngClass]="{
@@ -60,8 +58,6 @@
                   <span *ngIf="isTimeBetween(cls.startTime, cls.endTime)" class="live-badge">🔴 LIVE</span>
                 </td>
               </ng-container>
-              
-              <!-- EMPTY CELL - only show if NO class starts at this slot -->
               <td *ngIf="!hasClassAtSlot(course, slot)" class="empty-slot"></td>
             </ng-container>
           </tr>
@@ -69,13 +65,12 @@
       </table>
     </div>
 
-    <!-- MOBILE CARD LAYOUT -->
+    <!-- MOBILE - UNCHANGED -->
     <div class="mobile-timetable" *ngIf="isMobile()">
       <div class="mobile-course-card" *ngFor="let course of uniqueCourses(); trackBy: trackByCourse">
         <div class="course-header">{{ course }}</div>
         <div class="mobile-slots">
-          <div class="slot-item" 
-               *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
+          <div class="slot-item" *ngFor="let cls of getCourseData(course); trackBy: trackByClass">
             <div class="slot-time">{{ cls.startTime }}:00 - {{ cls.endTime }}:00</div>
             <div class="slot-content">
               <div class="class-short">{{ cls.short }}</div>
@@ -88,7 +83,7 @@
     </div>
   </div>
 
-  <!-- Faculty Status - CURRENT HOUR ONLY -->
+  <!-- Faculty Status - UNCHANGED -->
   <div class="faculty-status-container">
     <div class="status-section">
       <h4>✅ Available Faculty Now 
@@ -101,7 +96,6 @@
         </div>
       </div>
     </div>
-
     <div class="status-section">
       <h4>🔴 Occupied Faculty Now 
         <small class="current-hour-badge">({{ currentHour() }})</small>

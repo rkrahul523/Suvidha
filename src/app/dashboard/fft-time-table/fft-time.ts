@@ -1,5 +1,510 @@
 export const ffttime=  [
-       
+    {
+        "ADC_FOUNDRY_SEM_2_303": {
+            "FRI": [
+                {
+                    "day": "FRI",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Tooling and Methoding Lab",
+                    "short": "FTM lab",
+                    "sub": "Dr. Vivek S Ayar",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Heat Treatment Technology Lab",
+                    "short": "HTT Lab",
+                    "sub": "Dr. Deepak Kumar",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Non Ferrous Casting Process",
+                    "short": "NFCP",
+                    "sub": "Dr. Vivek S Ayar",
+                    "startTime": 9,
+                    "endTime": 10
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Non Ferrous Casting Process",
+                    "short": "NFCP",
+                    "sub": "Dr. Nandita Gupta",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Iron and Steel Casting Production",
+                    "short": "ISCP",
+                    "sub": "Dr. Amitesh Kumar",
+                    "startTime": 10,
+                    "endTime": 11
+                }
+            ],
+            "TUE": [
+                {
+                    "day": "TUE",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Tooling and Methoding",
+                    "short": "FTM",
+                    "sub": "Dr. Himanshu Khandelwal",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "TUE",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Heat Treatment Technology",
+                    "short": "HTT",
+                    "sub": "Dr. Deepak Kumar",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "TUE",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Iron and Steel Casting Production",
+                    "short": "ISCP",
+                    "sub": "Dr. Amitesh Kumar",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "TUE",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Non Ferrous Casting Processes Lab",
+                    "short": "NFCP Lab",
+                    "sub": "Dr. Vivek S Ayar",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "TUE",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Processes",
+                    "short": "FP",
+                    "sub": "Dr. Pavitra Singh",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Tooling and Methoding",
+                    "short": "FTM",
+                    "sub": "Dr. Vivek S Ayar",
+                    "startTime": 9,
+                    "endTime": 10
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Heat Treatment Technology",
+                    "short": "HTT",
+                    "sub": "Dr. Deepak Kumar",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Iron and Steel Casting Production Lab",
+                    "short": "ISCP Lab",
+                    "sub": "Dr. Amitesh Kumar",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ],
+            "WED": [
+                {
+                    "day": "WED",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Tooling and Methoding",
+                    "short": "FTM",
+                    "sub": "Dr. Himanshu Khandelwal",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Iron and Steel Casting Production",
+                    "short": "ISCP",
+                    "sub": "Dr. Amitesh Kumar",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Processes Lab",
+                    "short": "FP Lab",
+                    "sub": "Dr. Pavitra Singh",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ],
+            "THU": [
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Non Ferrous Casting Process",
+                    "short": "NFCP",
+                    "sub": "Dr. Nandita Gupta",
+                    "startTime": 9,
+                    "endTime": 10
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Non Ferrous Casting Process",
+                    "short": "NFCP",
+                    "sub": "Dr. Nandita Gupta",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Foundry Processes",
+                    "short": "FP",
+                    "sub": "Dr. Pavitra Singh",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Metrology Inspection & Quality Control Lab",
+                    "short": "MIQ Lab",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FOUNDRY_SEM_1",
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ]
+        }
+    },
+    {
+        "ADC_FORGE_SEM_2_304": {
+            "MON": [
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Heat Treatment Technology",
+                    "short": "HTT",
+                    "sub": "Dr. Deepak Kumar",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Heat Treatment Technology Lab",
+                    "short": "HTT Lab",
+                    "sub": "Dr. Deepak Kumar",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 11,
+                    "endTime": 12
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Metrology Inspection & Quality Control",
+                    "short": "MIQ",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "MON",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging of Non Ferrous and Special Alloy",
+                    "short": "FNFSA",
+                    "sub": "Dr. R. Rahul Kulkarni",
+                    "startTime": 9,
+                    "endTime": 10
+                }
+            ],
+            "WED": [
+                {
+                    "day": "WED",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Metrology Inspection & Quality Control Lab",
+                    "short": "MIQ Lab",
+                    "sub": "Dr. Ajit Kr Pramanick",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 14,
+                    "endTime": 15
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging of Non Ferrous and Special Alloy",
+                    "short": "FNFSA",
+                    "sub": "Dr. R. Rahul Kulkarni",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Technology of Closed Die Forging",
+                    "short": "TCDF",
+                    "sub": "Dr. Manoj Kumar",
+                    "startTime": 12,
+                    "endTime": 13
+                },
+                {
+                    "day": "WED",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Technology of Free Forging",
+                    "short": "TFF",
+                    "sub": "Dr. Anas Ahmad Siddique",
+                    "startTime": 11,
+                    "endTime": 12
+                }
+            ],
+            "TUE": [
+                {
+                    "endTime": 15,
+                    "sub": "Dr. Deepak Kumar",
+                    "short": "HTT",
+                    "day": "TUE",
+                    "startTime": 14,
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Heat Treatment Technology"
+                },
+                {
+                    "head": "Technology of Closed Die Forging",
+                    "course": "ADC_FORGE_SEM_1",
+                    "day": "TUE",
+                    "short": "TCDF",
+                    "endTime": 11,
+                    "startTime": 10,
+                    "sub": "Dr. N.K. Singh"
+                },
+                {
+                    "day": "TUE",
+                    "short": "TFF",
+                    "endTime": 16,
+                    "head": "Technology of Free Forging",
+                    "course": "ADC_FORGE_SEM_1",
+                    "sub": "Dr. Vineet Chak",
+                    "startTime": 15
+                },
+                {
+                    "day": "TUE",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Technology of Free Forging Lab",
+                    "short": "TFF Lab",
+                    "sub": "Dr. Anas Ahmad Siddique",
+                    "startTime": 11,
+                    "endTime": 13
+                }
+            ],
+            "FRI": [
+                {
+                    "day": "FRI",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging of Non Ferrous and Special Alloy Lab",
+                    "short": "FNFSA Lab",
+                    "sub": "Dr. R. Rahul Kulkarni",
+                    "startTime": 15,
+                    "endTime": 17
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging Die Design and Manufacturing",
+                    "short": "FDDM",
+                    "sub": "Dr. N.K. Singh",
+                    "startTime": 9,
+                    "endTime": 10
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging Die Design and Manufacturing",
+                    "short": "FDDM",
+                    "sub": "Dr. N.K. Singh",
+                    "startTime": 10,
+                    "endTime": 11
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging Die Design and Manufacturing Lab",
+                    "short": "FDDM Lab",
+                    "sub": "Dr. N.K. Singh",
+                    "startTime": 11,
+                    "endTime": 13
+                },
+                {
+                    "day": "FRI",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Foundry Process",
+                    "short": "FP",
+                    "sub": "Dr. Pavitra Singh",
+                    "startTime": 14,
+                    "endTime": 15
+                }
+            ],
+            "THU": [
+                {
+                    "course": "ADC_FORGE_SEM_1",
+                    "endTime": 12,
+                    "head": "Metrology Inspection & Quality Control",
+                    "day": "THU",
+                    "short": "MIQ",
+                    "startTime": 11,
+                    "sub": "Dr. Ajit Kr Pramanick"
+                },
+                {
+                    "course": "ADC_FORGE_SEM_1",
+                    "sub": "Dr. R.K. Odhar",
+                    "startTime": 14,
+                    "head": "Industrial Engineering Management",
+                    "short": "IEM",
+                    "endTime": 15,
+                    "day": "THU"
+                },
+                {
+                    "sub": "Dr. R. Rahul Kulkarni",
+                    "course": "ADC_FORGE_SEM_1",
+                    "endTime": 11,
+                    "head": "Forging of Non Ferrous and Special Alloy",
+                    "day": "THU",
+                    "short": "FNFSA",
+                    "startTime": 10
+                },
+                {
+                    "short": "TCDF Lab",
+                    "day": "THU",
+                    "endTime": 17,
+                    "head": "Technology of Closed Die Forging Lab",
+                    "sub": "Dr. Manoj Kumar",
+                    "course": "ADC_FORGE_SEM_1",
+                    "startTime": 15
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Technology of Free Forging",
+                    "short": "TFF",
+                    "sub": "Dr. Vineet Chak",
+                    "startTime": 9,
+                    "endTime": 10
+                },
+                {
+                    "day": "THU",
+                    "course": "ADC_FORGE_SEM_1",
+                    "head": "Forging Die Design and Manufacturing",
+                    "short": "FDDM",
+                    "sub": "Dr. Manoj Kumar",
+                    "startTime": 12,
+                    "endTime": 13
+                }
+            ]
+        }
+    },
+    
         {
             "BTECH_PIE_SEM_2_205": {
                 "FRI": [
@@ -545,3 +1050,4 @@ export const ffttime=  [
             }
         }]
   
+

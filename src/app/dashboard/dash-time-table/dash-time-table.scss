@@ -429,3 +429,57 @@
     }
   }
 }
+
+
+.weekday-container {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.weekday-btn {
+  border: 2px solid #007bff !important;
+  background: white !important;
+  color: #007bff !important;
+  padding: 8px 12px !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  min-width: 50px !important;
+  user-select: none !important;
+
+  &:hover {
+    background: #007bff !important;
+    color: white !important;
+    transform: scale(1.05) !important;
+  }
+
+  &.active {
+    background: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+  }
+
+  span {
+    font-size: 14px !important;
+  }
+
+  .active-indicator {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff0000;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
