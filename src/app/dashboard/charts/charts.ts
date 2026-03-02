@@ -32,11 +32,11 @@ interface Leave {
   styleUrl: './charts.scss',
 })
 export class Charts implements AfterViewInit, OnDestroy {
-  @ViewChild('pieChartCanvas') pieChartCanvas!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('barChartCanvas') barChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('rhChartCanvas') rhChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('clChartCanvas') clChartCanvas!: ElementRef<HTMLCanvasElement>;
 
-  private pieChart!: Chart;
-  private barChart!: Chart;
+  private rhChart!: Chart;
+  private clChart!: Chart;
   private isBrowser = false;
   private chartsInitialized = false;
 
@@ -45,7 +45,6 @@ export class Charts implements AfterViewInit, OnDestroy {
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private api: TimeTableApiService) {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
-    // Watch for data changes and update charts
     effect(() => {
       const apiData: any = this.api.leaveManagerData();
       if (apiData && apiData.length > 0) {
@@ -59,7 +58,6 @@ export class Charts implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (this.isBrowser) {
-      // Small delay to ensure DOM is fully ready
       setTimeout(() => {
         this.createCharts();
       }, 0);
@@ -67,69 +65,77 @@ export class Charts implements AfterViewInit, OnDestroy {
   }
 
   private createCharts() {
-    // Destroy existing charts
     this.destroyCharts();
 
-    // PIE CHART: Leave Type Distribution
-    const leaveDistribution = this.getLeaveTypeDistribution();
-    const totalDays = leaveDistribution.reduce((sum, item) => sum + item.days, 0);
+    // ✅ RH LEAVES BY EMPLOYEE (Count of leaves)
+    const rhEmployeeData = this.getLeavesByEmployee('RH');
     
-    if (this.pieChartCanvas?.nativeElement) {
-      this.pieChart = new Chart(this.pieChartCanvas.nativeElement, {
-        type: 'pie' as ChartType,
+    if (this.rhChartCanvas?.nativeElement) {
+      this.rhChart = new Chart(this.rhChartCanvas.nativeElement, {
+        type: 'bar' as ChartType,
         data: {
-          labels: leaveDistribution.map(item => `${item.type} (${item.days.toFixed(1)}d)`),
+          labels: rhEmployeeData.map(item => item.employee),
           datasets: [{
-            data: leaveDistribution.map(item => item.days),
-            backgroundColor: ['#f39c12', '#e74c3c', '#3498db'],
-            hoverBackgroundColor: ['#e67e22', '#c0392b', '#2980b9'],
+            label: 'RH Leaves Taken',
+            data: rhEmployeeData.map(item => item.leaveCount),
+            backgroundColor: 'rgba(155, 89, 182, 0.85)', // Purple for RH
+            borderColor: '#9b59b6',
             borderWidth: 2,
-            borderColor: '#fff',
+            borderRadius: 8,
+            borderSkipped: false,
           }],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          indexAxis: 'y', // Horizontal bars
           plugins: {
             legend: {
-              position: 'right' as const,
+              display: true,
+              position: 'top' as const,
               labels: {
                 padding: 20,
                 usePointStyle: true,
-                font: { size: 12 }
+                font: { size: 12, weight: 'bold' },
+                boxWidth: 12,
+                boxHeight: 12
               }
             },
             title: {
               display: true,
-              text: `Leave Type Distribution (Total: ${totalDays.toFixed(1)} days)`,
-              font: { size: 14, weight: 'bold' }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
-                  const percentage = ((context.parsed / total) * 100).toFixed(1);
-                  return `${context.label}: ${percentage}%`;
-                }
-              }
+              text: 'Restricted Holiday Leaves by Employee',
+              font: { size: 14, weight: 'bold' },
+              padding: { bottom: 20 }
             }
-          }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 10,
+              grid: { color: 'rgba(0,0,0,0.1)' },
+              ticks: { font: { size: 12 } }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            }
+          },
         },
-      } as ChartConfiguration<'pie'>);
+      } as ChartConfiguration<'bar'>);
     }
 
-    // BAR CHART: CL by Employee
-    const clByEmployee = this.getCLByEmployee();
+    // ✅ CL LEAVES BY EMPLOYEE (Count of leaves)
+    const clEmployeeData = this.getLeavesByEmployee('CL');
     
-    if (this.barChartCanvas?.nativeElement) {
-      this.barChart = new Chart(this.barChartCanvas.nativeElement, {
+    if (this.clChartCanvas?.nativeElement) {
+      this.clChart = new Chart(this.clChartCanvas.nativeElement, {
         type: 'bar' as ChartType,
         data: {
-          labels: clByEmployee.map(item => item.employee),
+          labels: clEmployeeData.map(item => item.employee),
           datasets: [{
-            label: 'CL Days',
-            data: clByEmployee.map(item => item.days),
-            backgroundColor: 'rgba(243, 156, 18, 0.85)',
+            label: 'CL Leaves Taken',
+            data: clEmployeeData.map(item => item.leaveCount),
+            backgroundColor: 'rgba(243, 156, 18, 0.85)', // Orange for CL
             borderColor: '#f39c12',
             borderWidth: 2,
             borderRadius: 8,
@@ -141,17 +147,28 @@ export class Charts implements AfterViewInit, OnDestroy {
           maintainAspectRatio: false,
           indexAxis: 'y',
           plugins: {
-            legend: { display: false },
+            legend: {
+              display: true,
+              position: 'top' as const,
+              labels: {
+                padding: 20,
+                usePointStyle: true,
+                font: { size: 12, weight: 'bold' },
+                boxWidth: 12,
+                boxHeight: 12
+              }
+            },
             title: {
               display: true,
-              text: 'Casual Leave Days by Employee (CL Only)',
-              font: { size: 16 }
+              text: 'Casual Leaves by Employee',
+              font: { size: 14, weight: 'bold' },
+              padding: { bottom: 20 }
             }
           },
           scales: {
             x: {
               beginAtZero: true,
-              max: 4,
+              max: 10,
               grid: { color: 'rgba(0,0,0,0.1)' },
               ticks: { font: { size: 12 } }
             },
@@ -170,77 +187,63 @@ export class Charts implements AfterViewInit, OnDestroy {
   private updateCharts() {
     if (!this.chartsInitialized || !this.isBrowser) return;
 
-    // Update PIE CHART
-    if (this.pieChart && this.pieChartCanvas?.nativeElement) {
-      const leaveDistribution = this.getLeaveTypeDistribution();
-      const totalDays = leaveDistribution.reduce((sum, item) => sum + item.days, 0);
-      
-      this.pieChart.data.labels = leaveDistribution.map(item => `${item.type} (${item.days.toFixed(1)}d)`);
-      this.pieChart.data.datasets[0].data = leaveDistribution.map(item => item.days);
-      
-      // Update title
-      (this.pieChart.options.plugins!.title as any).text = `Leave Type Distribution (Total: ${totalDays.toFixed(1)} days)`;
-      
-      this.pieChart.update('none');
+    // Update RH Chart
+    if (this.rhChart && this.rhChartCanvas?.nativeElement) {
+      const rhEmployeeData = this.getLeavesByEmployee('RH');
+      this.rhChart.data.labels = rhEmployeeData.map(item => item.employee);
+      this.rhChart.data.datasets[0].data = rhEmployeeData.map(item => item.leaveCount);
+      this.rhChart.update('none');
     }
 
-    // Update BAR CHART
-    if (this.barChart && this.barChartCanvas?.nativeElement) {
-      const clByEmployee = this.getCLByEmployee();
-      this.barChart.data.labels = clByEmployee.map(item => item.employee);
-      this.barChart.data.datasets[0].data = clByEmployee.map(item => item.days);
-      this.barChart.update('none');
+    // Update CL Chart
+    if (this.clChart && this.clChartCanvas?.nativeElement) {
+      const clEmployeeData = this.getLeavesByEmployee('CL');
+      this.clChart.data.labels = clEmployeeData.map(item => item.employee);
+      this.clChart.data.datasets[0].data = clEmployeeData.map(item => item.leaveCount);
+      this.clChart.update('none');
     }
   }
 
-  private getLeaveTypeDistribution(): { type: string; days: number }[] {
-    const leaveMap = new Map<string, number>();
-    this.leaveManagerData().forEach(leave => {
-      leaveMap.set(leave.type, (leaveMap.get(leave.type) || 0) + leave.day);
-    });
-    return Array.from(leaveMap.entries())
-      .map(([type, days]) => ({ type, days }))
-      .sort((a, b) => b.days - a.days);
-  }
-
-  private getCLByEmployee(): { employee: string; days: number }[] {
-    const clLeaves = this.leaveManagerData().filter(leave => {
-      // Check type is CL
+  // ✅ NEW: Get leave COUNT by employee for specific type
+  private getLeavesByEmployee(leaveType: string): { employee: string; leaveCount: number }[] {
+    //const filteredLeaves = this.leaveManagerData().filter(leave => leave.type === leaveType);
+    const filteredLeaves = this.leaveManagerData().filter(leave => {
       if (leave.type !== 'CL') return false;
       
-      // Parse DD-MM-YYYY format
       const [day, month, year] = leave.fromDate.split('-').map(Number);
-      const fromDate = new Date(year, month - 1, day); // month is 0-indexed
+      const fromDate = new Date(year, month - 1, day);
       const toDate = leave.toDate ? 
         (() => {
           const [d, m, y] = leave.toDate.split('-').map(Number);
           return new Date(y, m - 1, d);
         })() : fromDate;
       
-      // 2026 range check
-      const start2026 = new Date(2026, 0, 1);  // Jan 1, 2026
-      const end2026 = new Date(2026, 11, 31);  // Dec 31, 2026
+      const start2026 = new Date(2026, 0, 1);
+      const end2026 = new Date(2026, 11, 31);
       
       return fromDate >= start2026 && toDate <= end2026;
     });
     
+    
     const employeeMap = new Map<string, number>();
-    clLeaves.forEach(leave => {
-      employeeMap.set(leave.employee, (employeeMap.get(leave.employee) || 0) + leave.day);
+    filteredLeaves.forEach(leave => {
+      employeeMap.set(leave.employee, (employeeMap.get(leave.employee) || 0) + 1); // Count leaves
     });
+
     return Array.from(employeeMap.entries())
-      .map(([employee, days]) => ({ employee, days }))
-      .sort((a, b) => b.days - a.days);
+      .map(([employee, leaveCount]) => ({ employee, leaveCount }))
+      .sort((a, b) => b.leaveCount - a.leaveCount)
+      .slice(0, 10); // Top 10 employees
   }
 
   private destroyCharts() {
-    if (this.pieChart) {
-      this.pieChart.destroy();
-      this.pieChart = {} as Chart;
+    if (this.rhChart) {
+      this.rhChart.destroy();
+      this.rhChart = {} as Chart;
     }
-    if (this.barChart) {
-      this.barChart.destroy();
-      this.barChart = {} as Chart;
+    if (this.clChart) {
+      this.clChart.destroy();
+      this.clChart = {} as Chart;
     }
   }
 

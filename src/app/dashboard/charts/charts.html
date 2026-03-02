@@ -1,30 +1,30 @@
 <div class="row g-4">
-  <!-- Pie Chart -->
+  <!-- RH Leave by Employee -->
   <div class="col-lg-6">
     <div class="card h-100 shadow-lg border-0 overflow-hidden">
-      <div class="card-header bg-gradient-primary text-white rounded-top py-3">
+      <div class="card-header bg-gradient-warning text-white rounded-top py-3">
         <h6 class="mb-0 fw-bold d-flex align-items-center">
-          <i class="bi bi-pie-chart-fill me-2 fs-5"></i>
-          Leave Type Distribution
+          <i class="bi bi-person-check-fill me-2 fs-5"></i>
+          RH Leave Trend 2026
         </h6>
       </div>
       <div class="card-body chart-container p-4">
-        <canvas #pieChartCanvas></canvas>
+        <canvas #rhChartCanvas></canvas>
       </div>
     </div>
   </div>
 
-  <!-- Bar Chart -->
+  <!-- CL Leave by Employee -->
   <div class="col-lg-6">
     <div class="card h-100 shadow-lg border-0 overflow-hidden">
       <div class="card-header bg-gradient-success text-white rounded-top py-3">
         <h6 class="mb-0 fw-bold d-flex align-items-center">
-          <i class="bi bi-bar-chart-fill me-2 fs-5"></i>
+          <i class="bi bi-person-check-fill me-2 fs-5"></i>
           CL Leave Trend 2026
         </h6>
       </div>
       <div class="card-body chart-container p-4">
-        <canvas #barChartCanvas></canvas>
+        <canvas #clChartCanvas></canvas>
       </div>
     </div>
   </div>
