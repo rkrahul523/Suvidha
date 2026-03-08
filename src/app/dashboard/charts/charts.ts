@@ -208,7 +208,7 @@ export class Charts implements AfterViewInit, OnDestroy {
   private getLeavesByEmployee(leaveType: string): { employee: string; leaveCount: number }[] {
     //const filteredLeaves = this.leaveManagerData().filter(leave => leave.type === leaveType);
     const filteredLeaves = this.leaveManagerData().filter(leave => {
-      if (leave.type !== 'CL') return false;
+      if (leave.type !== leaveType) return false;
       
       const [day, month, year] = leave.fromDate.split('-').map(Number);
       const fromDate = new Date(year, month - 1, day);
@@ -227,13 +227,12 @@ export class Charts implements AfterViewInit, OnDestroy {
     
     const employeeMap = new Map<string, number>();
     filteredLeaves.forEach(leave => {
-      employeeMap.set(leave.employee, (employeeMap.get(leave.employee) || 0) + 1); // Count leaves
+      employeeMap.set(leave.employee, (employeeMap.get(leave.employee) || 0) + leave.day); // Count leaves
     });
-
     return Array.from(employeeMap.entries())
-      .map(([employee, leaveCount]) => ({ employee, leaveCount }))
-      .sort((a, b) => b.leaveCount - a.leaveCount)
-      .slice(0, 10); // Top 10 employees
+    .map(([employee, leaveCount]) => ({ employee, leaveCount }))
+    .sort((a, b) => b.leaveCount - a.leaveCount)
+    // .slice(0, 10); // Top 10 employees
   }
 
   private destroyCharts() {
